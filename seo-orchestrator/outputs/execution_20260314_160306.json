@@ -1,0 +1,531 @@
+{
+  "run_id": "20260314_160306",
+  "started_at": "2026-03-14T16:03:28.916473",
+  "completed_at": "2026-03-14T16:04:10.961885",
+  "results": [
+    {
+      "action_id": "luminaclippers.com_otto_deploy",
+      "action_type": "OTTO_DEPLOY",
+      "site": "luminaclippers.com",
+      "status": "success",
+      "description": "Deployed 38 OTTO fixes. Total: 224/285. SEO score: 78%",
+      "details": {
+        "newly_deployed": 38,
+        "total_issues": 285,
+        "deployed_after": 224,
+        "pending_after": 61,
+        "optimization_score_after": 78,
+        "optimization_score_before": 64,
+        "time_saved": null,
+        "fix_categories": {
+          "images": {
+            "total": 89,
+            "pending": 0,
+            "approved": 89,
+            "compliant_count": 89
+          },
+          "page_title": {
+            "total": 11,
+            "pending": 0,
+            "approved": 11,
+            "compliant_count": 11
+          },
+          "twitter_meta": {
+            "total": 22,
+            "pending": 11,
+            "approved": 11
+          },
+          "meta_keywords": {
+            "total": 11,
+            "pending": 0,
+            "approved": 11
+          },
+          "schema_markup": {
+            "total": 12,
+            "pending": 0,
+            "approved": 12
+          },
+          "internal_links": {
+            "total": 29,
+            "pending": 0,
+            "approved": 29
+          },
+          "headings_length": {
+            "total": 5,
+            "pending": 0,
+            "approved": 5,
+            "complaint_count": 0
+          },
+          "dynamic_indexing": {
+            "total": 11,
+            "pending": 0,
+            "approved": 11
+          },
+          "meta_description": {
+            "total": 11,
+            "pending": 0,
+            "approved": 11,
+            "compliant_count": 11
+          },
+          "missing_headings": {
+            "total": 8,
+            "pending": 0,
+            "approved": 8
+          },
+          "semantic_analysis": {
+            "total": 25,
+            "pending": 0,
+            "approved": 25
+          }
+        }
+      },
+      "executed_at": "2026-03-14T16:03:32.003660",
+      "error": null
+    },
+    {
+      "action_id": "luminaweb3.io_otto_deploy",
+      "action_type": "OTTO_DEPLOY",
+      "site": "luminaweb3.io",
+      "status": "success",
+      "description": "Deployed 0 OTTO fixes. Total: 281/390. SEO score: 73%",
+      "details": {
+        "newly_deployed": 0,
+        "total_issues": 390,
+        "deployed_after": 281,
+        "pending_after": 109,
+        "optimization_score_after": 73,
+        "optimization_score_before": 73,
+        "time_saved": null,
+        "fix_categories": {
+          "images": {
+            "total": 109,
+            "pending": 0,
+            "approved": 109,
+            "compliant_count": 109
+          },
+          "og_meta": {
+            "total": 30,
+            "pending": 21,
+            "approved": 9
+          },
+          "page_title": {
+            "total": 32,
+            "pending": 19,
+            "approved": 13,
+            "compliant_count": 25
+          },
+          "twitter_meta": {
+            "total": 65,
+            "pending": 22,
+            "approved": 43
+          },
+          "meta_keywords": {
+            "total": 32,
+            "pending": 11,
+            "approved": 21
+          },
+          "schema_markup": {
+            "total": 19,
+            "pending": 9,
+            "approved": 10
+          },
+          "internal_links": {
+            "total": 2,
+            "pending": 0,
+            "approved": 2
+          },
+          "headings_length": {
+            "total": 23,
+            "pending": 6,
+            "approved": 17,
+            "complaint_count": 0
+          },
+          "dynamic_indexing": {
+            "total": 36,
+            "pending": 0,
+            "approved": 36
+          },
+          "meta_description": {
+            "total": 32,
+            "pending": 21,
+            "approved": 11,
+            "compliant_count": 6
+          },
+          "missing_headings": {
+            "total": 4,
+            "pending": 0,
+            "approved": 4
+          },
+          "missing_keywords": {
+            "total": 4,
+            "pending": 0,
+            "approved": 4
+          },
+          "topical_maps_and_supplemental_content": {
+            "total": 1,
+            "pending": 0,
+            "approved": 1
+          }
+        }
+      },
+      "executed_at": "2026-03-14T16:03:34.907279",
+      "error": null
+    },
+    {
+      "action_id": "luminaclippers.com_serp_refresh",
+      "action_type": "SERP_REFRESH",
+      "site": "luminaclippers.com",
+      "status": "success",
+      "description": "SERP data refresh triggered for rank tracking project 70664",
+      "details": {
+        "message": "Refreshing SERPs for Project."
+      },
+      "executed_at": "2026-03-14T16:03:44.085500",
+      "error": null
+    },
+    {
+      "action_id": "luminaweb3.io_serp_refresh",
+      "action_type": "SERP_REFRESH",
+      "site": "luminaweb3.io",
+      "status": "success",
+      "description": "SERP data refresh triggered for rank tracking project 69275",
+      "details": {
+        "message": "Refreshing SERPs for Project."
+      },
+      "executed_at": "2026-03-14T16:04:05.211150",
+      "error": null
+    },
+    {
+      "action_id": "luminaclippers.com_tech_non_unique_title",
+      "action_type": "TECH_ISSUE",
+      "site": "luminaclippers.com",
+      "status": "success",
+      "description": "Tech fix covered by OTTO auto-deploy: [Uniqueness] Title not unique: 2 page(s) affected. Health potential: +5pts.",
+      "details": {},
+      "executed_at": "2026-03-14T16:04:05.211201",
+      "error": null
+    },
+    {
+      "action_id": "luminaclippers.com_tech_is_orphaned_page",
+      "action_type": "TECH_ISSUE",
+      "site": "luminaclippers.com",
+      "status": "success",
+      "description": "Tech fix covered by OTTO auto-deploy: [Page URL] Page is orphaned: 3 page(s) affected. Health potential: +5pts.",
+      "details": {},
+      "executed_at": "2026-03-14T16:04:05.211210",
+      "error": null
+    },
+    {
+      "action_id": "luminaclippers.com_tech_non_unique_h1",
+      "action_type": "TECH_ISSUE",
+      "site": "luminaclippers.com",
+      "status": "success",
+      "description": "Tech fix covered by OTTO auto-deploy: [Uniqueness] H1 heading is not unique: 4 page(s) affected. Health potential: +5pts.",
+      "details": {},
+      "executed_at": "2026-03-14T16:04:05.211214",
+      "error": null
+    },
+    {
+      "action_id": "luminaclippers.com_tech_large_dom_size",
+      "action_type": "TECH_ISSUE",
+      "site": "luminaclippers.com",
+      "status": "success",
+      "description": "Tech fix covered by OTTO auto-deploy: [Content] DOM size too large: 4 page(s) affected. Health potential: +3pts.",
+      "details": {},
+      "executed_at": "2026-03-14T16:04:05.211218",
+      "error": null
+    },
+    {
+      "action_id": "luminaclippers.com_tech_element_has_style_attribute",
+      "action_type": "TECH_ISSUE",
+      "site": "luminaclippers.com",
+      "status": "success",
+      "description": "Tech fix covered by OTTO auto-deploy: [Content] Inline style attribute: 11 page(s) affected. Health potential: +3pts.",
+      "details": {},
+      "executed_at": "2026-03-14T16:04:05.211221",
+      "error": null
+    },
+    {
+      "action_id": "luminaclippers.com_tech_empty_src_in_link",
+      "action_type": "TECH_ISSUE",
+      "site": "luminaclippers.com",
+      "status": "success",
+      "description": "Tech fix covered by OTTO auto-deploy: [Content] Empty href attribute in link: 4 page(s) affected. Health potential: +3pts.",
+      "details": {},
+      "executed_at": "2026-03-14T16:04:05.211225",
+      "error": null
+    },
+    {
+      "action_id": "luminaclippers.com_tech_js_more_than_300_kb",
+      "action_type": "TECH_ISSUE",
+      "site": "luminaclippers.com",
+      "status": "success",
+      "description": "Tech fix covered by OTTO auto-deploy: [Content] JS file size too large: 1 page(s) affected. Health potential: +1pts.",
+      "details": {},
+      "executed_at": "2026-03-14T16:04:05.211228",
+      "error": null
+    },
+    {
+      "action_id": "luminaclippers.com_tech_h1",
+      "action_type": "TECH_ISSUE",
+      "site": "luminaclippers.com",
+      "status": "success",
+      "description": "Tech fix covered by OTTO auto-deploy: [Page Headers] H1 tag missing or empty: 3 page(s) affected. Health potential: +4pts.",
+      "details": {},
+      "executed_at": "2026-03-14T16:04:05.211232",
+      "error": null
+    },
+    {
+      "action_id": "luminaclippers.com_kw_3",
+      "action_type": "NEW_ARTICLE",
+      "site": "luminaclippers.com",
+      "status": "skipped",
+      "description": "New article recommended for 'short form content agency' \u2014 requires manual content creation",
+      "details": {
+        "keyword": "short form content agency",
+        "search_volume": 50.0,
+        "content_brief": {
+          "target_word_count": 1500,
+          "suggested_title": "",
+          "suggested_outline": [],
+          "internal_link_targets": [
+            "https://luminaclippers.com/"
+          ]
+        }
+      },
+      "executed_at": "2026-03-14T16:04:05.211239",
+      "error": null
+    },
+    {
+      "action_id": "luminaclippers.com_kw_4",
+      "action_type": "NEW_ARTICLE",
+      "site": "luminaclippers.com",
+      "status": "skipped",
+      "description": "New article recommended for 'clipping agency' \u2014 requires manual content creation",
+      "details": {
+        "keyword": "clipping agency",
+        "search_volume": 147.5,
+        "content_brief": {
+          "target_word_count": 1500,
+          "suggested_title": "",
+          "suggested_outline": [],
+          "internal_link_targets": [
+            "https://luminaclippers.com/"
+          ]
+        }
+      },
+      "executed_at": "2026-03-14T16:04:05.211245",
+      "error": null
+    },
+    {
+      "action_id": "luminaweb3.io_tech_non_unique_meta_desc",
+      "action_type": "TECH_ISSUE",
+      "site": "luminaweb3.io",
+      "status": "success",
+      "description": "Tech fix covered by OTTO auto-deploy: [Uniqueness] Meta description not unique: 21 page(s) affected. Health potential: +11pts.",
+      "details": {},
+      "executed_at": "2026-03-14T16:04:05.211248",
+      "error": null
+    },
+    {
+      "action_id": "luminaweb3.io_tech_is_orphaned_page",
+      "action_type": "TECH_ISSUE",
+      "site": "luminaweb3.io",
+      "status": "success",
+      "description": "Tech fix covered by OTTO auto-deploy: [Page URL] Page is orphaned: 1 page(s) affected. Health potential: +1pts.",
+      "details": {},
+      "executed_at": "2026-03-14T16:04:05.211252",
+      "error": null
+    },
+    {
+      "action_id": "luminaweb3.io_tech_not_enough_internal_links",
+      "action_type": "TECH_ISSUE",
+      "site": "luminaweb3.io",
+      "status": "success",
+      "description": "Tech fix covered by OTTO auto-deploy: [Links] Too few internal links: 32 page(s) affected. Health potential: +5pts.",
+      "details": {},
+      "executed_at": "2026-03-14T16:04:05.211256",
+      "error": null
+    },
+    {
+      "action_id": "luminaweb3.io_tech_has_only_one_internal_dofollow_link",
+      "action_type": "TECH_ISSUE",
+      "site": "luminaweb3.io",
+      "status": "success",
+      "description": "Tech fix covered by OTTO auto-deploy: [Links] Page has only one dofollow incoming internal link: 7 page(s) affected. Health potential: +2p",
+      "details": {},
+      "executed_at": "2026-03-14T16:04:05.211259",
+      "error": null
+    },
+    {
+      "action_id": "luminaweb3.io_tech_element_has_style_attribute",
+      "action_type": "TECH_ISSUE",
+      "site": "luminaweb3.io",
+      "status": "success",
+      "description": "Tech fix covered by OTTO auto-deploy: [Content] Inline style attribute: 32 page(s) affected. Health potential: +3pts.",
+      "details": {},
+      "executed_at": "2026-03-14T16:04:05.211263",
+      "error": null
+    },
+    {
+      "action_id": "luminaweb3.io_tech_js_more_than_300_kb",
+      "action_type": "TECH_ISSUE",
+      "site": "luminaweb3.io",
+      "status": "success",
+      "description": "Tech fix covered by OTTO auto-deploy: [Content] JS file size too large: 6 page(s) affected. Health potential: +1pts.",
+      "details": {},
+      "executed_at": "2026-03-14T16:04:05.211266",
+      "error": null
+    },
+    {
+      "action_id": "luminaweb3.io_kw_0",
+      "action_type": "UPDATE_ON_PAGE",
+      "site": "luminaweb3.io",
+      "status": "success",
+      "description": "On-page optimization via OTTO deploy: web3 marketing agency",
+      "details": {
+        "keyword": "web3 marketing agency",
+        "current_position": 8,
+        "search_volume": 210.0,
+        "suggested_changes": {
+          "title": "Include 'web3 marketing agency' in title tag, front-load if possible",
+          "meta_description": "Write compelling meta with 'web3 marketing agency', include CTA",
+          "h1": "Ensure H1 contains 'web3 marketing agency' or close semantic variant",
+          "internal_links": "Add 2-3 internal links from related pages using 'web3 marketing agency' as anchor text"
+        }
+      },
+      "executed_at": "2026-03-14T16:04:05.211271",
+      "error": null
+    },
+    {
+      "action_id": "luminaweb3.io_kw_1",
+      "action_type": "UPDATE_ON_PAGE",
+      "site": "luminaweb3.io",
+      "status": "success",
+      "description": "On-page optimization via OTTO deploy: blockchain marketing agency",
+      "details": {
+        "keyword": "blockchain marketing agency",
+        "current_position": 17,
+        "search_volume": 140.0,
+        "suggested_changes": {
+          "title": "Include 'blockchain marketing agency' in title tag, front-load if possible",
+          "meta_description": "Write compelling meta with 'blockchain marketing agency', include CTA",
+          "h1": "Ensure H1 contains 'blockchain marketing agency' or close semantic variant",
+          "internal_links": "Add 2-3 internal links from related pages using 'blockchain marketing agency' as anchor text"
+        }
+      },
+      "executed_at": "2026-03-14T16:04:05.211275",
+      "error": null
+    },
+    {
+      "action_id": "luminaweb3.io_kw_2",
+      "action_type": "NEW_ARTICLE",
+      "site": "luminaweb3.io",
+      "status": "skipped",
+      "description": "New article recommended for 'crypto marketing agency' \u2014 requires manual content creation",
+      "details": {
+        "keyword": "crypto marketing agency",
+        "search_volume": 480.0,
+        "content_brief": {
+          "target_word_count": 1500,
+          "suggested_title": "",
+          "suggested_outline": [],
+          "internal_link_targets": [
+            "https://luminaweb3.io/"
+          ]
+        }
+      },
+      "executed_at": "2026-03-14T16:04:05.211279",
+      "error": null
+    },
+    {
+      "action_id": "luminaweb3.io_kw_3",
+      "action_type": "NEW_ARTICLE",
+      "site": "luminaweb3.io",
+      "status": "skipped",
+      "description": "New article recommended for 'web3 pr agency' \u2014 requires manual content creation",
+      "details": {
+        "keyword": "web3 pr agency",
+        "search_volume": 117.83,
+        "content_brief": {
+          "target_word_count": 1500,
+          "suggested_title": "",
+          "suggested_outline": [],
+          "internal_link_targets": [
+            "https://luminaweb3.io/"
+          ]
+        }
+      },
+      "executed_at": "2026-03-14T16:04:05.211283",
+      "error": null
+    },
+    {
+      "action_id": "luminaclippers.com_press_release_1b381b76-0ed7-4c6d-821a-0f962532644c",
+      "action_type": "PRESS_RELEASE",
+      "site": "luminaclippers.com",
+      "status": "success",
+      "description": "Press release created targeting 'short form content agency'",
+      "details": {
+        "pr_id": "1b381b76-0ed7-4c6d-821a-0f962532644c",
+        "keywords": [
+          "short form content agency",
+          "clipping agency"
+        ]
+      },
+      "executed_at": "2026-03-14T16:04:06.739509",
+      "error": null
+    },
+    {
+      "action_id": "luminaclippers.com_cloud_stack_31535",
+      "action_type": "CLOUD_STACK",
+      "site": "luminaclippers.com",
+      "status": "success",
+      "description": "Cloud stack created targeting 'short form content agency'",
+      "details": {
+        "cs_id": 31535,
+        "keywords": [
+          "short form content agency",
+          "clipping agency"
+        ]
+      },
+      "executed_at": "2026-03-14T16:04:08.150637",
+      "error": null
+    },
+    {
+      "action_id": "luminaweb3.io_press_release_failed",
+      "action_type": "PRESS_RELEASE",
+      "site": "luminaweb3.io",
+      "status": "failed",
+      "description": "Failed to create press release for 'crypto marketing agency'",
+      "details": {},
+      "executed_at": "2026-03-14T16:04:09.827398",
+      "error": "Client error '400 Bad Request' for url 'https://ca.searchatlas.com/api/cg/v1/press-release/'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/400"
+    },
+    {
+      "action_id": "luminaweb3.io_cloud_stack_31536",
+      "action_type": "CLOUD_STACK",
+      "site": "luminaweb3.io",
+      "status": "success",
+      "description": "Cloud stack created targeting 'crypto marketing agency'",
+      "details": {
+        "cs_id": 31536,
+        "keywords": [
+          "crypto marketing agency",
+          "web3 pr agency"
+        ]
+      },
+      "executed_at": "2026-03-14T16:04:10.961838",
+      "error": null
+    }
+  ],
+  "summary": {
+    "total_actions": 28,
+    "executed": 23,
+    "failed": 1,
+    "skipped": 4,
+    "sites_deployed": [
+      "luminaclippers.com",
+      "luminaweb3.io"
+    ]
+  }
+}

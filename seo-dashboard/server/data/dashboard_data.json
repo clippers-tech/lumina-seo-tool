@@ -1,0 +1,2447 @@
+{
+  "sites": {
+    "luminaclippers.com": {
+      "hostname": "luminaclippers.com",
+      "type": "wordpress",
+      "priority": 1,
+      "description": "Lumina Clipping Agency \u2014 short-form content distribution",
+      "priority_keywords": [
+        "clipping agency",
+        "content clipping service",
+        "short form content agency",
+        "video clipping agency",
+        "tiktok clipping service",
+        "ugc clipping service",
+        "social media clipping agency"
+      ],
+      "money_pages": [
+        "/",
+        "/services",
+        "/pricing"
+      ],
+      "rank_overview": {
+        "avg_position": null,
+        "prev_avg_position": null,
+        "position_delta": 0,
+        "estimated_traffic": 0,
+        "keywords_up": 0,
+        "keywords_down": 0,
+        "traffic_history": [
+          {
+            "date": "2026-03-07",
+            "traffic": 0.0
+          },
+          {
+            "date": "2026-02-28",
+            "traffic": 0.0
+          },
+          {
+            "date": "2026-02-21",
+            "traffic": 0.0
+          },
+          {
+            "date": "2026-02-20",
+            "traffic": 0.0
+          }
+        ],
+        "serps_overview": [
+          {
+            "date": "2026-03-07",
+            "serp_1": 0,
+            "serp_2_3": 0,
+            "serp_4_10": 0,
+            "serp_11_20": 0,
+            "serp_21_50": 0,
+            "serp_51_100": 0,
+            "is_manual": false
+          },
+          {
+            "date": "2026-02-28",
+            "serp_1": 0,
+            "serp_2_3": 0,
+            "serp_4_10": 0,
+            "serp_11_20": 0,
+            "serp_21_50": 0,
+            "serp_51_100": 0,
+            "is_manual": false
+          },
+          {
+            "date": "2026-02-21",
+            "serp_1": 0,
+            "serp_2_3": 0,
+            "serp_4_10": 0,
+            "serp_11_20": 0,
+            "serp_21_50": 0,
+            "serp_51_100": 0,
+            "is_manual": false
+          },
+          {
+            "date": "2026-02-20",
+            "serp_1": 0,
+            "serp_2_3": 0,
+            "serp_4_10": 0,
+            "serp_11_20": 0,
+            "serp_21_50": 0,
+            "serp_51_100": 0,
+            "is_manual": false
+          }
+        ],
+        "search_visibility": []
+      },
+      "keywords": [
+        {
+          "keyword": "content clipping service",
+          "position": null,
+          "prev_position": null,
+          "delta": null,
+          "search_volume": 0.0,
+          "url": "",
+          "serp_features": [],
+          "position_history": [
+            {
+              "position": null,
+              "date": "2026-02-20"
+            },
+            {
+              "position": null,
+              "date": "2026-02-21"
+            },
+            {
+              "position": null,
+              "date": "2026-02-28"
+            },
+            {
+              "position": null,
+              "date": "2026-03-07"
+            }
+          ]
+        },
+        {
+          "keyword": "video clipping agency",
+          "position": null,
+          "prev_position": null,
+          "delta": null,
+          "search_volume": 0.0,
+          "url": "",
+          "serp_features": [],
+          "position_history": [
+            {
+              "position": null,
+              "date": "2026-02-20"
+            },
+            {
+              "position": null,
+              "date": "2026-02-21"
+            },
+            {
+              "position": null,
+              "date": "2026-02-28"
+            },
+            {
+              "position": null,
+              "date": "2026-03-07"
+            }
+          ]
+        },
+        {
+          "keyword": "tiktok clipping service",
+          "position": null,
+          "prev_position": null,
+          "delta": null,
+          "search_volume": 0.0,
+          "url": "",
+          "serp_features": [],
+          "position_history": [
+            {
+              "position": null,
+              "date": "2026-02-20"
+            },
+            {
+              "position": null,
+              "date": "2026-02-21"
+            },
+            {
+              "position": null,
+              "date": "2026-02-28"
+            },
+            {
+              "position": null,
+              "date": "2026-03-07"
+            }
+          ]
+        },
+        {
+          "keyword": "short form content agency",
+          "position": null,
+          "prev_position": null,
+          "delta": null,
+          "search_volume": 50.0,
+          "url": "",
+          "serp_features": [],
+          "position_history": [
+            {
+              "position": null,
+              "date": "2026-02-20"
+            },
+            {
+              "position": null,
+              "date": "2026-02-21"
+            },
+            {
+              "position": null,
+              "date": "2026-02-28"
+            },
+            {
+              "position": null,
+              "date": "2026-03-07"
+            }
+          ]
+        },
+        {
+          "keyword": "clipping agency",
+          "position": null,
+          "prev_position": null,
+          "delta": null,
+          "search_volume": 147.5,
+          "url": "",
+          "serp_features": [],
+          "position_history": [
+            {
+              "position": null,
+              "date": "2026-02-20"
+            },
+            {
+              "position": null,
+              "date": "2026-02-21"
+            },
+            {
+              "position": null,
+              "date": "2026-02-28"
+            },
+            {
+              "position": null,
+              "date": "2026-03-07"
+            }
+          ]
+        }
+      ],
+      "audit": {
+        "site_health": {
+          "actual": 950,
+          "total": 1000,
+          "color": "#1FAC47",
+          "segments": [
+            {
+              "name": "Top 10% Important Pages",
+              "actual": 878,
+              "total_pages": 4,
+              "total": 1000,
+              "color": "#1FAC47"
+            }
+          ]
+        },
+        "crawled_pages": 11,
+        "total_pages": 41,
+        "issues": [
+          {
+            "group": "Uniqueness",
+            "name": "non_unique_title",
+            "label": "Title not unique",
+            "severity": "error",
+            "affected_pages": 2,
+            "health_to_gain": 5
+          },
+          {
+            "group": "Uniqueness",
+            "name": "non_unique_h1",
+            "label": "H1 heading is not unique",
+            "severity": "warning",
+            "affected_pages": 4,
+            "health_to_gain": 5
+          },
+          {
+            "group": "Content",
+            "name": "large_dom_size",
+            "label": "DOM size too large",
+            "severity": "notice",
+            "affected_pages": 4,
+            "health_to_gain": 3
+          },
+          {
+            "group": "Content",
+            "name": "element_has_style_attribute",
+            "label": "Inline style attribute",
+            "severity": "notice",
+            "affected_pages": 11,
+            "health_to_gain": 3
+          },
+          {
+            "group": "Content",
+            "name": "empty_src_in_link",
+            "label": "Empty href attribute in link",
+            "severity": "notice",
+            "affected_pages": 4,
+            "health_to_gain": 3
+          },
+          {
+            "group": "Content",
+            "name": "js_more_than_300_kb",
+            "label": "JS file size too large",
+            "severity": "notice",
+            "affected_pages": 1,
+            "health_to_gain": 1
+          },
+          {
+            "group": "Page Headers",
+            "name": "h1",
+            "label": "H1 tag missing or empty",
+            "severity": "warning",
+            "affected_pages": 3,
+            "health_to_gain": 4
+          },
+          {
+            "group": "Page Headers",
+            "name": "heading_level_is_skipped",
+            "label": "Heading level is skipped",
+            "severity": "notice",
+            "affected_pages": 5,
+            "health_to_gain": 3
+          },
+          {
+            "group": "Page Headers",
+            "name": "h2_under_20_over_70",
+            "label": "H2 tag doesn't meet length requirements",
+            "severity": "notice",
+            "affected_pages": 4,
+            "health_to_gain": 1
+          },
+          {
+            "group": "Schema",
+            "name": "schema_type",
+            "label": "Missing recommended schema markup types",
+            "severity": "notice",
+            "affected_pages": 5,
+            "health_to_gain": 6
+          },
+          {
+            "group": "Links",
+            "name": "not_enough_internal_links",
+            "label": "Too few internal links",
+            "severity": "notice",
+            "affected_pages": 11,
+            "health_to_gain": 5
+          },
+          {
+            "group": "Links",
+            "name": "has_only_one_internal_dofollow_link",
+            "label": "Page has only one dofollow incoming internal link",
+            "severity": "notice",
+            "affected_pages": 1,
+            "health_to_gain": 1
+          },
+          {
+            "group": "Page URL",
+            "name": "is_orphaned_page",
+            "label": "Page is orphaned",
+            "severity": "error",
+            "affected_pages": 3,
+            "health_to_gain": 5
+          },
+          {
+            "group": "Images",
+            "name": "image_not_in_modern_format",
+            "label": "Image not in modern format",
+            "severity": "notice",
+            "affected_pages": 9,
+            "health_to_gain": 2
+          },
+          {
+            "group": "Images",
+            "name": "image_more_than_100_kb",
+            "label": "Image file size too large",
+            "severity": "notice",
+            "affected_pages": 3,
+            "health_to_gain": 1
+          },
+          {
+            "group": "Domain",
+            "name": "content_security_policy_missing",
+            "label": "Content Security Policy is missing",
+            "severity": "notice",
+            "affected_pages": 0,
+            "health_to_gain": 2
+          },
+          {
+            "group": "Robots TXT",
+            "name": "barebone_content",
+            "label": "Robots.txt content is barebone",
+            "severity": "notice",
+            "affected_pages": 0,
+            "health_to_gain": 2
+          },
+          {
+            "group": "Twitter Meta",
+            "name": "twitter_site_property",
+            "label": "Twitter Cards Siteproperty tag missing or empty.",
+            "severity": "notice",
+            "affected_pages": 11,
+            "health_to_gain": 2
+          }
+        ]
+      },
+      "otto": {
+        "domain_rating": 9,
+        "backlinks": 27,
+        "refdomains": 17,
+        "optimization_score": 94,
+        "total_issues": 197,
+        "deployed_fixes": 186,
+        "total_pages": 11,
+        "healthy_pages": 11,
+        "is_gsc_connected": true,
+        "pixel_tag_state": "installed"
+      }
+    },
+    "luminaweb3.io": {
+      "hostname": "luminaweb3.io",
+      "type": "nextjs",
+      "priority": 2,
+      "description": "Lumina Web3 \u2014 crypto/Web3 marketing agency",
+      "priority_keywords": [
+        "web3 marketing agency",
+        "crypto marketing agency",
+        "blockchain marketing agency",
+        "web3 pr agency",
+        "crypto influencer marketing",
+        "blockchain content marketing"
+      ],
+      "money_pages": [
+        "/",
+        "/services",
+        "/case-studies"
+      ],
+      "rank_overview": {
+        "avg_position": 12,
+        "prev_avg_position": 18,
+        "position_delta": 6,
+        "estimated_traffic": 0,
+        "keywords_up": 2,
+        "keywords_down": 0,
+        "traffic_history": [
+          {
+            "date": "2026-03-07",
+            "traffic": 9.0
+          },
+          {
+            "date": "2026-03-04",
+            "traffic": 9.0
+          },
+          {
+            "date": "2026-03-03",
+            "traffic": 0.0
+          },
+          {
+            "date": "2026-03-02",
+            "traffic": 0.0
+          },
+          {
+            "date": "2026-03-01",
+            "traffic": 0.0
+          },
+          {
+            "date": "2026-02-28",
+            "traffic": 0.0
+          },
+          {
+            "date": "2026-02-27",
+            "traffic": 0.0
+          },
+          {
+            "date": "2026-02-26",
+            "traffic": 0.0
+          },
+          {
+            "date": "2026-02-25",
+            "traffic": 0.0
+          },
+          {
+            "date": "2026-02-24",
+            "traffic": 0.0
+          },
+          {
+            "date": "2026-02-23",
+            "traffic": 0.0
+          },
+          {
+            "date": "2026-02-22",
+            "traffic": 0.0
+          },
+          {
+            "date": "2026-02-21",
+            "traffic": 0.0
+          },
+          {
+            "date": "2026-02-20",
+            "traffic": 0.0
+          }
+        ],
+        "serps_overview": [
+          {
+            "date": "2026-03-07",
+            "serp_1": 0,
+            "serp_2_3": 0,
+            "serp_4_10": 1,
+            "serp_11_20": 1,
+            "serp_21_50": 0,
+            "serp_51_100": 0,
+            "is_manual": false
+          },
+          {
+            "date": "2026-03-04",
+            "serp_1": 0,
+            "serp_2_3": 0,
+            "serp_4_10": 1,
+            "serp_11_20": 1,
+            "serp_21_50": 0,
+            "serp_51_100": 0,
+            "is_manual": false
+          },
+          {
+            "date": "2026-03-03",
+            "serp_1": 0,
+            "serp_2_3": 0,
+            "serp_4_10": 0,
+            "serp_11_20": 1,
+            "serp_21_50": 0,
+            "serp_51_100": 0,
+            "is_manual": false
+          },
+          {
+            "date": "2026-03-02",
+            "serp_1": 0,
+            "serp_2_3": 0,
+            "serp_4_10": 0,
+            "serp_11_20": 2,
+            "serp_21_50": 0,
+            "serp_51_100": 0,
+            "is_manual": false
+          },
+          {
+            "date": "2026-03-01",
+            "serp_1": 0,
+            "serp_2_3": 0,
+            "serp_4_10": 0,
+            "serp_11_20": 1,
+            "serp_21_50": 0,
+            "serp_51_100": 0,
+            "is_manual": false
+          },
+          {
+            "date": "2026-02-28",
+            "serp_1": 0,
+            "serp_2_3": 0,
+            "serp_4_10": 0,
+            "serp_11_20": 0,
+            "serp_21_50": 0,
+            "serp_51_100": 0,
+            "is_manual": false
+          },
+          {
+            "date": "2026-02-27",
+            "serp_1": 0,
+            "serp_2_3": 0,
+            "serp_4_10": 0,
+            "serp_11_20": 0,
+            "serp_21_50": 0,
+            "serp_51_100": 0,
+            "is_manual": false
+          },
+          {
+            "date": "2026-02-26",
+            "serp_1": 0,
+            "serp_2_3": 0,
+            "serp_4_10": 0,
+            "serp_11_20": 0,
+            "serp_21_50": 0,
+            "serp_51_100": 0,
+            "is_manual": false
+          },
+          {
+            "date": "2026-02-25",
+            "serp_1": 0,
+            "serp_2_3": 0,
+            "serp_4_10": 0,
+            "serp_11_20": 0,
+            "serp_21_50": 0,
+            "serp_51_100": 0,
+            "is_manual": false
+          },
+          {
+            "date": "2026-02-24",
+            "serp_1": 0,
+            "serp_2_3": 0,
+            "serp_4_10": 0,
+            "serp_11_20": 0,
+            "serp_21_50": 0,
+            "serp_51_100": 0,
+            "is_manual": false
+          },
+          {
+            "date": "2026-02-23",
+            "serp_1": 0,
+            "serp_2_3": 0,
+            "serp_4_10": 0,
+            "serp_11_20": 0,
+            "serp_21_50": 0,
+            "serp_51_100": 0,
+            "is_manual": false
+          },
+          {
+            "date": "2026-02-22",
+            "serp_1": 0,
+            "serp_2_3": 0,
+            "serp_4_10": 0,
+            "serp_11_20": 0,
+            "serp_21_50": 0,
+            "serp_51_100": 0,
+            "is_manual": false
+          },
+          {
+            "date": "2026-02-21",
+            "serp_1": 0,
+            "serp_2_3": 0,
+            "serp_4_10": 0,
+            "serp_11_20": 0,
+            "serp_21_50": 0,
+            "serp_51_100": 0,
+            "is_manual": false
+          },
+          {
+            "date": "2026-02-20",
+            "serp_1": 0,
+            "serp_2_3": 0,
+            "serp_4_10": 0,
+            "serp_11_20": 0,
+            "serp_21_50": 0,
+            "serp_51_100": 0,
+            "is_manual": false
+          }
+        ],
+        "search_visibility": [
+          {
+            "date": "2026-03-07",
+            "sv": 6.4
+          },
+          {
+            "date": "2026-03-04",
+            "sv": 0.0
+          },
+          {
+            "date": "2026-03-03",
+            "sv": 0.0
+          },
+          {
+            "date": "2026-03-02",
+            "sv": 2.11
+          },
+          {
+            "date": "2026-03-01",
+            "sv": 0.0
+          }
+        ]
+      },
+      "keywords": [
+        {
+          "keyword": "web3 marketing agency",
+          "position": 8,
+          "prev_position": 18,
+          "delta": 10,
+          "search_volume": 210.0,
+          "url": "luminaweb3.io/",
+          "serp_features": [
+            "videos",
+            "organic",
+            "related_searches"
+          ],
+          "position_history": [
+            {
+              "position": null,
+              "date": "2026-02-16"
+            },
+            {
+              "position": null,
+              "date": "2026-02-19"
+            },
+            {
+              "position": null,
+              "date": "2026-02-20"
+            },
+            {
+              "position": null,
+              "date": "2026-02-21"
+            },
+            {
+              "position": null,
+              "date": "2026-02-22"
+            },
+            {
+              "position": null,
+              "date": "2026-02-23"
+            },
+            {
+              "position": null,
+              "date": "2026-02-24"
+            },
+            {
+              "position": null,
+              "date": "2026-02-25"
+            },
+            {
+              "position": null,
+              "date": "2026-02-26"
+            },
+            {
+              "position": null,
+              "date": "2026-02-27"
+            },
+            {
+              "position": null,
+              "date": "2026-02-28"
+            },
+            {
+              "position": 18,
+              "date": "2026-03-01"
+            },
+            {
+              "position": 17,
+              "date": "2026-03-02"
+            },
+            {
+              "position": null,
+              "date": "2026-03-03"
+            },
+            {
+              "position": 8,
+              "date": "2026-03-04"
+            },
+            {
+              "position": 8,
+              "date": "2026-03-07"
+            }
+          ]
+        },
+        {
+          "keyword": "blockchain marketing agency",
+          "position": 17,
+          "prev_position": 18,
+          "delta": 1,
+          "search_volume": 140.0,
+          "url": "luminaweb3.io/",
+          "serp_features": [
+            "related_searches",
+            "organic",
+            "people_also_ask"
+          ],
+          "position_history": [
+            {
+              "position": null,
+              "date": "2026-02-16"
+            },
+            {
+              "position": null,
+              "date": "2026-02-19"
+            },
+            {
+              "position": null,
+              "date": "2026-02-20"
+            },
+            {
+              "position": null,
+              "date": "2026-02-21"
+            },
+            {
+              "position": null,
+              "date": "2026-02-22"
+            },
+            {
+              "position": null,
+              "date": "2026-02-23"
+            },
+            {
+              "position": null,
+              "date": "2026-02-24"
+            },
+            {
+              "position": null,
+              "date": "2026-02-25"
+            },
+            {
+              "position": null,
+              "date": "2026-02-26"
+            },
+            {
+              "position": null,
+              "date": "2026-02-27"
+            },
+            {
+              "position": null,
+              "date": "2026-02-28"
+            },
+            {
+              "position": null,
+              "date": "2026-03-01"
+            },
+            {
+              "position": 18,
+              "date": "2026-03-02"
+            },
+            {
+              "position": 16,
+              "date": "2026-03-03"
+            },
+            {
+              "position": 17,
+              "date": "2026-03-04"
+            },
+            {
+              "position": 17,
+              "date": "2026-03-07"
+            }
+          ]
+        },
+        {
+          "keyword": "crypto marketing agency",
+          "position": null,
+          "prev_position": null,
+          "delta": null,
+          "search_volume": 480.0,
+          "url": "",
+          "serp_features": [],
+          "position_history": [
+            {
+              "position": null,
+              "date": "2026-02-16"
+            },
+            {
+              "position": null,
+              "date": "2026-02-19"
+            },
+            {
+              "position": null,
+              "date": "2026-02-20"
+            },
+            {
+              "position": null,
+              "date": "2026-02-21"
+            },
+            {
+              "position": null,
+              "date": "2026-02-22"
+            },
+            {
+              "position": null,
+              "date": "2026-02-23"
+            },
+            {
+              "position": null,
+              "date": "2026-02-24"
+            },
+            {
+              "position": null,
+              "date": "2026-02-25"
+            },
+            {
+              "position": null,
+              "date": "2026-02-26"
+            },
+            {
+              "position": null,
+              "date": "2026-02-27"
+            },
+            {
+              "position": null,
+              "date": "2026-02-28"
+            },
+            {
+              "position": null,
+              "date": "2026-03-01"
+            },
+            {
+              "position": null,
+              "date": "2026-03-02"
+            },
+            {
+              "position": null,
+              "date": "2026-03-03"
+            },
+            {
+              "position": null,
+              "date": "2026-03-04"
+            },
+            {
+              "position": null,
+              "date": "2026-03-07"
+            }
+          ]
+        },
+        {
+          "keyword": "web3 pr agency",
+          "position": null,
+          "prev_position": null,
+          "delta": null,
+          "search_volume": 117.83,
+          "url": "",
+          "serp_features": [],
+          "position_history": [
+            {
+              "position": null,
+              "date": "2026-02-16"
+            },
+            {
+              "position": null,
+              "date": "2026-02-19"
+            },
+            {
+              "position": null,
+              "date": "2026-02-20"
+            },
+            {
+              "position": null,
+              "date": "2026-02-21"
+            },
+            {
+              "position": null,
+              "date": "2026-02-22"
+            },
+            {
+              "position": null,
+              "date": "2026-02-23"
+            },
+            {
+              "position": null,
+              "date": "2026-02-24"
+            },
+            {
+              "position": null,
+              "date": "2026-02-25"
+            },
+            {
+              "position": null,
+              "date": "2026-02-26"
+            },
+            {
+              "position": null,
+              "date": "2026-02-27"
+            },
+            {
+              "position": null,
+              "date": "2026-02-28"
+            },
+            {
+              "position": null,
+              "date": "2026-03-01"
+            },
+            {
+              "position": null,
+              "date": "2026-03-02"
+            },
+            {
+              "position": null,
+              "date": "2026-03-03"
+            },
+            {
+              "position": null,
+              "date": "2026-03-04"
+            },
+            {
+              "position": null,
+              "date": "2026-03-07"
+            }
+          ]
+        },
+        {
+          "keyword": "crypto influencer marketing",
+          "position": null,
+          "prev_position": null,
+          "delta": null,
+          "search_volume": 168.7,
+          "url": "",
+          "serp_features": [],
+          "position_history": [
+            {
+              "position": null,
+              "date": "2026-02-16"
+            },
+            {
+              "position": null,
+              "date": "2026-02-19"
+            },
+            {
+              "position": null,
+              "date": "2026-02-20"
+            },
+            {
+              "position": null,
+              "date": "2026-02-21"
+            },
+            {
+              "position": null,
+              "date": "2026-02-22"
+            },
+            {
+              "position": null,
+              "date": "2026-02-23"
+            },
+            {
+              "position": null,
+              "date": "2026-02-24"
+            },
+            {
+              "position": null,
+              "date": "2026-02-25"
+            },
+            {
+              "position": null,
+              "date": "2026-02-26"
+            },
+            {
+              "position": null,
+              "date": "2026-02-27"
+            },
+            {
+              "position": null,
+              "date": "2026-02-28"
+            },
+            {
+              "position": null,
+              "date": "2026-03-01"
+            },
+            {
+              "position": null,
+              "date": "2026-03-02"
+            },
+            {
+              "position": null,
+              "date": "2026-03-03"
+            },
+            {
+              "position": null,
+              "date": "2026-03-04"
+            },
+            {
+              "position": null,
+              "date": "2026-03-07"
+            }
+          ]
+        },
+        {
+          "keyword": "blockchain content marketing",
+          "position": null,
+          "prev_position": null,
+          "delta": null,
+          "search_volume": 17.39,
+          "url": "",
+          "serp_features": [],
+          "position_history": [
+            {
+              "position": null,
+              "date": "2026-02-16"
+            },
+            {
+              "position": null,
+              "date": "2026-02-19"
+            },
+            {
+              "position": null,
+              "date": "2026-02-20"
+            },
+            {
+              "position": null,
+              "date": "2026-02-21"
+            },
+            {
+              "position": null,
+              "date": "2026-02-22"
+            },
+            {
+              "position": null,
+              "date": "2026-02-23"
+            },
+            {
+              "position": null,
+              "date": "2026-02-24"
+            },
+            {
+              "position": null,
+              "date": "2026-02-25"
+            },
+            {
+              "position": null,
+              "date": "2026-02-26"
+            },
+            {
+              "position": null,
+              "date": "2026-02-27"
+            },
+            {
+              "position": null,
+              "date": "2026-02-28"
+            },
+            {
+              "position": null,
+              "date": "2026-03-01"
+            },
+            {
+              "position": null,
+              "date": "2026-03-02"
+            },
+            {
+              "position": null,
+              "date": "2026-03-03"
+            },
+            {
+              "position": null,
+              "date": "2026-03-04"
+            },
+            {
+              "position": null,
+              "date": "2026-03-07"
+            }
+          ]
+        }
+      ],
+      "audit": {
+        "site_health": {
+          "actual": 951,
+          "total": 1000,
+          "color": "#1FAC47",
+          "segments": [
+            {
+              "name": "Top 10% Important Pages",
+              "actual": 964,
+              "total_pages": 3,
+              "total": 1000,
+              "color": "#1FAC47"
+            }
+          ]
+        },
+        "crawled_pages": 32,
+        "total_pages": 32,
+        "issues": [
+          {
+            "group": "Uniqueness",
+            "name": "non_unique_meta_desc",
+            "label": "Meta description not unique",
+            "severity": "error",
+            "affected_pages": 21,
+            "health_to_gain": 11
+          },
+          {
+            "group": "Links",
+            "name": "not_enough_internal_links",
+            "label": "Too few internal links",
+            "severity": "notice",
+            "affected_pages": 32,
+            "health_to_gain": 5
+          },
+          {
+            "group": "Links",
+            "name": "has_only_one_internal_dofollow_link",
+            "label": "Page has only one dofollow incoming internal link",
+            "severity": "notice",
+            "affected_pages": 7,
+            "health_to_gain": 2
+          },
+          {
+            "group": "Content",
+            "name": "element_has_style_attribute",
+            "label": "Inline style attribute",
+            "severity": "notice",
+            "affected_pages": 32,
+            "health_to_gain": 3
+          },
+          {
+            "group": "Content",
+            "name": "js_more_than_300_kb",
+            "label": "JS file size too large",
+            "severity": "notice",
+            "affected_pages": 6,
+            "health_to_gain": 1
+          },
+          {
+            "group": "Content",
+            "name": "meta_keywords",
+            "label": "Meta keywords missing or empty",
+            "severity": "notice",
+            "affected_pages": 11,
+            "health_to_gain": 1
+          },
+          {
+            "group": "Content",
+            "name": "content_below_150_words",
+            "label": "Content too short",
+            "severity": "notice",
+            "affected_pages": 1,
+            "health_to_gain": 1
+          },
+          {
+            "group": "Content",
+            "name": "large_dom_size",
+            "label": "DOM size too large",
+            "severity": "notice",
+            "affected_pages": 1,
+            "health_to_gain": 1
+          },
+          {
+            "group": "Page Headers",
+            "name": "h1",
+            "label": "H1 tag missing or empty",
+            "severity": "warning",
+            "affected_pages": 4,
+            "health_to_gain": 2
+          },
+          {
+            "group": "Page Headers",
+            "name": "multiple_h1_headings_present",
+            "label": "Multiple H1 headings found",
+            "severity": "warning",
+            "affected_pages": 7,
+            "health_to_gain": 1
+          },
+          {
+            "group": "Page Headers",
+            "name": "h1_under_20_over_70",
+            "label": "H1 tag doesn't meet length requirements",
+            "severity": "warning",
+            "affected_pages": 6,
+            "health_to_gain": 1
+          },
+          {
+            "group": "Page Headers",
+            "name": "h2_under_20_over_70",
+            "label": "H2 tag doesn't meet length requirements",
+            "severity": "notice",
+            "affected_pages": 12,
+            "health_to_gain": 1
+          },
+          {
+            "group": "Page Headers",
+            "name": "heading_level_is_skipped",
+            "label": "Heading level is skipped",
+            "severity": "notice",
+            "affected_pages": 3,
+            "health_to_gain": 1
+          },
+          {
+            "group": "Page Headers",
+            "name": "h2",
+            "label": "H2 tag missing or empty",
+            "severity": "notice",
+            "affected_pages": 2,
+            "health_to_gain": 1
+          },
+          {
+            "group": "Meta Description",
+            "name": "meta_desc_invalid_length",
+            "label": "Meta description doesn't meet length requirements",
+            "severity": "warning",
+            "affected_pages": 21,
+            "health_to_gain": 6
+          },
+          {
+            "group": "OG Meta",
+            "name": "og_image",
+            "label": "Open Graph Image tag missing or empty.",
+            "severity": "notice",
+            "affected_pages": 32,
+            "health_to_gain": 3
+          },
+          {
+            "group": "OG Meta",
+            "name": "og_title_over_60",
+            "label": "Open Graph Title too long",
+            "severity": "notice",
+            "affected_pages": 21,
+            "health_to_gain": 2
+          },
+          {
+            "group": "Twitter Meta",
+            "name": "twitter_site_property",
+            "label": "Twitter Cards Siteproperty tag missing or empty.",
+            "severity": "notice",
+            "affected_pages": 21,
+            "health_to_gain": 1
+          },
+          {
+            "group": "Twitter Meta",
+            "name": "twitter_image",
+            "label": "Twitter Cards Image tag missing or empty.",
+            "severity": "notice",
+            "affected_pages": 32,
+            "health_to_gain": 1
+          },
+          {
+            "group": "Twitter Meta",
+            "name": "twitter_title_over_55",
+            "label": "Twitter Cards Title too long",
+            "severity": "notice",
+            "affected_pages": 21,
+            "health_to_gain": 1
+          },
+          {
+            "group": "Twitter Meta",
+            "name": "twitter_description_over_125",
+            "label": "Twitter Cards Description too long",
+            "severity": "notice",
+            "affected_pages": 1,
+            "health_to_gain": 1
+          },
+          {
+            "group": "Images",
+            "name": "image_not_in_modern_format",
+            "label": "Image not in modern format",
+            "severity": "notice",
+            "affected_pages": 5,
+            "health_to_gain": 1
+          },
+          {
+            "group": "Images",
+            "name": "images_missing_alt",
+            "label": "Images missing alt attribute",
+            "severity": "notice",
+            "affected_pages": 1,
+            "health_to_gain": 1
+          },
+          {
+            "group": "Images",
+            "name": "image_more_than_100_kb",
+            "label": "Image file size too large",
+            "severity": "notice",
+            "affected_pages": 1,
+            "health_to_gain": 1
+          },
+          {
+            "group": "Domain",
+            "name": "content_security_policy_missing",
+            "label": "Content Security Policy is missing",
+            "severity": "notice",
+            "affected_pages": 0,
+            "health_to_gain": 2
+          },
+          {
+            "group": "Robots TXT",
+            "name": "barebone_content",
+            "label": "Robots.txt content is barebone",
+            "severity": "notice",
+            "affected_pages": 0,
+            "health_to_gain": 2
+          },
+          {
+            "group": "Page Title",
+            "name": "title_invalid_length",
+            "label": "Title doesn't meet length requirements",
+            "severity": "warning",
+            "affected_pages": 3,
+            "health_to_gain": 1
+          },
+          {
+            "group": "Schema",
+            "name": "schema_type",
+            "label": "Missing recommended schema markup types",
+            "severity": "notice",
+            "affected_pages": 4,
+            "health_to_gain": 1
+          },
+          {
+            "group": "Page URL",
+            "name": "is_orphaned_page",
+            "label": "Page is orphaned",
+            "severity": "error",
+            "affected_pages": 1,
+            "health_to_gain": 1
+          },
+          {
+            "group": "Robots",
+            "name": "robots_is_noindex",
+            "label": "Noindex page in robots meta",
+            "severity": "notice",
+            "affected_pages": 2,
+            "health_to_gain": 1
+          }
+        ]
+      },
+      "otto": {
+        "domain_rating": null,
+        "backlinks": 2,
+        "refdomains": 2,
+        "optimization_score": 61,
+        "total_issues": 396,
+        "deployed_fixes": 240,
+        "total_pages": 32,
+        "healthy_pages": 18,
+        "is_gsc_connected": true,
+        "pixel_tag_state": "installed"
+      }
+    }
+  },
+  "actions": [
+    {
+      "id": "luminaclippers.com_tech_non_unique_title",
+      "action_type": "TECH_ISSUE",
+      "site": "luminaclippers.com",
+      "target_url": "https://luminaclippers.com/",
+      "description": "[Uniqueness] Title not unique: 2 page(s) affected. Health potential: +5pts.",
+      "risk_level": "high",
+      "status": "applied",
+      "payload": {
+        "issue_name": "non_unique_title",
+        "group": "Uniqueness",
+        "severity": "error",
+        "affected_pages": 2,
+        "health_to_gain": 5,
+        "description": "Page's title should not be similar to other Page titles on your website.",
+        "learn_why": "Indexable pages that are not part of a pagination sequence or hreflang group should have a unique page title. This is to avoid confusing search engines in deciding which page to display for the keywords you incorporate."
+      },
+      "reasoning": "Site audit found 'Title not unique' affecting 2 pages. Category: Uniqueness. Severity: error. Fixing this could recover 5 health points. Indexable pages that are not part of a pagination sequence or hreflang group should have a unique page title. This is to avoid confusing search engines in deciding which page to display for the keywords you incorporate.",
+      "keyword": ""
+    },
+    {
+      "id": "luminaclippers.com_tech_is_orphaned_page",
+      "action_type": "TECH_ISSUE",
+      "site": "luminaclippers.com",
+      "target_url": "https://luminaclippers.com/",
+      "description": "[Page URL] Page is orphaned: 3 page(s) affected. Health potential: +5pts.",
+      "risk_level": "high",
+      "status": "applied",
+      "payload": {
+        "issue_name": "is_orphaned_page",
+        "group": "Page URL",
+        "severity": "error",
+        "affected_pages": 3,
+        "health_to_gain": 5,
+        "description": "Orphan pages have no links pointing to them and cannot be found or indexed by search engine crawlers.",
+        "learn_why": "The presence of orphan pages creates for poor site architecture and missed keyword ranking opportunities. Resolving orphan pages can lead to more pages in Google's index and increased total keyword rankings."
+      },
+      "reasoning": "Site audit found 'Page is orphaned' affecting 3 pages. Category: Page URL. Severity: error. Fixing this could recover 5 health points. The presence of orphan pages creates for poor site architecture and missed keyword ranking opportunities. Resolving orphan pages can lead to more pages in Google's index and increased total keyword rankings.",
+      "keyword": ""
+    },
+    {
+      "id": "luminaclippers.com_tech_non_unique_h1",
+      "action_type": "TECH_ISSUE",
+      "site": "luminaclippers.com",
+      "target_url": "https://luminaclippers.com/",
+      "description": "[Uniqueness] H1 heading is not unique: 4 page(s) affected. Health potential: +5pts.",
+      "risk_level": "medium",
+      "status": "applied",
+      "payload": {
+        "issue_name": "non_unique_h1",
+        "group": "Uniqueness",
+        "severity": "warning",
+        "affected_pages": 4,
+        "health_to_gain": 5,
+        "description": "Page's H1 heading should be unique and dissimilar to the H1 headings on other pages of your website.",
+        "learn_why": "Indexable pages that are not part of a pagination sequence or hreflang group should have a unique H1 heading. This is to avoid confusing search engines in deciding which page to display for the keywords you incorporate."
+      },
+      "reasoning": "Site audit found 'H1 heading is not unique' affecting 4 pages. Category: Uniqueness. Severity: warning. Fixing this could recover 5 health points. Indexable pages that are not part of a pagination sequence or hreflang group should have a unique H1 heading. This is to avoid confusing search engines in deciding which page to display for the keywords you incorporate.",
+      "keyword": ""
+    },
+    {
+      "id": "luminaclippers.com_tech_large_dom_size",
+      "action_type": "TECH_ISSUE",
+      "site": "luminaclippers.com",
+      "target_url": "https://luminaclippers.com/",
+      "description": "[Content] DOM size too large: 4 page(s) affected. Health potential: +3pts.",
+      "risk_level": "medium",
+      "status": "applied",
+      "payload": {
+        "issue_name": "large_dom_size",
+        "group": "Content",
+        "severity": "notice",
+        "affected_pages": 4,
+        "health_to_gain": 3,
+        "description": "Large DOM sizes hurt performance by making it harder for browsers to render a webpage. Your Page should have a DOM size of less than 1000 elements.",
+        "learn_why": "The DOM (or Document Object Model), is a programming interface for web documents. An excessive DOM can harm web page performance, and it is recommended that a web page has no more that 1000 elements."
+      },
+      "reasoning": "Site audit found 'DOM size too large' affecting 4 pages. Category: Content. Severity: notice. Fixing this could recover 3 health points. The DOM (or Document Object Model), is a programming interface for web documents. An excessive DOM can harm web page performance, and it is recommended that a web page has no more that 1000 elements.",
+      "keyword": ""
+    },
+    {
+      "id": "luminaclippers.com_tech_element_has_style_attribute",
+      "action_type": "TECH_ISSUE",
+      "site": "luminaclippers.com",
+      "target_url": "https://luminaclippers.com/",
+      "description": "[Content] Inline style attribute: 11 page(s) affected. Health potential: +3pts.",
+      "risk_level": "medium",
+      "status": "applied",
+      "payload": {
+        "issue_name": "element_has_style_attribute",
+        "group": "Content",
+        "severity": "notice",
+        "affected_pages": 11,
+        "health_to_gain": 3,
+        "description": "HTML elements should use a .css file for styling, making your HTML cleaner and more maintainable.",
+        "learn_why": "CSS files are used to style and lay out web pages. They determine how font, colors, spacing, and other HTML elements are displayed on web pages. Google crawls and renders CSS files to understand the content, relevance, and page experience of a web page."
+      },
+      "reasoning": "Site audit found 'Inline style attribute' affecting 11 pages. Category: Content. Severity: notice. Fixing this could recover 3 health points. CSS files are used to style and lay out web pages. They determine how font, colors, spacing, and other HTML elements are displayed on web pages. Google crawls and renders CSS files to understand the content, relevance, and page experience of a web page.",
+      "keyword": ""
+    },
+    {
+      "id": "luminaclippers.com_tech_empty_src_in_link",
+      "action_type": "TECH_ISSUE",
+      "site": "luminaclippers.com",
+      "target_url": "https://luminaclippers.com/",
+      "description": "[Content] Empty href attribute in link: 4 page(s) affected. Health potential: +3pts.",
+      "risk_level": "medium",
+      "status": "applied",
+      "payload": {
+        "issue_name": "empty_src_in_link",
+        "group": "Content",
+        "severity": "notice",
+        "affected_pages": 4,
+        "health_to_gain": 3,
+        "description": "All links on a page should have an explicit \"href\" attribute defined to avoid cross-browser compatibility issues and ensure search engines can discover the linked-to pages.",
+        "learn_why": "The href attribute specifies the url of the page that a link points to. Without the \"href\", the link will not direct the user to another page"
+      },
+      "reasoning": "Site audit found 'Empty href attribute in link' affecting 4 pages. Category: Content. Severity: notice. Fixing this could recover 3 health points. The href attribute specifies the url of the page that a link points to. Without the \"href\", the link will not direct the user to another page",
+      "keyword": ""
+    },
+    {
+      "id": "luminaclippers.com_tech_js_more_than_300_kb",
+      "action_type": "TECH_ISSUE",
+      "site": "luminaclippers.com",
+      "target_url": "https://luminaclippers.com/",
+      "description": "[Content] JS file size too large: 1 page(s) affected. Health potential: +1pts.",
+      "risk_level": "medium",
+      "status": "applied",
+      "payload": {
+        "issue_name": "js_more_than_300_kb",
+        "group": "Content",
+        "severity": "notice",
+        "affected_pages": 1,
+        "health_to_gain": 1,
+        "description": "Avoid using large javascript files, which slow down page load time and hurt performance. Files should be smaller than 300 KB.",
+        "learn_why": "Search engines have a more difficult time crawling and indexing Javascript, which is why unoptimized javascript files can hurt SEO performance. Any Javascript files should be smaller than 300KB. "
+      },
+      "reasoning": "Site audit found 'JS file size too large' affecting 1 pages. Category: Content. Severity: notice. Fixing this could recover 1 health points. Search engines have a more difficult time crawling and indexing Javascript, which is why unoptimized javascript files can hurt SEO performance. Any Javascript files should be smaller than 300KB. ",
+      "keyword": ""
+    },
+    {
+      "id": "luminaclippers.com_tech_h1",
+      "action_type": "TECH_ISSUE",
+      "site": "luminaclippers.com",
+      "target_url": "https://luminaclippers.com/",
+      "description": "[Page Headers] H1 tag missing or empty: 3 page(s) affected. Health potential: +4pts.",
+      "risk_level": "medium",
+      "status": "applied",
+      "payload": {
+        "issue_name": "h1",
+        "group": "Page Headers",
+        "severity": "warning",
+        "affected_pages": 3,
+        "health_to_gain": 4,
+        "description": "Page should have a <h1> tag.",
+        "learn_why": "H1 headings are a ranking factor for search engines as they use the H1 heading to determine what the page is about. On top of that, H1 headings help your visitors to quickly understand the topic of the page."
+      },
+      "reasoning": "Site audit found 'H1 tag missing or empty' affecting 3 pages. Category: Page Headers. Severity: warning. Fixing this could recover 4 health points. H1 headings are a ranking factor for search engines as they use the H1 heading to determine what the page is about. On top of that, H1 headings help your visitors to quickly understand the topic of the page.",
+      "keyword": ""
+    },
+    {
+      "id": "luminaclippers.com_kw_3",
+      "action_type": "NEW_ARTICLE",
+      "site": "luminaclippers.com",
+      "target_url": "https://luminaclippers.com/blog/",
+      "description": "Create new article targeting 'short form content agency' (not ranking, vol 50.0/mo). Build topical authority with supporting content.",
+      "risk_level": "low",
+      "status": "human_review",
+      "payload": {
+        "keyword": "short form content agency",
+        "search_volume": 50.0,
+        "content_brief": {
+          "target_word_count": 1500,
+          "suggested_title": "",
+          "suggested_outline": [],
+          "internal_link_targets": [
+            "https://luminaclippers.com/"
+          ]
+        }
+      },
+      "reasoning": "Not ranking at all for 'short form content agency' despite tracking it. Search volume of 50.0/mo represents opportunity. A dedicated, high-quality article could capture this traffic.",
+      "keyword": "short form content agency"
+    },
+    {
+      "id": "luminaclippers.com_kw_4",
+      "action_type": "NEW_ARTICLE",
+      "site": "luminaclippers.com",
+      "target_url": "https://luminaclippers.com/blog/",
+      "description": "Create new article targeting 'clipping agency' (not ranking, vol 147.5/mo). Build topical authority with supporting content.",
+      "risk_level": "low",
+      "status": "human_review",
+      "payload": {
+        "keyword": "clipping agency",
+        "search_volume": 147.5,
+        "content_brief": {
+          "target_word_count": 1500,
+          "suggested_title": "",
+          "suggested_outline": [],
+          "internal_link_targets": [
+            "https://luminaclippers.com/"
+          ]
+        }
+      },
+      "reasoning": "Not ranking at all for 'clipping agency' despite tracking it. Search volume of 147.5/mo represents opportunity. A dedicated, high-quality article could capture this traffic.",
+      "keyword": "clipping agency"
+    },
+    {
+      "id": "luminaweb3.io_tech_non_unique_meta_desc",
+      "action_type": "TECH_ISSUE",
+      "site": "luminaweb3.io",
+      "target_url": "https://luminaweb3.io/",
+      "description": "[Uniqueness] Meta description not unique: 21 page(s) affected. Health potential: +11pts.",
+      "risk_level": "high",
+      "status": "applied",
+      "payload": {
+        "issue_name": "non_unique_meta_desc",
+        "group": "Uniqueness",
+        "severity": "error",
+        "affected_pages": 21,
+        "health_to_gain": 11,
+        "description": "Page's meta description should be unique and dissimilar to the meta description on other pages of your website.",
+        "learn_why": "Indexable pages that are not part of a pagination sequence or hreflang group should have a unique meta description. Doing so helps search engines distinguish pages, and increases your chances of search engines using the meta description."
+      },
+      "reasoning": "Site audit found 'Meta description not unique' affecting 21 pages. Category: Uniqueness. Severity: error. Fixing this could recover 11 health points. Indexable pages that are not part of a pagination sequence or hreflang group should have a unique meta description. Doing so helps search engines distinguish pages, and increases your chances of search engines using the meta description.",
+      "keyword": ""
+    },
+    {
+      "id": "luminaweb3.io_tech_is_orphaned_page",
+      "action_type": "TECH_ISSUE",
+      "site": "luminaweb3.io",
+      "target_url": "https://luminaweb3.io/",
+      "description": "[Page URL] Page is orphaned: 1 page(s) affected. Health potential: +1pts.",
+      "risk_level": "high",
+      "status": "applied",
+      "payload": {
+        "issue_name": "is_orphaned_page",
+        "group": "Page URL",
+        "severity": "error",
+        "affected_pages": 1,
+        "health_to_gain": 1,
+        "description": "Orphan pages have no links pointing to them and cannot be found or indexed by search engine crawlers.",
+        "learn_why": "The presence of orphan pages creates for poor site architecture and missed keyword ranking opportunities. Resolving orphan pages can lead to more pages in Google's index and increased total keyword rankings."
+      },
+      "reasoning": "Site audit found 'Page is orphaned' affecting 1 pages. Category: Page URL. Severity: error. Fixing this could recover 1 health points. The presence of orphan pages creates for poor site architecture and missed keyword ranking opportunities. Resolving orphan pages can lead to more pages in Google's index and increased total keyword rankings.",
+      "keyword": ""
+    },
+    {
+      "id": "luminaweb3.io_tech_not_enough_internal_links",
+      "action_type": "TECH_ISSUE",
+      "site": "luminaweb3.io",
+      "target_url": "https://luminaweb3.io/",
+      "description": "[Links] Too few internal links: 32 page(s) affected. Health potential: +5pts.",
+      "risk_level": "medium",
+      "status": "applied",
+      "payload": {
+        "issue_name": "not_enough_internal_links",
+        "group": "Links",
+        "severity": "notice",
+        "affected_pages": 32,
+        "health_to_gain": 5,
+        "description": "Page should include more internal links. Internal Links help search engines discover content on your website and improve search rankings of linked-to pages.",
+        "learn_why": "Internal links help search engines find and discover new pages on your website. They also help search engines understand how all of your web pages interrelate. Not having enough internal links is a missed oppportunity to communicate to search engine crawlers the other relevant content you have on your website."
+      },
+      "reasoning": "Site audit found 'Too few internal links' affecting 32 pages. Category: Links. Severity: notice. Fixing this could recover 5 health points. Internal links help search engines find and discover new pages on your website. They also help search engines understand how all of your web pages interrelate. Not having enough internal links is a missed oppportunity to communicate to search engine crawlers the other relevant content you have on your website.",
+      "keyword": ""
+    },
+    {
+      "id": "luminaweb3.io_tech_has_only_one_internal_dofollow_link",
+      "action_type": "TECH_ISSUE",
+      "site": "luminaweb3.io",
+      "target_url": "https://luminaweb3.io/",
+      "description": "[Links] Page has only one dofollow incoming internal link: 7 page(s) affected. Health potential: +2pts.",
+      "risk_level": "medium",
+      "status": "applied",
+      "payload": {
+        "issue_name": "has_only_one_internal_dofollow_link",
+        "group": "Links",
+        "severity": "notice",
+        "affected_pages": 7,
+        "health_to_gain": 2,
+        "description": "The number of internal links pointing to a page is a signal to search engines about the relative importance of that page.",
+        "learn_why": null
+      },
+      "reasoning": "Site audit found 'Page has only one dofollow incoming internal link' affecting 7 pages. Category: Links. Severity: notice. Fixing this could recover 2 health points. None",
+      "keyword": ""
+    },
+    {
+      "id": "luminaweb3.io_tech_element_has_style_attribute",
+      "action_type": "TECH_ISSUE",
+      "site": "luminaweb3.io",
+      "target_url": "https://luminaweb3.io/",
+      "description": "[Content] Inline style attribute: 32 page(s) affected. Health potential: +3pts.",
+      "risk_level": "medium",
+      "status": "applied",
+      "payload": {
+        "issue_name": "element_has_style_attribute",
+        "group": "Content",
+        "severity": "notice",
+        "affected_pages": 32,
+        "health_to_gain": 3,
+        "description": "HTML elements should use a .css file for styling, making your HTML cleaner and more maintainable.",
+        "learn_why": "CSS files are used to style and lay out web pages. They determine how font, colors, spacing, and other HTML elements are displayed on web pages. Google crawls and renders CSS files to understand the content, relevance, and page experience of a web page."
+      },
+      "reasoning": "Site audit found 'Inline style attribute' affecting 32 pages. Category: Content. Severity: notice. Fixing this could recover 3 health points. CSS files are used to style and lay out web pages. They determine how font, colors, spacing, and other HTML elements are displayed on web pages. Google crawls and renders CSS files to understand the content, relevance, and page experience of a web page.",
+      "keyword": ""
+    },
+    {
+      "id": "luminaweb3.io_tech_js_more_than_300_kb",
+      "action_type": "TECH_ISSUE",
+      "site": "luminaweb3.io",
+      "target_url": "https://luminaweb3.io/",
+      "description": "[Content] JS file size too large: 6 page(s) affected. Health potential: +1pts.",
+      "risk_level": "medium",
+      "status": "applied",
+      "payload": {
+        "issue_name": "js_more_than_300_kb",
+        "group": "Content",
+        "severity": "notice",
+        "affected_pages": 6,
+        "health_to_gain": 1,
+        "description": "Avoid using large javascript files, which slow down page load time and hurt performance. Files should be smaller than 300 KB.",
+        "learn_why": "Search engines have a more difficult time crawling and indexing Javascript, which is why unoptimized javascript files can hurt SEO performance. Any Javascript files should be smaller than 300KB. "
+      },
+      "reasoning": "Site audit found 'JS file size too large' affecting 6 pages. Category: Content. Severity: notice. Fixing this could recover 1 health points. Search engines have a more difficult time crawling and indexing Javascript, which is why unoptimized javascript files can hurt SEO performance. Any Javascript files should be smaller than 300KB. ",
+      "keyword": ""
+    },
+    {
+      "id": "luminaweb3.io_kw_0",
+      "action_type": "UPDATE_ON_PAGE",
+      "site": "luminaweb3.io",
+      "target_url": "luminaweb3.io/",
+      "description": "Optimize on-page for 'web3 marketing agency' (position 8, vol 210.0/mo). Improve title, meta description, and H1 to better target this keyword.",
+      "risk_level": "low",
+      "status": "applied",
+      "payload": {
+        "keyword": "web3 marketing agency",
+        "current_position": 8,
+        "search_volume": 210.0,
+        "suggested_changes": {
+          "title": "Include 'web3 marketing agency' in title tag, front-load if possible",
+          "meta_description": "Write compelling meta with 'web3 marketing agency', include CTA",
+          "h1": "Ensure H1 contains 'web3 marketing agency' or close semantic variant",
+          "internal_links": "Add 2-3 internal links from related pages using 'web3 marketing agency' as anchor text"
+        }
+      },
+      "reasoning": "Striking distance keyword at position 8. Small on-page improvements could push into top 5-7. Search volume: 210.0/mo.",
+      "keyword": "web3 marketing agency"
+    },
+    {
+      "id": "luminaweb3.io_kw_1",
+      "action_type": "UPDATE_ON_PAGE",
+      "site": "luminaweb3.io",
+      "target_url": "luminaweb3.io/",
+      "description": "Optimize on-page for 'blockchain marketing agency' (position 17, vol 140.0/mo). Improve title, meta description, and H1 to better target this keyword.",
+      "risk_level": "low",
+      "status": "applied",
+      "payload": {
+        "keyword": "blockchain marketing agency",
+        "current_position": 17,
+        "search_volume": 140.0,
+        "suggested_changes": {
+          "title": "Include 'blockchain marketing agency' in title tag, front-load if possible",
+          "meta_description": "Write compelling meta with 'blockchain marketing agency', include CTA",
+          "h1": "Ensure H1 contains 'blockchain marketing agency' or close semantic variant",
+          "internal_links": "Add 2-3 internal links from related pages using 'blockchain marketing agency' as anchor text"
+        }
+      },
+      "reasoning": "Striking distance keyword at position 17. Small on-page improvements could push into top 5-7. Search volume: 140.0/mo.",
+      "keyword": "blockchain marketing agency"
+    },
+    {
+      "id": "luminaweb3.io_kw_2",
+      "action_type": "NEW_ARTICLE",
+      "site": "luminaweb3.io",
+      "target_url": "https://luminaweb3.io/blog/",
+      "description": "Create new article targeting 'crypto marketing agency' (not ranking, vol 480.0/mo). Build topical authority with supporting content.",
+      "risk_level": "low",
+      "status": "human_review",
+      "payload": {
+        "keyword": "crypto marketing agency",
+        "search_volume": 480.0,
+        "content_brief": {
+          "target_word_count": 1500,
+          "suggested_title": "",
+          "suggested_outline": [],
+          "internal_link_targets": [
+            "https://luminaweb3.io/"
+          ]
+        }
+      },
+      "reasoning": "Not ranking at all for 'crypto marketing agency' despite tracking it. Search volume of 480.0/mo represents opportunity. A dedicated, high-quality article could capture this traffic.",
+      "keyword": "crypto marketing agency"
+    },
+    {
+      "id": "luminaweb3.io_kw_3",
+      "action_type": "NEW_ARTICLE",
+      "site": "luminaweb3.io",
+      "target_url": "https://luminaweb3.io/blog/",
+      "description": "Create new article targeting 'web3 pr agency' (not ranking, vol 117.83/mo). Build topical authority with supporting content.",
+      "risk_level": "low",
+      "status": "human_review",
+      "payload": {
+        "keyword": "web3 pr agency",
+        "search_volume": 117.83,
+        "content_brief": {
+          "target_word_count": 1500,
+          "suggested_title": "",
+          "suggested_outline": [],
+          "internal_link_targets": [
+            "https://luminaweb3.io/"
+          ]
+        }
+      },
+      "reasoning": "Not ranking at all for 'web3 pr agency' despite tracking it. Search volume of 117.83/mo represents opportunity. A dedicated, high-quality article could capture this traffic.",
+      "keyword": "web3 pr agency"
+    }
+  ],
+  "generated_at": "2026-03-13T19:55:00Z",
+  "run_log": {
+    "run_id": "20260313_221522",
+    "timestamp": "2026-03-13T22:15:22.397095",
+    "sites_processed": [
+      "luminaclippers.com",
+      "luminaweb3.io"
+    ],
+    "summary": "",
+    "total_actions": 20,
+    "by_type": {
+      "TECH_ISSUE": 14,
+      "NEW_ARTICLE": 4,
+      "UPDATE_ON_PAGE": 2
+    },
+    "by_risk": {
+      "high": 4,
+      "medium": 10,
+      "low": 6
+    },
+    "by_status": {
+      "applied": 16,
+      "human_review": 4
+    }
+  },
+  "execution": {
+    "latest_run": {
+      "run_id": "20260313_221522",
+      "started_at": "2026-03-13T22:15:25.464219",
+      "completed_at": "2026-03-13T22:15:36.977767",
+      "results": [
+        {
+          "action_id": "luminaclippers.com_otto_deploy",
+          "action_type": "OTTO_DEPLOY",
+          "site": "luminaclippers.com",
+          "status": "success",
+          "description": "Deployed 186 OTTO fixes. Total: 186/197. SEO score: 94%",
+          "details": {
+            "newly_deployed": 186,
+            "total_issues": 197,
+            "deployed_after": 186,
+            "pending_after": 11,
+            "optimization_score_after": 94,
+            "optimization_score_before": 0,
+            "time_saved": null,
+            "fix_categories": {
+              "images": {
+                "total": 89,
+                "pending": 0,
+                "approved": 89,
+                "compliant_count": 89
+              },
+              "page_title": {
+                "total": 11,
+                "pending": 0,
+                "approved": 11,
+                "compliant_count": 11
+              },
+              "twitter_meta": {
+                "total": 22,
+                "pending": 11,
+                "approved": 11
+              },
+              "meta_keywords": {
+                "total": 11,
+                "pending": 0,
+                "approved": 11
+              },
+              "schema_markup": {
+                "total": 10,
+                "pending": 0,
+                "approved": 10
+              },
+              "internal_links": {
+                "total": 29,
+                "pending": 0,
+                "approved": 29
+              },
+              "headings_length": {
+                "total": 5,
+                "pending": 0,
+                "approved": 5,
+                "complaint_count": 0
+              },
+              "meta_description": {
+                "total": 11,
+                "pending": 0,
+                "approved": 11,
+                "compliant_count": 11
+              },
+              "missing_headings": {
+                "total": 8,
+                "pending": 0,
+                "approved": 8
+              }
+            }
+          },
+          "executed_at": "2026-03-13T22:15:30.715507",
+          "error": null
+        },
+        {
+          "action_id": "luminaweb3.io_otto_deploy",
+          "action_type": "OTTO_DEPLOY",
+          "site": "luminaweb3.io",
+          "status": "success",
+          "description": "Deployed 0 OTTO fixes. Total: 281/390. SEO score: 73%",
+          "details": {
+            "newly_deployed": 0,
+            "total_issues": 390,
+            "deployed_after": 281,
+            "pending_after": 109,
+            "optimization_score_after": 73,
+            "optimization_score_before": 73,
+            "time_saved": null,
+            "fix_categories": {
+              "images": {
+                "total": 109,
+                "pending": 0,
+                "approved": 109,
+                "compliant_count": 109
+              },
+              "og_meta": {
+                "total": 30,
+                "pending": 21,
+                "approved": 9
+              },
+              "page_title": {
+                "total": 32,
+                "pending": 19,
+                "approved": 13,
+                "compliant_count": 25
+              },
+              "twitter_meta": {
+                "total": 65,
+                "pending": 22,
+                "approved": 43
+              },
+              "meta_keywords": {
+                "total": 32,
+                "pending": 11,
+                "approved": 21
+              },
+              "schema_markup": {
+                "total": 19,
+                "pending": 9,
+                "approved": 10
+              },
+              "internal_links": {
+                "total": 2,
+                "pending": 0,
+                "approved": 2
+              },
+              "headings_length": {
+                "total": 23,
+                "pending": 6,
+                "approved": 17,
+                "complaint_count": 0
+              },
+              "dynamic_indexing": {
+                "total": 36,
+                "pending": 0,
+                "approved": 36
+              },
+              "meta_description": {
+                "total": 32,
+                "pending": 21,
+                "approved": 11,
+                "compliant_count": 6
+              },
+              "missing_headings": {
+                "total": 4,
+                "pending": 0,
+                "approved": 4
+              },
+              "missing_keywords": {
+                "total": 4,
+                "pending": 0,
+                "approved": 4
+              },
+              "topical_maps_and_supplemental_content": {
+                "total": 1,
+                "pending": 0,
+                "approved": 1
+              }
+            }
+          },
+          "executed_at": "2026-03-13T22:15:35.849530",
+          "error": null
+        },
+        {
+          "action_id": "luminaclippers.com_serp_refresh",
+          "action_type": "SERP_REFRESH",
+          "site": "luminaclippers.com",
+          "status": "success",
+          "description": "SERP data refresh triggered for rank tracking project 70664",
+          "details": {
+            "message": "Refreshing SERPs for Project."
+          },
+          "executed_at": "2026-03-13T22:15:36.678680",
+          "error": null
+        },
+        {
+          "action_id": "luminaweb3.io_serp_refresh",
+          "action_type": "SERP_REFRESH",
+          "site": "luminaweb3.io",
+          "status": "success",
+          "description": "SERP data refresh triggered for rank tracking project 69275",
+          "details": {
+            "message": "Refreshing SERPs for Project."
+          },
+          "executed_at": "2026-03-13T22:15:36.977578",
+          "error": null
+        },
+        {
+          "action_id": "luminaclippers.com_tech_non_unique_title",
+          "action_type": "TECH_ISSUE",
+          "site": "luminaclippers.com",
+          "status": "success",
+          "description": "Tech fix covered by OTTO auto-deploy: [Uniqueness] Title not unique: 2 page(s) affected. Health potential: +5pts.",
+          "details": {},
+          "executed_at": "2026-03-13T22:15:36.977609",
+          "error": null
+        },
+        {
+          "action_id": "luminaclippers.com_tech_is_orphaned_page",
+          "action_type": "TECH_ISSUE",
+          "site": "luminaclippers.com",
+          "status": "success",
+          "description": "Tech fix covered by OTTO auto-deploy: [Page URL] Page is orphaned: 3 page(s) affected. Health potential: +5pts.",
+          "details": {},
+          "executed_at": "2026-03-13T22:15:36.977618",
+          "error": null
+        },
+        {
+          "action_id": "luminaclippers.com_tech_non_unique_h1",
+          "action_type": "TECH_ISSUE",
+          "site": "luminaclippers.com",
+          "status": "success",
+          "description": "Tech fix covered by OTTO auto-deploy: [Uniqueness] H1 heading is not unique: 4 page(s) affected. Health potential: +5pts.",
+          "details": {},
+          "executed_at": "2026-03-13T22:15:36.977624",
+          "error": null
+        },
+        {
+          "action_id": "luminaclippers.com_tech_large_dom_size",
+          "action_type": "TECH_ISSUE",
+          "site": "luminaclippers.com",
+          "status": "success",
+          "description": "Tech fix covered by OTTO auto-deploy: [Content] DOM size too large: 4 page(s) affected. Health potential: +3pts.",
+          "details": {},
+          "executed_at": "2026-03-13T22:15:36.977630",
+          "error": null
+        },
+        {
+          "action_id": "luminaclippers.com_tech_element_has_style_attribute",
+          "action_type": "TECH_ISSUE",
+          "site": "luminaclippers.com",
+          "status": "success",
+          "description": "Tech fix covered by OTTO auto-deploy: [Content] Inline style attribute: 11 page(s) affected. Health potential: +3pts.",
+          "details": {},
+          "executed_at": "2026-03-13T22:15:36.977635",
+          "error": null
+        },
+        {
+          "action_id": "luminaclippers.com_tech_empty_src_in_link",
+          "action_type": "TECH_ISSUE",
+          "site": "luminaclippers.com",
+          "status": "success",
+          "description": "Tech fix covered by OTTO auto-deploy: [Content] Empty href attribute in link: 4 page(s) affected. Health potential: +3pts.",
+          "details": {},
+          "executed_at": "2026-03-13T22:15:36.977640",
+          "error": null
+        },
+        {
+          "action_id": "luminaclippers.com_tech_js_more_than_300_kb",
+          "action_type": "TECH_ISSUE",
+          "site": "luminaclippers.com",
+          "status": "success",
+          "description": "Tech fix covered by OTTO auto-deploy: [Content] JS file size too large: 1 page(s) affected. Health potential: +1pts.",
+          "details": {},
+          "executed_at": "2026-03-13T22:15:36.977646",
+          "error": null
+        },
+        {
+          "action_id": "luminaclippers.com_tech_h1",
+          "action_type": "TECH_ISSUE",
+          "site": "luminaclippers.com",
+          "status": "success",
+          "description": "Tech fix covered by OTTO auto-deploy: [Page Headers] H1 tag missing or empty: 3 page(s) affected. Health potential: +4pts.",
+          "details": {},
+          "executed_at": "2026-03-13T22:15:36.977653",
+          "error": null
+        },
+        {
+          "action_id": "luminaclippers.com_kw_3",
+          "action_type": "NEW_ARTICLE",
+          "site": "luminaclippers.com",
+          "status": "skipped",
+          "description": "New article recommended for 'short form content agency' \u2014 requires Content Genius Bearer auth or manual creation",
+          "details": {
+            "keyword": "short form content agency",
+            "search_volume": 50.0,
+            "content_brief": {
+              "target_word_count": 1500,
+              "suggested_title": "",
+              "suggested_outline": [],
+              "internal_link_targets": [
+                "https://luminaclippers.com/"
+              ]
+            }
+          },
+          "executed_at": "2026-03-13T22:15:36.977665",
+          "error": null
+        },
+        {
+          "action_id": "luminaclippers.com_kw_4",
+          "action_type": "NEW_ARTICLE",
+          "site": "luminaclippers.com",
+          "status": "skipped",
+          "description": "New article recommended for 'clipping agency' \u2014 requires Content Genius Bearer auth or manual creation",
+          "details": {
+            "keyword": "clipping agency",
+            "search_volume": 147.5,
+            "content_brief": {
+              "target_word_count": 1500,
+              "suggested_title": "",
+              "suggested_outline": [],
+              "internal_link_targets": [
+                "https://luminaclippers.com/"
+              ]
+            }
+          },
+          "executed_at": "2026-03-13T22:15:36.977673",
+          "error": null
+        },
+        {
+          "action_id": "luminaweb3.io_tech_non_unique_meta_desc",
+          "action_type": "TECH_ISSUE",
+          "site": "luminaweb3.io",
+          "status": "success",
+          "description": "Tech fix covered by OTTO auto-deploy: [Uniqueness] Meta description not unique: 21 page(s) affected. Health potential: +11pts.",
+          "details": {},
+          "executed_at": "2026-03-13T22:15:36.977679",
+          "error": null
+        },
+        {
+          "action_id": "luminaweb3.io_tech_is_orphaned_page",
+          "action_type": "TECH_ISSUE",
+          "site": "luminaweb3.io",
+          "status": "success",
+          "description": "Tech fix covered by OTTO auto-deploy: [Page URL] Page is orphaned: 1 page(s) affected. Health potential: +1pts.",
+          "details": {},
+          "executed_at": "2026-03-13T22:15:36.977684",
+          "error": null
+        },
+        {
+          "action_id": "luminaweb3.io_tech_not_enough_internal_links",
+          "action_type": "TECH_ISSUE",
+          "site": "luminaweb3.io",
+          "status": "success",
+          "description": "Tech fix covered by OTTO auto-deploy: [Links] Too few internal links: 32 page(s) affected. Health potential: +5pts.",
+          "details": {},
+          "executed_at": "2026-03-13T22:15:36.977689",
+          "error": null
+        },
+        {
+          "action_id": "luminaweb3.io_tech_has_only_one_internal_dofollow_link",
+          "action_type": "TECH_ISSUE",
+          "site": "luminaweb3.io",
+          "status": "success",
+          "description": "Tech fix covered by OTTO auto-deploy: [Links] Page has only one dofollow incoming internal link: 7 page(s) affected. Health potential: +2p",
+          "details": {},
+          "executed_at": "2026-03-13T22:15:36.977696",
+          "error": null
+        },
+        {
+          "action_id": "luminaweb3.io_tech_element_has_style_attribute",
+          "action_type": "TECH_ISSUE",
+          "site": "luminaweb3.io",
+          "status": "success",
+          "description": "Tech fix covered by OTTO auto-deploy: [Content] Inline style attribute: 32 page(s) affected. Health potential: +3pts.",
+          "details": {},
+          "executed_at": "2026-03-13T22:15:36.977703",
+          "error": null
+        },
+        {
+          "action_id": "luminaweb3.io_tech_js_more_than_300_kb",
+          "action_type": "TECH_ISSUE",
+          "site": "luminaweb3.io",
+          "status": "success",
+          "description": "Tech fix covered by OTTO auto-deploy: [Content] JS file size too large: 6 page(s) affected. Health potential: +1pts.",
+          "details": {},
+          "executed_at": "2026-03-13T22:15:36.977709",
+          "error": null
+        },
+        {
+          "action_id": "luminaweb3.io_kw_0",
+          "action_type": "UPDATE_ON_PAGE",
+          "site": "luminaweb3.io",
+          "status": "success",
+          "description": "On-page optimization via OTTO deploy: web3 marketing agency",
+          "details": {
+            "keyword": "web3 marketing agency",
+            "current_position": 8,
+            "search_volume": 210.0,
+            "suggested_changes": {
+              "title": "Include 'web3 marketing agency' in title tag, front-load if possible",
+              "meta_description": "Write compelling meta with 'web3 marketing agency', include CTA",
+              "h1": "Ensure H1 contains 'web3 marketing agency' or close semantic variant",
+              "internal_links": "Add 2-3 internal links from related pages using 'web3 marketing agency' as anchor text"
+            }
+          },
+          "executed_at": "2026-03-13T22:15:36.977719",
+          "error": null
+        },
+        {
+          "action_id": "luminaweb3.io_kw_1",
+          "action_type": "UPDATE_ON_PAGE",
+          "site": "luminaweb3.io",
+          "status": "success",
+          "description": "On-page optimization via OTTO deploy: blockchain marketing agency",
+          "details": {
+            "keyword": "blockchain marketing agency",
+            "current_position": 17,
+            "search_volume": 140.0,
+            "suggested_changes": {
+              "title": "Include 'blockchain marketing agency' in title tag, front-load if possible",
+              "meta_description": "Write compelling meta with 'blockchain marketing agency', include CTA",
+              "h1": "Ensure H1 contains 'blockchain marketing agency' or close semantic variant",
+              "internal_links": "Add 2-3 internal links from related pages using 'blockchain marketing agency' as anchor text"
+            }
+          },
+          "executed_at": "2026-03-13T22:15:36.977726",
+          "error": null
+        },
+        {
+          "action_id": "luminaweb3.io_kw_2",
+          "action_type": "NEW_ARTICLE",
+          "site": "luminaweb3.io",
+          "status": "skipped",
+          "description": "New article recommended for 'crypto marketing agency' \u2014 requires Content Genius Bearer auth or manual creation",
+          "details": {
+            "keyword": "crypto marketing agency",
+            "search_volume": 480.0,
+            "content_brief": {
+              "target_word_count": 1500,
+              "suggested_title": "",
+              "suggested_outline": [],
+              "internal_link_targets": [
+                "https://luminaweb3.io/"
+              ]
+            }
+          },
+          "executed_at": "2026-03-13T22:15:36.977734",
+          "error": null
+        },
+        {
+          "action_id": "luminaweb3.io_kw_3",
+          "action_type": "NEW_ARTICLE",
+          "site": "luminaweb3.io",
+          "status": "skipped",
+          "description": "New article recommended for 'web3 pr agency' \u2014 requires Content Genius Bearer auth or manual creation",
+          "details": {
+            "keyword": "web3 pr agency",
+            "search_volume": 117.83,
+            "content_brief": {
+              "target_word_count": 1500,
+              "suggested_title": "",
+              "suggested_outline": [],
+              "internal_link_targets": [
+                "https://luminaweb3.io/"
+              ]
+            }
+          },
+          "executed_at": "2026-03-13T22:15:36.977741",
+          "error": null
+        }
+      ],
+      "summary": {
+        "total_actions": 24,
+        "executed": 20,
+        "failed": 0,
+        "skipped": 4,
+        "sites_deployed": [
+          "luminaclippers.com",
+          "luminaweb3.io"
+        ]
+      }
+    },
+    "otto_status": {
+      "luminaclippers.com": {
+        "status": "success",
+        "description": "Deployed 186 OTTO fixes. Total: 186/197. SEO score: 94%",
+        "details": {
+          "newly_deployed": 186,
+          "total_issues": 197,
+          "deployed_after": 186,
+          "pending_after": 11,
+          "optimization_score_after": 94,
+          "optimization_score_before": 0,
+          "time_saved": null,
+          "fix_categories": {
+            "images": {
+              "total": 89,
+              "pending": 0,
+              "approved": 89,
+              "compliant_count": 89
+            },
+            "page_title": {
+              "total": 11,
+              "pending": 0,
+              "approved": 11,
+              "compliant_count": 11
+            },
+            "twitter_meta": {
+              "total": 22,
+              "pending": 11,
+              "approved": 11
+            },
+            "meta_keywords": {
+              "total": 11,
+              "pending": 0,
+              "approved": 11
+            },
+            "schema_markup": {
+              "total": 10,
+              "pending": 0,
+              "approved": 10
+            },
+            "internal_links": {
+              "total": 29,
+              "pending": 0,
+              "approved": 29
+            },
+            "headings_length": {
+              "total": 5,
+              "pending": 0,
+              "approved": 5,
+              "complaint_count": 0
+            },
+            "meta_description": {
+              "total": 11,
+              "pending": 0,
+              "approved": 11,
+              "compliant_count": 11
+            },
+            "missing_headings": {
+              "total": 8,
+              "pending": 0,
+              "approved": 8
+            }
+          }
+        },
+        "executed_at": "2026-03-13T22:15:30.715507"
+      },
+      "luminaweb3.io": {
+        "status": "success",
+        "description": "Deployed 0 OTTO fixes. Total: 281/390. SEO score: 73%",
+        "details": {
+          "newly_deployed": 0,
+          "total_issues": 390,
+          "deployed_after": 281,
+          "pending_after": 109,
+          "optimization_score_after": 73,
+          "optimization_score_before": 73,
+          "time_saved": null,
+          "fix_categories": {
+            "images": {
+              "total": 109,
+              "pending": 0,
+              "approved": 109,
+              "compliant_count": 109
+            },
+            "og_meta": {
+              "total": 30,
+              "pending": 21,
+              "approved": 9
+            },
+            "page_title": {
+              "total": 32,
+              "pending": 19,
+              "approved": 13,
+              "compliant_count": 25
+            },
+            "twitter_meta": {
+              "total": 65,
+              "pending": 22,
+              "approved": 43
+            },
+            "meta_keywords": {
+              "total": 32,
+              "pending": 11,
+              "approved": 21
+            },
+            "schema_markup": {
+              "total": 19,
+              "pending": 9,
+              "approved": 10
+            },
+            "internal_links": {
+              "total": 2,
+              "pending": 0,
+              "approved": 2
+            },
+            "headings_length": {
+              "total": 23,
+              "pending": 6,
+              "approved": 17,
+              "complaint_count": 0
+            },
+            "dynamic_indexing": {
+              "total": 36,
+              "pending": 0,
+              "approved": 36
+            },
+            "meta_description": {
+              "total": 32,
+              "pending": 21,
+              "approved": 11,
+              "compliant_count": 6
+            },
+            "missing_headings": {
+              "total": 4,
+              "pending": 0,
+              "approved": 4
+            },
+            "missing_keywords": {
+              "total": 4,
+              "pending": 0,
+              "approved": 4
+            },
+            "topical_maps_and_supplemental_content": {
+              "total": 1,
+              "pending": 0,
+              "approved": 1
+            }
+          }
+        },
+        "executed_at": "2026-03-13T22:15:35.849530"
+      }
+    }
+  }
+}

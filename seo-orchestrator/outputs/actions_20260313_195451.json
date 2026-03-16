@@ -1,0 +1,411 @@
+{
+  "run_id": "20260313_195451",
+  "timestamp": "2026-03-13T19:54:51.205051",
+  "sites_processed": [
+    "luminaclippers.com",
+    "luminaweb3.io"
+  ],
+  "total_actions": 20,
+  "actions": [
+    {
+      "id": "luminaclippers.com_tech_non_unique_title",
+      "action_type": "TECH_ISSUE",
+      "site": "luminaclippers.com",
+      "target_url": "https://luminaclippers.com/",
+      "description": "[Uniqueness] Title not unique: 2 page(s) affected. Health potential: +5pts.",
+      "risk_level": "high",
+      "status": "human_review",
+      "payload": {
+        "issue_name": "non_unique_title",
+        "group": "Uniqueness",
+        "severity": "error",
+        "affected_pages": 2,
+        "health_to_gain": 5,
+        "description": "Page's title should not be similar to other Page titles on your website.",
+        "learn_why": "Indexable pages that are not part of a pagination sequence or hreflang group should have a unique page title. This is to avoid confusing search engines in deciding which page to display for the keywords you incorporate."
+      },
+      "reasoning": "Site audit found 'Title not unique' affecting 2 pages. Category: Uniqueness. Severity: error. Fixing this could recover 5 health points. Indexable pages that are not part of a pagination sequence or hreflang group should have a unique page title. This is to avoid confusing search engines in deciding which page to display for the keywords you incorporate.",
+      "keyword": ""
+    },
+    {
+      "id": "luminaclippers.com_tech_is_orphaned_page",
+      "action_type": "TECH_ISSUE",
+      "site": "luminaclippers.com",
+      "target_url": "https://luminaclippers.com/",
+      "description": "[Page URL] Page is orphaned: 3 page(s) affected. Health potential: +5pts.",
+      "risk_level": "high",
+      "status": "human_review",
+      "payload": {
+        "issue_name": "is_orphaned_page",
+        "group": "Page URL",
+        "severity": "error",
+        "affected_pages": 3,
+        "health_to_gain": 5,
+        "description": "Orphan pages have no links pointing to them and cannot be found or indexed by search engine crawlers.",
+        "learn_why": "The presence of orphan pages creates for poor site architecture and missed keyword ranking opportunities. Resolving orphan pages can lead to more pages in Google's index and increased total keyword rankings."
+      },
+      "reasoning": "Site audit found 'Page is orphaned' affecting 3 pages. Category: Page URL. Severity: error. Fixing this could recover 5 health points. The presence of orphan pages creates for poor site architecture and missed keyword ranking opportunities. Resolving orphan pages can lead to more pages in Google's index and increased total keyword rankings.",
+      "keyword": ""
+    },
+    {
+      "id": "luminaclippers.com_tech_non_unique_h1",
+      "action_type": "TECH_ISSUE",
+      "site": "luminaclippers.com",
+      "target_url": "https://luminaclippers.com/",
+      "description": "[Uniqueness] H1 heading is not unique: 4 page(s) affected. Health potential: +5pts.",
+      "risk_level": "medium",
+      "status": "human_review",
+      "payload": {
+        "issue_name": "non_unique_h1",
+        "group": "Uniqueness",
+        "severity": "warning",
+        "affected_pages": 4,
+        "health_to_gain": 5,
+        "description": "Page's H1 heading should be unique and dissimilar to the H1 headings on other pages of your website.",
+        "learn_why": "Indexable pages that are not part of a pagination sequence or hreflang group should have a unique H1 heading. This is to avoid confusing search engines in deciding which page to display for the keywords you incorporate."
+      },
+      "reasoning": "Site audit found 'H1 heading is not unique' affecting 4 pages. Category: Uniqueness. Severity: warning. Fixing this could recover 5 health points. Indexable pages that are not part of a pagination sequence or hreflang group should have a unique H1 heading. This is to avoid confusing search engines in deciding which page to display for the keywords you incorporate.",
+      "keyword": ""
+    },
+    {
+      "id": "luminaclippers.com_tech_large_dom_size",
+      "action_type": "TECH_ISSUE",
+      "site": "luminaclippers.com",
+      "target_url": "https://luminaclippers.com/",
+      "description": "[Content] DOM size too large: 4 page(s) affected. Health potential: +3pts.",
+      "risk_level": "medium",
+      "status": "human_review",
+      "payload": {
+        "issue_name": "large_dom_size",
+        "group": "Content",
+        "severity": "notice",
+        "affected_pages": 4,
+        "health_to_gain": 3,
+        "description": "Large DOM sizes hurt performance by making it harder for browsers to render a webpage. Your Page should have a DOM size of less than 1000 elements.",
+        "learn_why": "The DOM (or Document Object Model), is a programming interface for web documents. An excessive DOM can harm web page performance, and it is recommended that a web page has no more that 1000 elements."
+      },
+      "reasoning": "Site audit found 'DOM size too large' affecting 4 pages. Category: Content. Severity: notice. Fixing this could recover 3 health points. The DOM (or Document Object Model), is a programming interface for web documents. An excessive DOM can harm web page performance, and it is recommended that a web page has no more that 1000 elements.",
+      "keyword": ""
+    },
+    {
+      "id": "luminaclippers.com_tech_element_has_style_attribute",
+      "action_type": "TECH_ISSUE",
+      "site": "luminaclippers.com",
+      "target_url": "https://luminaclippers.com/",
+      "description": "[Content] Inline style attribute: 11 page(s) affected. Health potential: +3pts.",
+      "risk_level": "medium",
+      "status": "human_review",
+      "payload": {
+        "issue_name": "element_has_style_attribute",
+        "group": "Content",
+        "severity": "notice",
+        "affected_pages": 11,
+        "health_to_gain": 3,
+        "description": "HTML elements should use a .css file for styling, making your HTML cleaner and more maintainable.",
+        "learn_why": "CSS files are used to style and lay out web pages. They determine how font, colors, spacing, and other HTML elements are displayed on web pages. Google crawls and renders CSS files to understand the content, relevance, and page experience of a web page."
+      },
+      "reasoning": "Site audit found 'Inline style attribute' affecting 11 pages. Category: Content. Severity: notice. Fixing this could recover 3 health points. CSS files are used to style and lay out web pages. They determine how font, colors, spacing, and other HTML elements are displayed on web pages. Google crawls and renders CSS files to understand the content, relevance, and page experience of a web page.",
+      "keyword": ""
+    },
+    {
+      "id": "luminaclippers.com_tech_empty_src_in_link",
+      "action_type": "TECH_ISSUE",
+      "site": "luminaclippers.com",
+      "target_url": "https://luminaclippers.com/",
+      "description": "[Content] Empty href attribute in link: 4 page(s) affected. Health potential: +3pts.",
+      "risk_level": "medium",
+      "status": "human_review",
+      "payload": {
+        "issue_name": "empty_src_in_link",
+        "group": "Content",
+        "severity": "notice",
+        "affected_pages": 4,
+        "health_to_gain": 3,
+        "description": "All links on a page should have an explicit \"href\" attribute defined to avoid cross-browser compatibility issues and ensure search engines can discover the linked-to pages.",
+        "learn_why": "The href attribute specifies the url of the page that a link points to. Without the \"href\", the link will not direct the user to another page"
+      },
+      "reasoning": "Site audit found 'Empty href attribute in link' affecting 4 pages. Category: Content. Severity: notice. Fixing this could recover 3 health points. The href attribute specifies the url of the page that a link points to. Without the \"href\", the link will not direct the user to another page",
+      "keyword": ""
+    },
+    {
+      "id": "luminaclippers.com_tech_js_more_than_300_kb",
+      "action_type": "TECH_ISSUE",
+      "site": "luminaclippers.com",
+      "target_url": "https://luminaclippers.com/",
+      "description": "[Content] JS file size too large: 1 page(s) affected. Health potential: +1pts.",
+      "risk_level": "medium",
+      "status": "human_review",
+      "payload": {
+        "issue_name": "js_more_than_300_kb",
+        "group": "Content",
+        "severity": "notice",
+        "affected_pages": 1,
+        "health_to_gain": 1,
+        "description": "Avoid using large javascript files, which slow down page load time and hurt performance. Files should be smaller than 300 KB.",
+        "learn_why": "Search engines have a more difficult time crawling and indexing Javascript, which is why unoptimized javascript files can hurt SEO performance. Any Javascript files should be smaller than 300KB. "
+      },
+      "reasoning": "Site audit found 'JS file size too large' affecting 1 pages. Category: Content. Severity: notice. Fixing this could recover 1 health points. Search engines have a more difficult time crawling and indexing Javascript, which is why unoptimized javascript files can hurt SEO performance. Any Javascript files should be smaller than 300KB. ",
+      "keyword": ""
+    },
+    {
+      "id": "luminaclippers.com_tech_h1",
+      "action_type": "TECH_ISSUE",
+      "site": "luminaclippers.com",
+      "target_url": "https://luminaclippers.com/",
+      "description": "[Page Headers] H1 tag missing or empty: 3 page(s) affected. Health potential: +4pts.",
+      "risk_level": "medium",
+      "status": "human_review",
+      "payload": {
+        "issue_name": "h1",
+        "group": "Page Headers",
+        "severity": "warning",
+        "affected_pages": 3,
+        "health_to_gain": 4,
+        "description": "Page should have a <h1> tag.",
+        "learn_why": "H1 headings are a ranking factor for search engines as they use the H1 heading to determine what the page is about. On top of that, H1 headings help your visitors to quickly understand the topic of the page."
+      },
+      "reasoning": "Site audit found 'H1 tag missing or empty' affecting 3 pages. Category: Page Headers. Severity: warning. Fixing this could recover 4 health points. H1 headings are a ranking factor for search engines as they use the H1 heading to determine what the page is about. On top of that, H1 headings help your visitors to quickly understand the topic of the page.",
+      "keyword": ""
+    },
+    {
+      "id": "luminaclippers.com_tech_heading_level_is_skipped",
+      "action_type": "TECH_ISSUE",
+      "site": "luminaclippers.com",
+      "target_url": "https://luminaclippers.com/",
+      "description": "[Page Headers] Heading level is skipped: 5 page(s) affected. Health potential: +3pts.",
+      "risk_level": "medium",
+      "status": "human_review",
+      "payload": {
+        "issue_name": "heading_level_is_skipped",
+        "group": "Page Headers",
+        "severity": "notice",
+        "affected_pages": 5,
+        "health_to_gain": 3,
+        "description": "Heading levels on indexable pages should follow an ordered sequence.",
+        "learn_why": "Heading levels that follow an ordered sequence improve the navigation experience on the page and help your visitors understand the page structure faster."
+      },
+      "reasoning": "Site audit found 'Heading level is skipped' affecting 5 pages. Category: Page Headers. Severity: notice. Fixing this could recover 3 health points. Heading levels that follow an ordered sequence improve the navigation experience on the page and help your visitors understand the page structure faster.",
+      "keyword": ""
+    },
+    {
+      "id": "luminaclippers.com_tech_h2_under_20_over_70",
+      "action_type": "TECH_ISSUE",
+      "site": "luminaclippers.com",
+      "target_url": "https://luminaclippers.com/",
+      "description": "[Page Headers] H2 tag doesn't meet length requirements: 4 page(s) affected. Health potential: +1pts.",
+      "risk_level": "medium",
+      "status": "human_review",
+      "payload": {
+        "issue_name": "h2_under_20_over_70",
+        "group": "Page Headers",
+        "severity": "notice",
+        "affected_pages": 4,
+        "health_to_gain": 1,
+        "description": "H2 headers should be between 20 and 70 characters.",
+        "learn_why": "H2 headers should be somewhere between 50 and 70 characters in order for the full heading to be visible on the web page and extracted by search engines for display in the SERPs."
+      },
+      "reasoning": "Site audit found 'H2 tag doesn't meet length requirements' affecting 4 pages. Category: Page Headers. Severity: notice. Fixing this could recover 1 health points. H2 headers should be somewhere between 50 and 70 characters in order for the full heading to be visible on the web page and extracted by search engines for display in the SERPs.",
+      "keyword": ""
+    },
+    {
+      "id": "luminaweb3.io_tech_non_unique_meta_desc",
+      "action_type": "TECH_ISSUE",
+      "site": "luminaweb3.io",
+      "target_url": "https://luminaweb3.io/",
+      "description": "[Uniqueness] Meta description not unique: 21 page(s) affected. Health potential: +11pts.",
+      "risk_level": "high",
+      "status": "human_review",
+      "payload": {
+        "issue_name": "non_unique_meta_desc",
+        "group": "Uniqueness",
+        "severity": "error",
+        "affected_pages": 21,
+        "health_to_gain": 11,
+        "description": "Page's meta description should be unique and dissimilar to the meta description on other pages of your website.",
+        "learn_why": "Indexable pages that are not part of a pagination sequence or hreflang group should have a unique meta description. Doing so helps search engines distinguish pages, and increases your chances of search engines using the meta description."
+      },
+      "reasoning": "Site audit found 'Meta description not unique' affecting 21 pages. Category: Uniqueness. Severity: error. Fixing this could recover 11 health points. Indexable pages that are not part of a pagination sequence or hreflang group should have a unique meta description. Doing so helps search engines distinguish pages, and increases your chances of search engines using the meta description.",
+      "keyword": ""
+    },
+    {
+      "id": "luminaweb3.io_tech_is_orphaned_page",
+      "action_type": "TECH_ISSUE",
+      "site": "luminaweb3.io",
+      "target_url": "https://luminaweb3.io/",
+      "description": "[Page URL] Page is orphaned: 1 page(s) affected. Health potential: +1pts.",
+      "risk_level": "high",
+      "status": "human_review",
+      "payload": {
+        "issue_name": "is_orphaned_page",
+        "group": "Page URL",
+        "severity": "error",
+        "affected_pages": 1,
+        "health_to_gain": 1,
+        "description": "Orphan pages have no links pointing to them and cannot be found or indexed by search engine crawlers.",
+        "learn_why": "The presence of orphan pages creates for poor site architecture and missed keyword ranking opportunities. Resolving orphan pages can lead to more pages in Google's index and increased total keyword rankings."
+      },
+      "reasoning": "Site audit found 'Page is orphaned' affecting 1 pages. Category: Page URL. Severity: error. Fixing this could recover 1 health points. The presence of orphan pages creates for poor site architecture and missed keyword ranking opportunities. Resolving orphan pages can lead to more pages in Google's index and increased total keyword rankings.",
+      "keyword": ""
+    },
+    {
+      "id": "luminaweb3.io_tech_not_enough_internal_links",
+      "action_type": "TECH_ISSUE",
+      "site": "luminaweb3.io",
+      "target_url": "https://luminaweb3.io/",
+      "description": "[Links] Too few internal links: 32 page(s) affected. Health potential: +5pts.",
+      "risk_level": "medium",
+      "status": "human_review",
+      "payload": {
+        "issue_name": "not_enough_internal_links",
+        "group": "Links",
+        "severity": "notice",
+        "affected_pages": 32,
+        "health_to_gain": 5,
+        "description": "Page should include more internal links. Internal Links help search engines discover content on your website and improve search rankings of linked-to pages.",
+        "learn_why": "Internal links help search engines find and discover new pages on your website. They also help search engines understand how all of your web pages interrelate. Not having enough internal links is a missed oppportunity to communicate to search engine crawlers the other relevant content you have on your website."
+      },
+      "reasoning": "Site audit found 'Too few internal links' affecting 32 pages. Category: Links. Severity: notice. Fixing this could recover 5 health points. Internal links help search engines find and discover new pages on your website. They also help search engines understand how all of your web pages interrelate. Not having enough internal links is a missed oppportunity to communicate to search engine crawlers the other relevant content you have on your website.",
+      "keyword": ""
+    },
+    {
+      "id": "luminaweb3.io_tech_has_only_one_internal_dofollow_link",
+      "action_type": "TECH_ISSUE",
+      "site": "luminaweb3.io",
+      "target_url": "https://luminaweb3.io/",
+      "description": "[Links] Page has only one dofollow incoming internal link: 7 page(s) affected. Health potential: +2pts.",
+      "risk_level": "medium",
+      "status": "human_review",
+      "payload": {
+        "issue_name": "has_only_one_internal_dofollow_link",
+        "group": "Links",
+        "severity": "notice",
+        "affected_pages": 7,
+        "health_to_gain": 2,
+        "description": "The number of internal links pointing to a page is a signal to search engines about the relative importance of that page.",
+        "learn_why": null
+      },
+      "reasoning": "Site audit found 'Page has only one dofollow incoming internal link' affecting 7 pages. Category: Links. Severity: notice. Fixing this could recover 2 health points. None",
+      "keyword": ""
+    },
+    {
+      "id": "luminaweb3.io_tech_element_has_style_attribute",
+      "action_type": "TECH_ISSUE",
+      "site": "luminaweb3.io",
+      "target_url": "https://luminaweb3.io/",
+      "description": "[Content] Inline style attribute: 32 page(s) affected. Health potential: +3pts.",
+      "risk_level": "medium",
+      "status": "human_review",
+      "payload": {
+        "issue_name": "element_has_style_attribute",
+        "group": "Content",
+        "severity": "notice",
+        "affected_pages": 32,
+        "health_to_gain": 3,
+        "description": "HTML elements should use a .css file for styling, making your HTML cleaner and more maintainable.",
+        "learn_why": "CSS files are used to style and lay out web pages. They determine how font, colors, spacing, and other HTML elements are displayed on web pages. Google crawls and renders CSS files to understand the content, relevance, and page experience of a web page."
+      },
+      "reasoning": "Site audit found 'Inline style attribute' affecting 32 pages. Category: Content. Severity: notice. Fixing this could recover 3 health points. CSS files are used to style and lay out web pages. They determine how font, colors, spacing, and other HTML elements are displayed on web pages. Google crawls and renders CSS files to understand the content, relevance, and page experience of a web page.",
+      "keyword": ""
+    },
+    {
+      "id": "luminaweb3.io_tech_js_more_than_300_kb",
+      "action_type": "TECH_ISSUE",
+      "site": "luminaweb3.io",
+      "target_url": "https://luminaweb3.io/",
+      "description": "[Content] JS file size too large: 6 page(s) affected. Health potential: +1pts.",
+      "risk_level": "medium",
+      "status": "human_review",
+      "payload": {
+        "issue_name": "js_more_than_300_kb",
+        "group": "Content",
+        "severity": "notice",
+        "affected_pages": 6,
+        "health_to_gain": 1,
+        "description": "Avoid using large javascript files, which slow down page load time and hurt performance. Files should be smaller than 300 KB.",
+        "learn_why": "Search engines have a more difficult time crawling and indexing Javascript, which is why unoptimized javascript files can hurt SEO performance. Any Javascript files should be smaller than 300KB. "
+      },
+      "reasoning": "Site audit found 'JS file size too large' affecting 6 pages. Category: Content. Severity: notice. Fixing this could recover 1 health points. Search engines have a more difficult time crawling and indexing Javascript, which is why unoptimized javascript files can hurt SEO performance. Any Javascript files should be smaller than 300KB. ",
+      "keyword": ""
+    },
+    {
+      "id": "luminaweb3.io_tech_meta_keywords",
+      "action_type": "TECH_ISSUE",
+      "site": "luminaweb3.io",
+      "target_url": "https://luminaweb3.io/",
+      "description": "[Content] Meta keywords missing or empty: 11 page(s) affected. Health potential: +1pts.",
+      "risk_level": "medium",
+      "status": "human_review",
+      "payload": {
+        "issue_name": "meta_keywords",
+        "group": "Content",
+        "severity": "notice",
+        "affected_pages": 11,
+        "health_to_gain": 1,
+        "description": "Page can implement <meta> keywords tag. This is optional.",
+        "learn_why": "The meta keywords tag communicates to Google keywords that are relevant to the web page content and gives more context about what the content is about. However, due to past manipulation by black hat SEOs, Google no longer uses meta keywords in its ranking algorithm, making it optional for web pages."
+      },
+      "reasoning": "Site audit found 'Meta keywords missing or empty' affecting 11 pages. Category: Content. Severity: notice. Fixing this could recover 1 health points. The meta keywords tag communicates to Google keywords that are relevant to the web page content and gives more context about what the content is about. However, due to past manipulation by black hat SEOs, Google no longer uses meta keywords in its ranking algorithm, making it optional for web pages.",
+      "keyword": ""
+    },
+    {
+      "id": "luminaweb3.io_tech_content_below_150_words",
+      "action_type": "TECH_ISSUE",
+      "site": "luminaweb3.io",
+      "target_url": "https://luminaweb3.io/",
+      "description": "[Content] Content too short: 1 page(s) affected. Health potential: +1pts.",
+      "risk_level": "medium",
+      "status": "human_review",
+      "payload": {
+        "issue_name": "content_below_150_words",
+        "group": "Content",
+        "severity": "notice",
+        "affected_pages": 1,
+        "health_to_gain": 1,
+        "description": "Page's content should contain more than 150 words.",
+        "learn_why": "Longer content communicates to Google that your website provides users with in-depth information to their questions and search queries. Google does not like thin content, and therefore rankworthy web pages should contain more than 150 words on the page."
+      },
+      "reasoning": "Site audit found 'Content too short' affecting 1 pages. Category: Content. Severity: notice. Fixing this could recover 1 health points. Longer content communicates to Google that your website provides users with in-depth information to their questions and search queries. Google does not like thin content, and therefore rankworthy web pages should contain more than 150 words on the page.",
+      "keyword": ""
+    },
+    {
+      "id": "luminaweb3.io_tech_large_dom_size",
+      "action_type": "TECH_ISSUE",
+      "site": "luminaweb3.io",
+      "target_url": "https://luminaweb3.io/",
+      "description": "[Content] DOM size too large: 1 page(s) affected. Health potential: +1pts.",
+      "risk_level": "medium",
+      "status": "human_review",
+      "payload": {
+        "issue_name": "large_dom_size",
+        "group": "Content",
+        "severity": "notice",
+        "affected_pages": 1,
+        "health_to_gain": 1,
+        "description": "Large DOM sizes hurt performance by making it harder for browsers to render a webpage. Your Page should have a DOM size of less than 1000 elements.",
+        "learn_why": "The DOM (or Document Object Model), is a programming interface for web documents. An excessive DOM can harm web page performance, and it is recommended that a web page has no more that 1000 elements."
+      },
+      "reasoning": "Site audit found 'DOM size too large' affecting 1 pages. Category: Content. Severity: notice. Fixing this could recover 1 health points. The DOM (or Document Object Model), is a programming interface for web documents. An excessive DOM can harm web page performance, and it is recommended that a web page has no more that 1000 elements.",
+      "keyword": ""
+    },
+    {
+      "id": "luminaweb3.io_tech_h1",
+      "action_type": "TECH_ISSUE",
+      "site": "luminaweb3.io",
+      "target_url": "https://luminaweb3.io/",
+      "description": "[Page Headers] H1 tag missing or empty: 4 page(s) affected. Health potential: +2pts.",
+      "risk_level": "medium",
+      "status": "human_review",
+      "payload": {
+        "issue_name": "h1",
+        "group": "Page Headers",
+        "severity": "warning",
+        "affected_pages": 4,
+        "health_to_gain": 2,
+        "description": "Page should have a <h1> tag.",
+        "learn_why": "H1 headings are a ranking factor for search engines as they use the H1 heading to determine what the page is about. On top of that, H1 headings help your visitors to quickly understand the topic of the page."
+      },
+      "reasoning": "Site audit found 'H1 tag missing or empty' affecting 4 pages. Category: Page Headers. Severity: warning. Fixing this could recover 2 health points. H1 headings are a ranking factor for search engines as they use the H1 heading to determine what the page is about. On top of that, H1 headings help your visitors to quickly understand the topic of the page.",
+      "keyword": ""
+    }
+  ]
+}
