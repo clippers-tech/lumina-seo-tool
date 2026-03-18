@@ -30,12 +30,14 @@ from pathlib import Path
 from config import load_config, OrchestratorConfig, SiteConfig
 from config.models import RunLog, Action, ActionType, ActionStatus
 from integrations.searchatlas import SearchAtlasClient
+from integrations.notifier import SEONotifier
 from integrations.github_publisher import GitHubPublisher
 from integrations.llm_writer import LLMContentWriter
 from core.analyzer import SEOAnalyzer
 from core.content_generator import ContentGenerator
 from core.reporter import ReportGenerator
 from core.executor import SEOExecutor, ExecutionLog
+from core.history import SEOHistory
 from core.competitor_tracker import CompetitorTracker
 from core.publisher import SEOPublisher
 
@@ -53,6 +55,8 @@ class SEOOrchestrator:
             sa_client=self.sa_client,
             sites=config.sites,
         )
+        self.history = SEOHistory()
+        self.notifier = SEONotifier(getattr(config, "notifications", {}) or {})
 
         # Competitor tracker
         self.competitor_tracker = CompetitorTracker(
@@ -182,6 +186,7 @@ class SEOOrchestrator:
                 error_msg = f"Error processing {hostname}: {str(e)}"
                 logger.error(error_msg, exc_info=True)
                 run_log.errors.append(error_msg)
+                await self.notifier.send_error_alert(str(e), f"Processing {hostname}")
 
         # Step 5: AUTO-EXECUTE
         execution_log = None
@@ -265,6 +270,66 @@ class SEOOrchestrator:
             }
         if publish_results:
             run_log.data_snapshot["content_publishing"] = publish_results
+
+        # Step 6: Save to history
+        logger.info("\n── Saving to history ──")
+        try:
+            self.history.save_run(run_log)
+            for hostname, site_data in site_data_map.items():
+                # Save keyword snapshots
+                keywords = site_data.get("keywords", [])
+                if keywords:
+                    kw_list = [
+                        {
+                            "keyword": kw.get("keyword", ""),
+                            "position": kw.get("position"),
+                            "prev_position": kw.get("prev_position"),
+                            "delta": kw.get("delta"),
+                            "search_volume": kw.get("search_volume", 0),
+                            "url": kw.get("url", ""),
+                        }
+                        for kw in keywords
+                    ]
+                    self.history.save_keyword_snapshot(run_log.run_id, hostname, kw_list)
+
+                # Save site metrics
+                rank_overview = site_data.get("rank_overview", {})
+                otto = site_data.get("otto", {})
+                audit = site_data.get("audit", {})
+                health = audit.get("site_health", {})
+                health_pct = (
+                    round(health["actual"] / health["total"] * 100)
+                    if health.get("total")
+                    else None
+                )
+                self.history.save_site_metrics(run_log.run_id, hostname, {
+                    "avg_position": rank_overview.get("avg_position"),
+                    "site_health": health_pct,
+                    "domain_rating": otto.get("domain_rating"),
+                    "estimated_traffic": rank_overview.get("estimated_traffic", 0),
+                    "total_keywords": len(keywords),
+                    "otto_score": otto.get("optimization_score", 0),
+                })
+
+            # Check for significant rank changes and send alerts
+            for hostname in run_log.sites_processed:
+                rank_changes = self.history.get_rank_changes(hostname, threshold=5)
+                for change in rank_changes:
+                    direction = "up" if change["change"] > 0 else "down"
+                    await self.notifier.send_rank_alert(
+                        keyword=change["keyword"],
+                        site=hostname,
+                        old_position=int(change["old_position"] or 100),
+                        new_position=int(change["new_position"] or 100),
+                        direction=direction,
+                    )
+
+            self.history.cleanup_old_data(self.config.log_retention_days)
+        except Exception as e:
+            logger.error(f"Error saving history: {e}", exc_info=True)
+
+        # Step 7: Send run summary notification
+        await self.notifier.send_run_summary(run_log, execution_log)
 
         logger.info(f"\n═══ Run Complete ═══")
         logger.info(f"Summary: {run_log.summary}")
