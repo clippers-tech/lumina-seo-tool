@@ -31,11 +31,11 @@
 │  │  ├─ Press Releases   │    │      │
 │  │  └─ Cloud Stacks     │    │      │
 │  ├──────────────────────┤    │      │
-│  │   WordPress REST     │◄───┼──────┘
-│  │  (luminaclippers.com)│    │
+│  │   Vercel Publisher    │◄───┼──────┘
+│  │  (both sites)        │    │
 │  ├──────────────────────┤    │
-│  │   Next.js Stub       │    │
-│  │  (luminaweb3.io)     │    │
+│  │   WordPress (legacy) │    │
+│  │  (preserved for use) │    │
 │  └──────────────────────┘    │
 └──────────────────────────────┘
 ```
@@ -82,8 +82,8 @@ seo-orchestrator/
 ├── integrations/
 │   ├── __init__.py
 │   ├── searchatlas.py       # SearchAtlas API client (all endpoints)
-│   ├── wordpress.py         # WordPress REST API v2 client
-│   └── nextjs_stub.py       # Next.js content management stubs
+│   ├── wordpress.py         # WordPress REST API v2 client (preserved for future use)
+│   └── vercel_publisher.py  # Vercel/Next.js publishing integration
 │
 ├── core/
 │   ├── __init__.py
@@ -120,10 +120,11 @@ seo-orchestrator/
 ## Environment Variables
 
 ```bash
-SEARCHATLAS_API_KEY=6d64cc823eccbb9865cfa2d0b45aa3e5
-WP_CLIPPERS_USER=<wordpress-username>
-WP_CLIPPERS_APP_PASSWORD=<wordpress-app-password>
+SEARCHATLAS_API_KEY=<your-api-key-here>
+VERCEL_TOKEN=<vercel-api-token>
+GITHUB_TOKEN=<github-pat-for-repo-commits>
 LUMINAWEB3_REVALIDATION_SECRET=<next-isr-secret>
+LUMINACLIPPERS_REVALIDATION_SECRET=<next-isr-secret>
 ```
 
 ## Guardrails Summary
