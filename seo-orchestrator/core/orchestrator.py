@@ -40,6 +40,7 @@ from core.executor import SEOExecutor, ExecutionLog
 from core.history import SEOHistory
 from core.competitor_tracker import CompetitorTracker
 from core.publisher import SEOPublisher
+from integrations.dashboard_push import push_dashboard_data, save_dashboard_data_locally
 
 logger = logging.getLogger("seo_orchestrator")
 
@@ -271,7 +272,23 @@ class SEOOrchestrator:
         if publish_results:
             run_log.data_snapshot["content_publishing"] = publish_results
 
-        # Step 6: Save to history
+        # Step 8: Build and push dashboard data to live dashboard
+        logger.info("\n── Building dashboard data ──")
+        try:
+            dashboard_payload = self._build_dashboard_payload(
+                run_log, site_data_map, execution_log, competitor_results
+            )
+            save_dashboard_data_locally(dashboard_payload)
+
+            push_success = await push_dashboard_data(dashboard_payload)
+            if push_success:
+                logger.info("Dashboard data pushed to live dashboard")
+            else:
+                logger.warning("Dashboard push failed — data saved locally only")
+        except Exception as e:
+            logger.error(f"Error building/pushing dashboard data: {e}", exc_info=True)
+
+        # Step 9: Save to history
         logger.info("\n── Saving to history ──")
         try:
             self.history.save_run(run_log)
@@ -328,7 +345,7 @@ class SEOOrchestrator:
         except Exception as e:
             logger.error(f"Error saving history: {e}", exc_info=True)
 
-        # Step 7: Send run summary notification
+        # Step 10: Send run summary notification
         await self.notifier.send_run_summary(run_log, execution_log)
 
         logger.info(f"\n═══ Run Complete ═══")
@@ -337,6 +354,105 @@ class SEOOrchestrator:
         logger.info(f"Report: {report_path}")
 
         return run_log
+
+    def _build_dashboard_payload(
+        self,
+        run_log: RunLog,
+        site_data_map: dict[str, dict],
+        execution_log: ExecutionLog | None,
+        competitor_results: dict[str, dict],
+    ) -> dict:
+        """Build the complete dashboard_data.json payload from run results."""
+        sites = {}
+        for site_config in self.config.sites:
+            hostname = site_config.hostname
+            sd = site_data_map.get(hostname, {})
+            overview = sd.get("project_overview", {})
+            kw_details = sd.get("keyword_details", [])
+            audit = sd.get("audit_issues", {})
+            otto = sd.get("otto_project", {})
+
+            pos_legends = overview.get("position_legends", {})
+            after_summary = otto.get("after_summary", {})
+
+            sites[hostname] = {
+                "priority": site_config.priority,
+                "rank_overview": {
+                    "avg_position": pos_legends.get("current_avg_position"),
+                    "position_delta": pos_legends.get("position_delta"),
+                    "estimated_traffic": overview.get("estimated_traffic", 0),
+                    "traffic_history": overview.get("traffic_history", []),
+                    "search_visibility": overview.get("search_visibility", []),
+                    "serps_overview": overview.get("serps_overview", []),
+                },
+                "keywords": [
+                    {
+                        "keyword": kw.get("keyword", ""),
+                        "position": kw.get("current_avg_position"),
+                        "prev_position": kw.get("previous_avg_position"),
+                        "delta": kw.get("avg_position_delta"),
+                        "search_volume": kw.get("search_volume", 0),
+                        "url": kw.get("url", ""),
+                        "serp_features": kw.get("serp_features", []),
+                        "position_history": kw.get("position_history", []),
+                    }
+                    for kw in kw_details
+                ],
+                "audit": {
+                    "site_health": audit.get("site_health", {"actual": 0, "total": 1}),
+                    "top_issues": audit.get("top_issues", []),
+                    "issue_groups": audit.get("issue_groups", {}),
+                },
+                "otto": {
+                    "optimization_score": after_summary.get("seo_optimization_score", 0),
+                    "domain_rating": otto.get("dr"),
+                    "backlinks": otto.get("backlinks"),
+                    "refdomains": otto.get("refdomains"),
+                },
+            }
+
+        # Build execution data
+        execution = {}
+        if execution_log:
+            execution["latest_run"] = {
+                "run_id": execution_log.run_id,
+                "started_at": execution_log.started_at,
+                "completed_at": execution_log.completed_at,
+                "results": [r.to_dict() for r in execution_log.results],
+                "summary": execution_log.summary,
+            }
+            # OTTO status per site
+            otto_status = {}
+            for result in execution_log.results:
+                if result.action_type == "OTTO_DEPLOY" and result.status.value == "success":
+                    otto_status[result.site] = {
+                        "status": "deployed",
+                        "details": result.details,
+                    }
+            execution["otto_status"] = otto_status
+
+        # Actions
+        actions = [a.to_dict() for a in run_log.actions]
+
+        # Competitors
+        competitors = {}
+        for hostname, comp_data in competitor_results.items():
+            competitors[hostname] = comp_data.get("competitors", [])
+
+        return {
+            "sites": sites,
+            "actions": actions,
+            "execution": execution,
+            "competitors": competitors,
+            "run_log": {
+                "run_id": run_log.run_id,
+                "timestamp": run_log.timestamp,
+                "sites_processed": run_log.sites_processed,
+                "total_actions": len(run_log.actions),
+                "summary": run_log.summary,
+                "errors": run_log.errors,
+            },
+        }
 
     async def _run_content_generation(self, run_log: RunLog) -> list[dict]:
         """Generate and publish articles for NEW_ARTICLE actions."""
