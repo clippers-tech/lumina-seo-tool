@@ -474,11 +474,24 @@ class SEOOrchestrator:
         for hostname, comp_data in competitor_results.items():
             competitors[hostname] = comp_data.get("competitors", [])
 
+        # Build breakdown dicts for run-log page
+        by_type: dict[str, int] = {}
+        by_risk: dict[str, int] = {}
+        by_status: dict[str, int] = {}
+        for a in run_log.actions:
+            at = a.action_type.value if hasattr(a.action_type, "value") else str(a.action_type)
+            by_type[at] = by_type.get(at, 0) + 1
+            rl = a.risk_level if isinstance(a.risk_level, str) else (a.risk_level.value if hasattr(a.risk_level, "value") else str(a.risk_level))
+            by_risk[rl] = by_risk.get(rl, 0) + 1
+            st = a.status if isinstance(a.status, str) else (a.status.value if hasattr(a.status, "value") else str(a.status))
+            by_status[st] = by_status.get(st, 0) + 1
+
         return {
             "sites": sites,
             "actions": actions,
             "execution": execution,
             "competitors": competitors,
+            "generated_at": run_log.timestamp,
             "run_log": {
                 "run_id": run_log.run_id,
                 "timestamp": run_log.timestamp,
@@ -486,6 +499,9 @@ class SEOOrchestrator:
                 "total_actions": len(run_log.actions),
                 "summary": run_log.summary,
                 "errors": run_log.errors,
+                "by_type": by_type,
+                "by_risk": by_risk,
+                "by_status": by_status,
             },
         }
 
