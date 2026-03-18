@@ -29,35 +29,17 @@ import {
 } from "recharts";
 
 interface CompetitorRow {
-  domain: string;
-  visibilityScore: number;
-  domainRating: number;
-  commonKeywords: number;
-  status: "outranking" | "trailing" | "new" | "stable";
+  url: string;
+  keywords_in_top_10: number;
+  avg_position: number | null;
+  previous_search_visibility: number | null;
+  current_search_visibility: number | null;
+  search_visibility_delta: number;
 }
 
-const competitorsBysite: Record<string, CompetitorRow[]> = {
-  "luminaclippers.com": [
-    { domain: "clutch.co", visibilityScore: 82, domainRating: 91, commonKeywords: 34, status: "outranking" },
-    { domain: "g2.com", visibilityScore: 89, domainRating: 92, commonKeywords: 28, status: "outranking" },
-    { domain: "contentmarketinginstitute.com", visibilityScore: 71, domainRating: 84, commonKeywords: 22, status: "trailing" },
-    { domain: "searchenginejournal.com", visibilityScore: 78, domainRating: 88, commonKeywords: 19, status: "stable" },
-    { domain: "semrush.com", visibilityScore: 95, domainRating: 94, commonKeywords: 41, status: "outranking" },
-    { domain: "moz.com", visibilityScore: 74, domainRating: 86, commonKeywords: 15, status: "new" },
-  ],
-  "luminaweb3.com": [
-    { domain: "cointelegraph.com", visibilityScore: 88, domainRating: 90, commonKeywords: 31, status: "outranking" },
-    { domain: "decrypt.co", visibilityScore: 76, domainRating: 79, commonKeywords: 25, status: "trailing" },
-    { domain: "theblock.co", visibilityScore: 81, domainRating: 82, commonKeywords: 20, status: "stable" },
-    { domain: "coindesk.com", visibilityScore: 91, domainRating: 93, commonKeywords: 38, status: "outranking" },
-    { domain: "defipulse.com", visibilityScore: 62, domainRating: 68, commonKeywords: 12, status: "new" },
-  ],
-};
-
 const statusConfig: Record<string, { color: string; label: string }> = {
-  outranking: { color: "bg-red-500/15 text-red-400 border-red-500/20", label: "Outranking" },
-  trailing: { color: "bg-emerald-500/15 text-emerald-400 border-emerald-500/20", label: "Trailing" },
-  new: { color: "bg-blue-500/15 text-blue-400 border-blue-500/20", label: "New" },
+  gaining: { color: "bg-emerald-500/15 text-emerald-400 border-emerald-500/20", label: "Gaining" },
+  losing: { color: "bg-red-500/15 text-red-400 border-red-500/20", label: "Losing" },
   stable: { color: "bg-amber-500/15 text-amber-400 border-amber-500/20", label: "Stable" },
 };
 
@@ -134,6 +116,10 @@ function OurMetricsCard({ site, hostname }: { site: SiteData; hostname: string }
 }
 
 function CompetitorTable({ competitors }: { competitors: CompetitorRow[] }) {
+  const sorted = [...competitors]
+    .sort((a, b) => b.keywords_in_top_10 - a.keywords_in_top_10)
+    .slice(0, 20);
+
   return (
     <Card className="bg-card border-card-border overflow-hidden">
       <CardHeader className="pb-0 px-4 pt-4">
@@ -153,10 +139,10 @@ function CompetitorTable({ competitors }: { competitors: CompetitorRow[] }) {
                   Visibility Score
                 </th>
                 <th className="text-center px-4 py-2.5 font-medium text-muted-foreground uppercase tracking-wider text-[10px]">
-                  Domain Rating
+                  Top 10 Keywords
                 </th>
                 <th className="text-center px-4 py-2.5 font-medium text-muted-foreground uppercase tracking-wider text-[10px]">
-                  Common Keywords
+                  Avg Position
                 </th>
                 <th className="text-center px-4 py-2.5 font-medium text-muted-foreground uppercase tracking-wider text-[10px]">
                   Status
@@ -164,18 +150,19 @@ function CompetitorTable({ competitors }: { competitors: CompetitorRow[] }) {
               </tr>
             </thead>
             <tbody>
-              {competitors.map((comp, i) => {
-                const status = statusConfig[comp.status] || statusConfig.stable;
+              {sorted.map((comp, i) => {
+                const statusKey = comp.search_visibility_delta > 0 ? "gaining" : comp.search_visibility_delta < 0 ? "losing" : "stable";
+                const status = statusConfig[statusKey] || statusConfig.stable;
                 return (
                   <tr
-                    key={comp.domain}
+                    key={comp.url}
                     className="border-b border-border/30 hover:bg-muted/20 transition-colors"
                     data-testid={`competitor-row-${i}`}
                   >
-                    <td className="px-4 py-3 font-medium">{comp.domain}</td>
-                    <td className="text-center px-4 py-3 tabular-nums">{comp.visibilityScore}</td>
-                    <td className="text-center px-4 py-3 tabular-nums font-semibold">{comp.domainRating}</td>
-                    <td className="text-center px-4 py-3 tabular-nums">{comp.commonKeywords}</td>
+                    <td className="px-4 py-3 font-medium">{comp.url}</td>
+                    <td className="text-center px-4 py-3 tabular-nums">{comp.current_search_visibility ?? 0}</td>
+                    <td className="text-center px-4 py-3 tabular-nums font-semibold">{comp.keywords_in_top_10}</td>
+                    <td className="text-center px-4 py-3 tabular-nums">{comp.avg_position ?? "–"}</td>
                     <td className="text-center px-4 py-3">
                       <Badge
                         variant="outline"
@@ -269,7 +256,7 @@ export default function CompetitorsPage() {
       </div>
 
       {filteredSites.map(([hostname, site]) => {
-        const competitors = competitorsBysite[hostname] || [];
+        const competitors = (data.competitors?.[hostname] || []) as CompetitorRow[];
         return (
           <div key={hostname} className="space-y-4">
             <div className="flex items-center gap-2">

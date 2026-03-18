@@ -390,11 +390,10 @@ class SEOOrchestrator:
                 for issue in group.get("issues_list", []):
                     all_issues.append({
                         "group": group_name,
-                        "name": issue.get("label", issue.get("issue_name", "")),
-                        "issue_name": issue.get("issue_name", ""),
+                        "name": issue.get("issue_name", ""),
+                        "label": issue.get("label", issue.get("issue_name", "")),
+                        "severity": issue.get("severity_type", "notice"),
                         "affected_pages": issue.get("affected_pages", 0),
-                        "severity_type": issue.get("severity_type", "notice"),
-                        "description": issue.get("description", ""),
                         "health_to_gain": issue.get("health_to_gain", 0),
                     })
 
@@ -419,21 +418,31 @@ class SEOOrchestrator:
                         "delta": kw.get("avg_position_delta"),
                         "search_volume": kw.get("search_volume", 0),
                         "url": kw.get("url", ""),
-                        "serp_features": kw.get("serp_features", []),
-                        "position_history": kw.get("position_history", []),
+                        "serp_features": kw.get("sf", []) or [],
+                        "position_history": [
+                            {"date": p.get("date", ""), "position": p.get("position")}
+                            for p in (kw.get("position_hist") or [])
+                        ],
                     }
                     for kw in kw_details
                 ],
                 "audit": {
                     "site_health": audit.get("site_health", {"actual": 0, "total": 1}),
-                    "top_issues": top_issues,
-                    "issue_groups": issue_groups_data,
+                    "crawled_pages": audit.get("crawled_pages", 0),
+                    "total_pages": audit.get("total_pages", 0),
+                    "issues": top_issues,
                 },
                 "otto": {
                     "optimization_score": after_summary.get("seo_optimization_score", 0),
                     "domain_rating": otto.get("dr"),
                     "backlinks": otto.get("backlinks"),
                     "refdomains": otto.get("refdomains"),
+                    "total_issues": after_summary.get("found_issues", 0),
+                    "deployed_fixes": after_summary.get("deployed_fixes", 0),
+                    "total_pages": after_summary.get("total_pages", 0),
+                    "healthy_pages": after_summary.get("healthy_pages", 0),
+                    "is_gsc_connected": otto.get("connected_data", {}).get("is_gsc_connected", False),
+                    "pixel_tag_state": otto.get("pixel_tag_state", "unknown"),
                 },
             }
 
