@@ -585,21 +585,25 @@ class SEOOrchestrator:
                 continue
 
             try:
+                content_brief = action.payload.get("content_brief", {})
+                suggested_title = content_brief.get("suggested_title", "")
+
+                # Build a proper title: use suggested_title if available, otherwise create one from keyword
+                if suggested_title:
+                    title = suggested_title
+                elif action.keyword:
+                    title = f"The Ultimate Guide to {action.keyword.title()}"
+                else:
+                    title = action.description
+
                 brief = {
-                    "title": action.payload.get("article_brief", {}).get(
-                        "suggested_titles", [action.description]
-                    )[0],
+                    "title": title,
                     "target_keyword": action.keyword,
-                    "outline": action.payload.get("article_brief", {}).get("outline", []),
-                    "word_count_target": action.payload.get("article_brief", {}).get(
-                        "target_word_count", 2500
-                    ),
-                    "internal_links": action.payload.get("article_brief", {}).get(
-                        "internal_links", []
-                    ),
-                    "meta_description": action.payload.get("article_brief", {}).get(
-                        "meta_description", ""
-                    ),
+                    "description": action.description,
+                    "keywords": [action.keyword] if action.keyword else [],
+                    "outline": content_brief.get("suggested_outline", []),
+                    "word_count_target": content_brief.get("target_word_count", 1500),
+                    "internal_links": content_brief.get("internal_link_targets", []),
                 }
 
                 logger.info(f"[{hostname}] Generating article for '{action.keyword}'")
