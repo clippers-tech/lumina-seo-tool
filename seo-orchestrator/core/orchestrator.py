@@ -375,14 +375,40 @@ class SEOOrchestrator:
             pos_legends = overview.get("position_legends", {})
             after_summary = otto.get("after_summary", {})
 
+            # Build top_issues from the raw issues list
+            raw_issues = audit.get("issues", [])
+            all_issues = []
+            issue_groups_data = {}
+            for group in raw_issues:
+                group_name = group.get("group", "Unknown")
+                issue_groups_data[group_name] = {
+                    "affected": group.get("group_affected", 0),
+                    "errors": group.get("error_count", 0),
+                    "warnings": group.get("warning_count", 0),
+                    "notices": group.get("notice_count", 0),
+                }
+                for issue in group.get("issues_list", []):
+                    all_issues.append({
+                        "group": group_name,
+                        "name": issue.get("label", issue.get("issue_name", "")),
+                        "issue_name": issue.get("issue_name", ""),
+                        "affected_pages": issue.get("affected_pages", 0),
+                        "severity_type": issue.get("severity_type", "notice"),
+                        "description": issue.get("description", ""),
+                        "health_to_gain": issue.get("health_to_gain", 0),
+                    })
+
+            # Sort by affected_pages descending, take top 10
+            top_issues = sorted(all_issues, key=lambda x: x.get("affected_pages", 0), reverse=True)[:10]
+
             sites[hostname] = {
                 "priority": site_config.priority,
                 "rank_overview": {
                     "avg_position": pos_legends.get("current_avg_position"),
                     "position_delta": pos_legends.get("position_delta"),
                     "estimated_traffic": overview.get("estimated_traffic", 0),
-                    "traffic_history": overview.get("traffic_history", []),
-                    "search_visibility": overview.get("search_visibility", []),
+                    "traffic_history": overview.get("estimated_traffic_report", []),
+                    "search_visibility": overview.get("search_visibility_report", []),
                     "serps_overview": overview.get("serps_overview", []),
                 },
                 "keywords": [
@@ -400,8 +426,8 @@ class SEOOrchestrator:
                 ],
                 "audit": {
                     "site_health": audit.get("site_health", {"actual": 0, "total": 1}),
-                    "top_issues": audit.get("top_issues", []),
-                    "issue_groups": audit.get("issue_groups", {}),
+                    "top_issues": top_issues,
+                    "issue_groups": issue_groups_data,
                 },
                 "otto": {
                     "optimization_score": after_summary.get("seo_optimization_score", 0),
