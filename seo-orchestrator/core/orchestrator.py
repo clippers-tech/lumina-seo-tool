@@ -30,6 +30,7 @@ from pathlib import Path
 from config import load_config, OrchestratorConfig, SiteConfig
 from config.models import RunLog, Action, ActionType, ActionStatus
 from integrations.searchatlas import SearchAtlasClient
+from integrations.searchatlas_content import SearchAtlasContentPublisher
 from integrations.notifier import SEONotifier
 from integrations.github_publisher import GitHubPublisher
 from integrations.ghost_publisher import GhostPublisher
@@ -94,27 +95,20 @@ class SEOOrchestrator:
                     except ValueError as e:
                         logger.warning(f"Could not create Ghost publisher for {site.hostname}: {e}")
 
-        # SEO publisher (per site — works with ghost alone, github alone, or both)
-        self.seo_publishers: dict[str, SEOPublisher] = {}
-        if self.llm_writer:
-            for site in config.sites:
-                gh_pub = self.github_publishers.get(site.hostname)
-                ghost_pub = self.ghost_publishers.get(site.hostname)
+        # SearchAtlas content publisher (uses existing SA client)
+        self.sa_content = SearchAtlasContentPublisher(sa_client=self.sa_client)
 
-                if gh_pub or ghost_pub:
-                    self.seo_publishers[site.hostname] = SEOPublisher(
-                        llm_writer=self.llm_writer,
-                        config={
-                            "auto_publish": config.content_generation.auto_publish,
-                            "vercel_deploy_hook": site.vercel.deploy_hook,
-                        },
-                        github_publisher=gh_pub,
-                        ghost_publisher=ghost_pub,
-                    )
-                    logger.info(
-                        f"SEO publisher created for {site.hostname} "
-                        f"(github={'yes' if gh_pub else 'no'}, ghost={'yes' if ghost_pub else 'no'})"
-                    )
+        # SEO publisher (per site) — now only needs SearchAtlas content publisher
+        self.seo_publishers: dict[str, SEOPublisher] = {}
+        if self.config.content_generation.enabled:
+            for site in config.sites:
+                self.seo_publishers[site.hostname] = SEOPublisher(
+                    searchatlas_content=self.sa_content,
+                    config={
+                        "auto_publish": config.content_generation.auto_publish,
+                    },
+                )
+                logger.info(f"SEO publisher created for {site.hostname} (searchatlas content)")
 
     def _init_llm_writer(self) -> LLMContentWriter | None:
         """Initialize LLM writer based on config."""
@@ -223,7 +217,7 @@ class SEOOrchestrator:
 
         # Step 6: Content generation + publishing (if enabled)
         publish_results = []
-        if self.config.content_generation.enabled and self.llm_writer:
+        if self.config.content_generation.enabled:
             logger.info(f"\n── Content Generation Phase ──")
             publish_results = await self._run_content_generation(run_log)
 
@@ -293,7 +287,22 @@ class SEOOrchestrator:
                 for h, r in competitor_results.items()
             }
         if publish_results:
-            run_log.data_snapshot["content_publishing"] = publish_results
+            run_log.data_snapshot["content_generation"] = {
+                "articles_processed": len(publish_results),
+                "articles": [
+                    {
+                        "hostname": r.get("hostname"),
+                        "title": r.get("article_title"),
+                        "word_count": r.get("word_count"),
+                        "method": r.get("publish_method"),
+                        "press_release_id": r.get("press_release_id"),
+                        "viewable_url": r.get("viewable_url"),
+                        "status": r.get("status", "unknown"),
+                        "error": r.get("error"),
+                    }
+                    for r in publish_results
+                ],
+            }
 
         # Step 8: Build and push dashboard data to live dashboard
         logger.info("\n── Building dashboard data ──")
@@ -512,8 +521,8 @@ class SEOOrchestrator:
             by_status[st] = by_status.get(st, 0) + 1
 
         # Content generation results
-        content_generation = {}
-        if publish_results:
+        content_generation = run_log.data_snapshot.get("content_generation", {})
+        if not content_generation and publish_results:
             articles = []
             for pr in publish_results:
                 articles.append({
@@ -521,13 +530,13 @@ class SEOOrchestrator:
                     "title": pr.get("article_title", ""),
                     "word_count": pr.get("word_count", 0),
                     "publish_method": pr.get("publish_method", ""),
-                    "ghost_post_id": pr.get("ghost_post_id", ""),
-                    "ghost_slug": pr.get("ghost_slug", ""),
-                    "ghost_status": pr.get("ghost_status", ""),
+                    "press_release_id": pr.get("press_release_id", ""),
+                    "viewable_url": pr.get("viewable_url", ""),
+                    "status": pr.get("status", ""),
                     "error": pr.get("error", ""),
                 })
             content_generation = {
-                "articles_generated": len(articles),
+                "articles_processed": len(articles),
                 "articles": articles,
             }
 

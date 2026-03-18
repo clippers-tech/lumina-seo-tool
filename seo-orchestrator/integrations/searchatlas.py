@@ -7,6 +7,7 @@ Authenticated endpoints use the API key from config.
 
 from __future__ import annotations
 
+import asyncio
 import logging
 from typing import Any, Optional
 from datetime import datetime, timedelta
@@ -290,6 +291,22 @@ class SearchAtlasClient:
             f"{CORE_TASKS_BASE}/tasks/{task_id}/",
             headers=self._bearer_headers()
         )
+
+    async def poll_press_release(self, pr_id: str, max_attempts: int = 12,
+                                  interval: float = 5.0) -> dict:
+        """Poll press release until status is 'Generated' or error."""
+        for i in range(max_attempts):
+            result = await self._get(
+                f"{CONTENT_BASE}/press-release/{pr_id}/",
+                headers=self._bearer_headers()
+            )
+            status = result.get("status")
+            if status == "Generated":
+                return result
+            if status in ("Failed", "Error"):
+                raise RuntimeError(f"Press release {pr_id} generation failed: {status}")
+            await asyncio.sleep(interval)
+        raise TimeoutError(f"Press release {pr_id} still generating after {max_attempts * interval}s")
 
     # ═══════════════════════════════════════════════════════════
     # OTTO DEPLOYMENT — Auto-fix execution

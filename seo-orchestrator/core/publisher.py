@@ -25,6 +25,7 @@ from config import SiteConfig
 from integrations.github_publisher import GitHubPublisher
 from integrations.ghost_publisher import GhostPublisher
 from integrations.llm_writer import LLMContentWriter
+from integrations.searchatlas_content import SearchAtlasContentPublisher
 
 logger = logging.getLogger("seo_orchestrator.publisher")
 
@@ -34,57 +35,47 @@ class SEOPublisher:
 
     def __init__(
         self,
-        llm_writer: LLMContentWriter,
-        config: dict,
+        searchatlas_content: SearchAtlasContentPublisher,
         github_publisher: Optional[GitHubPublisher] = None,
-        ghost_publisher: Optional[GhostPublisher] = None,
+        llm_writer: Optional[LLMContentWriter] = None,
+        config: dict = None,
     ):
+        self.searchatlas_content = searchatlas_content
         self.github = github_publisher
-        self.ghost_publisher = ghost_publisher
+        self.ghost_publisher = None
         self.llm = llm_writer
-        self.config = config
-        self.auto_publish = config.get("auto_publish", False)
+        self.config = config or {}
+        self.auto_publish = self.config.get("auto_publish", False)
 
     async def publish_new_article(self, brief: dict, site_config: SiteConfig) -> dict:
-        """Full pipeline: generate article -> publish to Ghost CMS or commit to repo -> trigger deploy.
-
-        For luminaclippers.com:
-          - Generate article via LLM
-          - Publish to Ghost CMS via Admin API (draft by default)
-          - Ghost handles rendering; Next.js fetches from Ghost
-
-        For luminaweb3.io:
-          - Generate article via LLM
-          - Commit blog post file to repo (as markdown or MDX)
-          - Trigger Vercel rebuild
-        """
+        """Generate article via SearchAtlas Content Genius press release API."""
         hostname = site_config.hostname
-        logger.info(f"[{hostname}] Starting article publish pipeline")
+        logger.info(f"[{hostname}] Generating article via SearchAtlas Content Genius")
 
-        # Step 1: Generate article content
-        brand_context = self.llm._load_brand_context()
-        article = await self.llm.generate_article(brief, brand_context)
+        result = await self.searchatlas_content.generate_article(brief, site_config)
 
         logger.info(
-            f"[{hostname}] Article generated: {article['title']} "
-            f"({article['word_count']} words)"
+            f"[{hostname}] Article generated: {result['blog_title']} "
+            f"({result['word_count']} words) — {result['viewable_url']}"
         )
 
-        result = {
+        return {
             "hostname": hostname,
-            "article_title": article["title"],
-            "word_count": article["word_count"],
-            "steps": [],
+            "article_title": result["blog_title"],
+            "word_count": result["word_count"],
+            "publish_method": "searchatlas_press_release",
+            "press_release_id": result["id"],
+            "viewable_url": result["viewable_url"],
+            "blog_summary": result["blog_summary"],
+            "status": result["status"],
+            "steps": [
+                {"step": "generate_via_searchatlas", "status": "success", "details": {
+                    "pr_id": result["id"],
+                    "title": result["title"],
+                    "viewable_url": result["viewable_url"],
+                }},
+            ],
         }
-
-        # Step 2: Publish based on site type
-        if hostname == "luminaclippers.com":
-            result.update(await self._publish_to_ghost(article, site_config))
-        else:
-            result.update(await self._publish_to_repo(article, brief, site_config))
-
-        logger.info(f"[{hostname}] Article publish pipeline complete")
-        return result
 
     async def _publish_to_ghost(self, article: dict, site_config: SiteConfig) -> dict:
         """Publish article to Ghost CMS for luminaclippers.com."""

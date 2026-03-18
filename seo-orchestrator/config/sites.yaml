@@ -10,7 +10,7 @@ orchestrator:
   log_retention_days: 90
   content_generation:
     enabled: true
-    provider: openai             # openai | anthropic
+    provider: searchatlas        # searchatlas | openai | anthropic
     max_articles_per_run: 1
     auto_publish: false          # if true, publishes immediately; if false, creates PR for review
   competitor_tracking:
