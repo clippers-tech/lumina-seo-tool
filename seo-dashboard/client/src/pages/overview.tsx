@@ -1,4 +1,4 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback, useRef, useEffect } from "react";
 import { useDashboardData } from "@/hooks/use-dashboard-data";
 import type { SiteData, OttoDeployStatus } from "@/hooks/use-dashboard-data";
 import { queryClient } from "@/lib/queryClient";
@@ -394,6 +394,14 @@ export default function OverviewPage() {
   const { data, isLoading } = useDashboardData();
   const { toast } = useToast();
   const [runLoading, setRunLoading] = useState(false);
+  const pollRef = useRef<ReturnType<typeof setInterval> | null>(null);
+
+  // Clean up polling on unmount
+  useEffect(() => {
+    return () => {
+      if (pollRef.current) clearInterval(pollRef.current);
+    };
+  }, []);
 
   const triggerRun = useCallback(async () => {
     setRunLoading(true);
@@ -402,14 +410,41 @@ export default function OverviewPage() {
       const body = await res.json();
       if (!res.ok) {
         toast({ title: "Error", description: body.error, variant: "destructive" });
+        setRunLoading(false);
         return;
       }
-      toast({ title: "Run triggered", description: `Run ID: ${body.run_id}` });
-      // Poll for completion, then refresh
-      setTimeout(() => {
-        queryClient.invalidateQueries({ queryKey: ["/api/dashboard-data"] });
-        setRunLoading(false);
-      }, 5000);
+      toast({ title: "Run triggered", description: body.message });
+
+      // Poll /api/runs/status every 10s to check completion
+      const startTime = Date.now();
+      const TIMEOUT_MS = 5 * 60 * 1000; // 5 minutes
+
+      pollRef.current = setInterval(async () => {
+        try {
+          const statusRes = await fetch("/api/runs/status");
+          const statusBody = await statusRes.json();
+
+          if (statusBody.status === "succeeded" || statusBody.status === "completed") {
+            if (pollRef.current) clearInterval(pollRef.current);
+            pollRef.current = null;
+            setRunLoading(false);
+            queryClient.invalidateQueries();
+            toast({ title: "Orchestrator run complete!", description: "Dashboard data has been refreshed." });
+          } else if (statusBody.status === "failed") {
+            if (pollRef.current) clearInterval(pollRef.current);
+            pollRef.current = null;
+            setRunLoading(false);
+            toast({ title: "Run failed", description: "The orchestrator run failed. Check logs for details.", variant: "destructive" });
+          } else if (Date.now() - startTime > TIMEOUT_MS) {
+            if (pollRef.current) clearInterval(pollRef.current);
+            pollRef.current = null;
+            setRunLoading(false);
+            toast({ title: "Run still in progress", description: "The orchestrator is still running. Data will refresh when it completes." });
+          }
+        } catch {
+          // Silently retry on network errors during polling
+        }
+      }, 10000);
     } catch (e: any) {
       toast({ title: "Error", description: e.message, variant: "destructive" });
       setRunLoading(false);

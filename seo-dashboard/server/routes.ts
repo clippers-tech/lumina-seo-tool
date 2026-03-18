@@ -2,7 +2,6 @@ import type { Express, Request, Response } from "express";
 import type { Server } from "http";
 import fs from "fs";
 import path from "path";
-import { spawn } from "child_process";
 
 // ── Helpers ──────────────────────────────────────────────────
 
@@ -54,17 +53,6 @@ function findSitesYaml(): string | null {
   return null;
 }
 
-// ── In-memory state for runs ─────────────────────────────────
-
-interface RunState {
-  status: "running" | "completed" | "failed";
-  startedAt: string;
-  completedAt?: string;
-  pid?: number;
-  output?: string;
-}
-
-const activeRuns: Map<string, RunState> = new Map();
 
 // ── Route Registration ───────────────────────────────────────
 
@@ -89,77 +77,74 @@ export async function registerRoutes(
 
   // ── Run management ───────────────────────────────────────
 
-  app.post("/api/runs/trigger", (_req: Request, res: Response) => {
-    const runId = new Date()
-      .toISOString()
-      .replace(/[-:T]/g, "")
-      .slice(0, 15);
+  app.post("/api/runs/trigger", async (_req: Request, res: Response) => {
+    try {
+      const renderApiKey = process.env.RENDER_API_KEY;
+      const cronServiceId = process.env.RENDER_CRON_SERVICE_ID || "crn-d6t8bhvkijhs73euvke0";
 
-    if (Array.from(activeRuns.values()).some((r) => r.status === "running")) {
-      return res
-        .status(409)
-        .json({ error: "A run is already in progress", running: true });
-    }
-
-    const runState: RunState = {
-      status: "running",
-      startedAt: new Date().toISOString(),
-    };
-
-    // Try to spawn the orchestrator process
-    const orchestratorDir = path.join(
-      process.cwd(),
-      "..",
-      "seo-orchestrator"
-    );
-    const runPy = path.join(orchestratorDir, "run.py");
-
-    if (fs.existsSync(runPy)) {
-      try {
-        const proc = spawn("python3", [runPy], {
-          cwd: orchestratorDir,
-          stdio: ["ignore", "pipe", "pipe"],
-          detached: true,
-        });
-
-        runState.pid = proc.pid;
-        let output = "";
-
-        proc.stdout?.on("data", (chunk: Buffer) => {
-          output += chunk.toString();
-        });
-        proc.stderr?.on("data", (chunk: Buffer) => {
-          output += chunk.toString();
-        });
-
-        proc.on("close", (code: number | null) => {
-          runState.status = code === 0 ? "completed" : "failed";
-          runState.completedAt = new Date().toISOString();
-          runState.output = output.slice(-2000);
-        });
-
-        proc.unref();
-      } catch (e: any) {
-        runState.status = "failed";
-        runState.completedAt = new Date().toISOString();
-        runState.output = e.message;
+      if (!renderApiKey) {
+        return res.status(500).json({ error: "RENDER_API_KEY not configured" });
       }
-    } else {
-      // Write a trigger file as fallback
-      const triggerDir = path.join(process.cwd(), "..", "seo-orchestrator");
-      if (fs.existsSync(triggerDir)) {
-        fs.writeFileSync(
-          path.join(triggerDir, ".trigger"),
-          JSON.stringify({ run_id: runId, triggered_at: new Date().toISOString() })
-        );
-      }
-      runState.status = "completed";
-      runState.completedAt = new Date().toISOString();
-      runState.output = "Trigger file written (orchestrator not found for direct execution)";
-    }
 
-    activeRuns.set(runId, runState);
-    res.json({ run_id: runId, status: runState.status });
+      // Trigger the cron job via Render API
+      const response = await fetch(`https://api.render.com/v1/services/${cronServiceId}/jobs`, {
+        method: "POST",
+        headers: {
+          "Authorization": `Bearer ${renderApiKey}`,
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ startCommand: "python run.py" })
+      });
+
+      if (!response.ok) {
+        const error = await response.text();
+        return res.status(response.status).json({ error: `Render API error: ${error}` });
+      }
+
+      const job = await response.json();
+      res.json({
+        status: "triggered",
+        jobId: job.id || job.jobId,
+        message: "Orchestrator run triggered. Data will refresh when complete."
+      });
+    } catch (error: any) {
+      res.status(500).json({ error: error.message });
+    }
+  });
+
+  app.get("/api/runs/status", async (_req: Request, res: Response) => {
+    try {
+      const renderApiKey = process.env.RENDER_API_KEY;
+      const cronServiceId = process.env.RENDER_CRON_SERVICE_ID || "crn-d6t8bhvkijhs73euvke0";
+
+      if (!renderApiKey) {
+        return res.status(500).json({ error: "RENDER_API_KEY not configured" });
+      }
+
+      // Get latest job status
+      const response = await fetch(`https://api.render.com/v1/services/${cronServiceId}/jobs?limit=1`, {
+        headers: { "Authorization": `Bearer ${renderApiKey}` }
+      });
+
+      if (!response.ok) {
+        return res.status(response.status).json({ error: "Failed to check status" });
+      }
+
+      const jobs = await response.json();
+      if (jobs.length > 0) {
+        const latest = jobs[0];
+        res.json({
+          status: latest.status,
+          startedAt: latest.startedAt,
+          finishedAt: latest.finishedAt,
+          id: latest.id
+        });
+      } else {
+        res.json({ status: "no_runs" });
+      }
+    } catch (error: any) {
+      res.status(500).json({ error: error.message });
+    }
   });
 
   app.get("/api/runs", (_req: Request, res: Response) => {
@@ -179,17 +164,6 @@ export async function registerRoutes(
         });
       }
 
-      // Include in-memory runs
-      for (const [runId, state] of Array.from(activeRuns.entries())) {
-        historicalRuns.push({
-          run_id: runId,
-          timestamp: state.startedAt,
-          status: state.status,
-          completed_at: state.completedAt,
-          source: "triggered",
-        });
-      }
-
       res.json({ runs: historicalRuns });
     } catch (err) {
       res.status(500).json({ error: "Failed to fetch runs" });
@@ -198,12 +172,6 @@ export async function registerRoutes(
 
   app.get("/api/runs/:id", (req: Request, res: Response) => {
     const id = req.params.id as string;
-
-    // Check in-memory runs
-    const activeRun = activeRuns.get(id);
-    if (activeRun) {
-      return res.json({ run_id: id, ...activeRun });
-    }
 
     // Check dashboard data
     const data = readDashboardData();
