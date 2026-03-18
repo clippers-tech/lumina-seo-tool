@@ -160,7 +160,7 @@ export async function registerRoutes(
 
       const jobs = await response.json();
       if (jobs.length > 0) {
-        const latest = jobs[0];
+        const latest = jobs[0].job;
         res.json({
           status: latest.status,
           startedAt: latest.startedAt,

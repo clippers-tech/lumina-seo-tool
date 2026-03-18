@@ -53,11 +53,11 @@ function OttoDeployDetail({
   ottoStatus: OttoDeployStatus;
 }) {
   const details = ottoStatus.details;
-  const deployed = details.deployed_after || 0;
+  const deployed = details.deployed_after ?? details.deployed_before ?? 0;
   const total = details.total_issues || 0;
-  const pending = details.pending_after || 0;
-  const score = details.optimization_score_after || 0;
-  const scoreBefore = details.optimization_score_before || 0;
+  const pending = details.pending_after ?? details.pending_before ?? 0;
+  const score = details.optimization_score_after ?? details.optimization_score ?? 0;
+  const scoreBefore = details.optimization_score_before ?? 0;
   const pct = total > 0 ? Math.round((deployed / total) * 100) : 0;
   const fixCategories = details.fix_categories || {};
 
