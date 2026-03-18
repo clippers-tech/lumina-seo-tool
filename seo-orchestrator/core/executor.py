@@ -94,7 +94,8 @@ class SEOExecutor:
 
         logger.info(f"═══ SEO Executor starting for run {run_log.run_id} ═══")
 
-        # Phase 1: Deploy OTTO fixes for each site
+        # Phase 1: Deploy OTTO fixes for each site, track success per site
+        otto_deploy_success = {}
         for hostname in run_log.sites_processed:
             site_config = self.sites.get(hostname)
             if not site_config:
@@ -102,6 +103,7 @@ class SEOExecutor:
 
             result = await self._deploy_otto_fixes(site_config)
             exec_log.results.append(result)
+            otto_deploy_success[hostname] = (result.status == ExecutionStatus.SUCCESS)
 
         # Phase 2: Refresh SERP data for each site
         for hostname in run_log.sites_processed:
@@ -112,34 +114,51 @@ class SEOExecutor:
             result = await self._refresh_serp_data(site_config)
             exec_log.results.append(result)
 
-        # Phase 3: Mark actions as executed or pending review
+        # Phase 3: Mark actions based on OTTO deploy outcome
         for action in run_log.actions:
+            deploy_ok = otto_deploy_success.get(action.site, False)
+
             if action.action_type == ActionType.TECH_ISSUE:
-                # Tech issues are handled by OTTO deploy above
-                action.status = ActionStatus.APPLIED
-                exec_log.results.append(ExecutionResult(
-                    action_id=action.id,
-                    action_type=action.action_type.value,
-                    site=action.site,
-                    status=ExecutionStatus.SUCCESS,
-                    description=f"Tech fix covered by OTTO auto-deploy: {action.description[:100]}",
-                ))
+                if deploy_ok:
+                    action.status = ActionStatus.APPLIED
+                    exec_log.results.append(ExecutionResult(
+                        action_id=action.id,
+                        action_type=action.action_type.value,
+                        site=action.site,
+                        status=ExecutionStatus.SUCCESS,
+                        description=f"Tech fix covered by OTTO auto-deploy: {action.description[:100]}",
+                    ))
+                else:
+                    action.status = ActionStatus.HUMAN_REVIEW
+                    exec_log.results.append(ExecutionResult(
+                        action_id=action.id,
+                        action_type=action.action_type.value,
+                        site=action.site,
+                        status=ExecutionStatus.FAILED,
+                        description=f"OTTO deploy failed — tech fix needs manual review: {action.description[:100]}",
+                    ))
             elif action.action_type == ActionType.UPDATE_ON_PAGE:
-                # On-page updates for striking distance keywords:
-                # OTTO handles title/meta/heading optimization.
-                action.status = ActionStatus.APPLIED
-                exec_log.results.append(ExecutionResult(
-                    action_id=action.id,
-                    action_type=action.action_type.value,
-                    site=action.site,
-                    status=ExecutionStatus.SUCCESS,
-                    description=f"On-page optimization via OTTO deploy: {action.keyword}",
-                    details=action.payload,
-                ))
+                if deploy_ok:
+                    action.status = ActionStatus.APPLIED
+                    exec_log.results.append(ExecutionResult(
+                        action_id=action.id,
+                        action_type=action.action_type.value,
+                        site=action.site,
+                        status=ExecutionStatus.SUCCESS,
+                        description=f"On-page optimization via OTTO deploy: {action.keyword}",
+                        details=action.payload,
+                    ))
+                else:
+                    action.status = ActionStatus.HUMAN_REVIEW
+                    exec_log.results.append(ExecutionResult(
+                        action_id=action.id,
+                        action_type=action.action_type.value,
+                        site=action.site,
+                        status=ExecutionStatus.FAILED,
+                        description=f"OTTO deploy failed — on-page update needs manual review: {action.keyword}",
+                        details=action.payload,
+                    ))
             elif action.action_type == ActionType.NEW_ARTICLE:
-                # Content creation: still needs human review for article writing,
-                # but auto-create a press release + cloud stack to build authority
-                # for the target keyword
                 action.status = ActionStatus.HUMAN_REVIEW
                 exec_log.results.append(ExecutionResult(
                     action_id=action.id,
@@ -151,16 +170,26 @@ class SEOExecutor:
                     details=action.payload,
                 ))
             elif action.action_type == ActionType.EXPAND_CONTENT:
-                # Content expansion: OTTO may handle some via missing keywords
-                action.status = ActionStatus.APPLIED
-                exec_log.results.append(ExecutionResult(
-                    action_id=action.id,
-                    action_type=action.action_type.value,
-                    site=action.site,
-                    status=ExecutionStatus.SUCCESS,
-                    description=f"Content expansion via OTTO missing keywords: {action.keyword}",
-                    details=action.payload,
-                ))
+                if deploy_ok:
+                    action.status = ActionStatus.APPLIED
+                    exec_log.results.append(ExecutionResult(
+                        action_id=action.id,
+                        action_type=action.action_type.value,
+                        site=action.site,
+                        status=ExecutionStatus.SUCCESS,
+                        description=f"Content expansion via OTTO missing keywords: {action.keyword}",
+                        details=action.payload,
+                    ))
+                else:
+                    action.status = ActionStatus.HUMAN_REVIEW
+                    exec_log.results.append(ExecutionResult(
+                        action_id=action.id,
+                        action_type=action.action_type.value,
+                        site=action.site,
+                        status=ExecutionStatus.FAILED,
+                        description=f"OTTO deploy failed — content expansion needs manual review: {action.keyword}",
+                        details=action.payload,
+                    ))
 
         # Phase 4: Build authority assets (press releases + cloud stacks)
         # Auto-create for priority keywords that lack ranking

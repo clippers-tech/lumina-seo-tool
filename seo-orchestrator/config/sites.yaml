@@ -11,7 +11,7 @@ orchestrator:
 
 sites:
   - hostname: luminaclippers.com
-    type: framer
+    type: nextjs
     priority: 1                  # Lower = higher priority
     description: "Lumina Clipping Agency — short-form content distribution"
     github: "https://github.com/RhysMckay7777/luminaclippers-site"
@@ -39,8 +39,9 @@ sites:
       - "/services"
       - "/pricing"
     cms:
-      type: framer
-      # Blog content managed in Framer CMS — articles provided as markdown for manual paste
+      type: nextjs
+      content_dir: "./content"   # JSON/YAML content folder
+      # Next.js site on Vercel, deployed from GitHub repo
       # GitHub repo: https://github.com/RhysMckay7777/luminaclippers-site
 
   - hostname: luminaweb3.io
@@ -81,6 +82,6 @@ sites:
 # Environment Variables Required (set before running):
 # ============================================================
 # SEARCHATLAS_API_KEY         — SearchAtlas API key
-# WP_CLIPPERS_USER            — WordPress username for luminaclippers.com
-# WP_CLIPPERS_APP_PASSWORD    — WordPress application password
+# VERCEL_TOKEN                  — Vercel API token for deployments
 # LUMINAWEB3_REVALIDATION_SECRET — Next.js ISR revalidation secret
+# LUMINACLIPPERS_REVALIDATION_SECRET — Next.js ISR revalidation secret
