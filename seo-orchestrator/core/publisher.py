@@ -23,6 +23,7 @@ from typing import Optional
 
 from config import SiteConfig
 from integrations.github_publisher import GitHubPublisher
+from integrations.ghost_publisher import GhostPublisher
 from integrations.llm_writer import LLMContentWriter
 
 logger = logging.getLogger("seo_orchestrator.publisher")
@@ -33,11 +34,13 @@ class SEOPublisher:
 
     def __init__(
         self,
-        github_publisher: GitHubPublisher,
         llm_writer: LLMContentWriter,
         config: dict,
+        github_publisher: Optional[GitHubPublisher] = None,
+        ghost_publisher: Optional[GhostPublisher] = None,
     ):
         self.github = github_publisher
+        self.ghost_publisher = ghost_publisher
         self.llm = llm_writer
         self.config = config
         self.auto_publish = config.get("auto_publish", False)
@@ -86,15 +89,24 @@ class SEOPublisher:
     async def _publish_to_ghost(self, article: dict, site_config: SiteConfig) -> dict:
         """Publish article to Ghost CMS for luminaclippers.com."""
         hostname = site_config.hostname
-        ghost_config = site_config.cms.get("ghost", {}) if isinstance(site_config.cms, dict) else {}
+
+        if not self.ghost_publisher:
+            logger.warning(f"[{hostname}] No ghost_publisher configured, cannot publish to Ghost")
+            return {
+                "publish_method": "ghost_cms",
+                "error": "No ghost_publisher configured",
+                "steps": [
+                    {"step": "generate_article", "status": "success"},
+                    {"step": "publish_to_ghost", "status": "skipped", "error": "No ghost_publisher"},
+                ],
+            }
 
         try:
-            ghost_result = await self.github.create_blog_post_ghost(
+            ghost_result = await self.ghost_publisher.create_draft_post(
                 title=article["title"],
                 html_content=article["html_content"],
                 excerpt=article["meta_description"],
                 tags=article.get("keywords_used", []),
-                ghost_api_url=ghost_config.get("api_url"),
             )
             return {
                 "publish_method": "ghost_cms",
@@ -122,6 +134,18 @@ class SEOPublisher:
     ) -> dict:
         """Publish article by committing to the GitHub repo."""
         hostname = site_config.hostname
+
+        if not self.github:
+            logger.warning(f"[{hostname}] No github_publisher configured, skipping repo publish")
+            return {
+                "publish_method": "github_repo",
+                "error": "No github_publisher configured",
+                "steps": [
+                    {"step": "generate_article", "status": "success"},
+                    {"step": "commit_to_repo", "status": "skipped", "error": "No github_publisher"},
+                ],
+            }
+
         slug = brief.get("target_keyword", "article").lower().replace(" ", "-")
         timestamp = datetime.utcnow().strftime("%Y%m%d")
         branch_name = f"seo/article-{slug}-{timestamp}"
