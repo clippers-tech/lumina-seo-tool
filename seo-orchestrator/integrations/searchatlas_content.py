@@ -82,8 +82,8 @@ class SearchAtlasContentPublisher:
         await self.sa.build_press_release(pr_id)
         logger.info(f"[{hostname}] Build triggered, polling for completion...")
 
-        # Step 3: Poll until generated (5s intervals, max 60s)
-        result = await self.sa.poll_press_release(pr_id, max_attempts=12, interval=5.0)
+        # Step 3: Poll until generated (5s intervals, max 180s)
+        result = await self.sa.poll_press_release(pr_id, max_attempts=36, interval=5.0)
         logger.info(f"[{hostname}] Press release generated: {result.get('blog_title', 'N/A')}")
 
         # Calculate approximate word count
