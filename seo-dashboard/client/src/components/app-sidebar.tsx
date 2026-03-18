@@ -6,6 +6,8 @@ import {
   ShieldCheck,
   ScrollText,
   PlayCircle,
+  Users,
+  Settings,
   Sun,
   Moon,
 } from "lucide-react";
@@ -29,8 +31,10 @@ const navItems = [
   { title: "Keywords", url: "/keywords", icon: KeyRound },
   { title: "Actions", url: "/actions", icon: Zap },
   { title: "Site Audit", url: "/site-audit", icon: ShieldCheck },
+  { title: "Competitors", url: "/competitors", icon: Users },
   { title: "Run Log", url: "/run-log", icon: ScrollText },
   { title: "Execution", url: "/execution", icon: PlayCircle },
+  { title: "Settings", url: "/settings", icon: Settings },
 ];
 
 export function AppSidebar() {

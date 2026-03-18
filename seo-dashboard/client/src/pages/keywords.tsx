@@ -1,9 +1,12 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useCallback } from "react";
 import { useDashboardData } from "@/hooks/use-dashboard-data";
 import type { KeywordData } from "@/hooks/use-dashboard-data";
+import { queryClient } from "@/lib/queryClient";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import {
   Select,
   SelectContent,
@@ -11,7 +14,15 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { ArrowUp, ArrowDown, Minus } from "lucide-react";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import { ArrowUp, ArrowDown, Minus, Plus, Trash2, Loader2 } from "lucide-react";
+import { useToast } from "@/hooks/use-toast";
 import {
   LineChart,
   Line,
@@ -79,7 +90,54 @@ function DeltaBadge({ delta }: { delta: number | null }) {
 
 export default function KeywordsPage() {
   const { data, isLoading } = useDashboardData();
+  const { toast } = useToast();
   const [siteFilter, setSiteFilter] = useState<string>("all");
+  const [dialogOpen, setDialogOpen] = useState(false);
+  const [newKeyword, setNewKeyword] = useState("");
+  const [newKeywordSite, setNewKeywordSite] = useState("");
+  const [addLoading, setAddLoading] = useState(false);
+  const [deleteLoading, setDeleteLoading] = useState<string | null>(null);
+
+  const handleAddKeyword = useCallback(async () => {
+    if (!newKeyword.trim() || !newKeywordSite) return;
+    setAddLoading(true);
+    try {
+      const res = await fetch("/api/keywords", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ keyword: newKeyword.trim(), site: newKeywordSite }),
+      });
+      const body = await res.json();
+      if (!res.ok) throw new Error(body.error);
+      queryClient.invalidateQueries({ queryKey: ["/api/dashboard-data"] });
+      toast({ title: "Keyword added", description: `"${newKeyword}" added to ${newKeywordSite}` });
+      setNewKeyword("");
+      setDialogOpen(false);
+    } catch (e: any) {
+      toast({ title: "Error", description: e.message, variant: "destructive" });
+    } finally {
+      setAddLoading(false);
+    }
+  }, [newKeyword, newKeywordSite, toast]);
+
+  const handleDeleteKeyword = useCallback(async (keyword: string, site: string) => {
+    const key = `${site}-${keyword}`;
+    setDeleteLoading(key);
+    try {
+      const res = await fetch(
+        `/api/keywords/${encodeURIComponent(keyword)}?site=${encodeURIComponent(site)}`,
+        { method: "DELETE" }
+      );
+      const body = await res.json();
+      if (!res.ok) throw new Error(body.error);
+      queryClient.invalidateQueries({ queryKey: ["/api/dashboard-data"] });
+      toast({ title: "Keyword removed" });
+    } catch (e: any) {
+      toast({ title: "Error", description: e.message, variant: "destructive" });
+    } finally {
+      setDeleteLoading(null);
+    }
+  }, [toast]);
 
   const allKeywords = useMemo<KeywordRow[]>(() => {
     if (!data) return [];
@@ -117,19 +175,65 @@ export default function KeywordsPage() {
             {allKeywords.length} tracked keywords across {sites.length} sites
           </p>
         </div>
-        <Select value={siteFilter} onValueChange={setSiteFilter}>
-          <SelectTrigger className="w-48 h-8 text-xs" data-testid="select-site-filter">
-            <SelectValue placeholder="Filter by site" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="all">All Sites</SelectItem>
-            {sites.map((s) => (
-              <SelectItem key={s} value={s}>
-                {s}
-              </SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
+        <div className="flex items-center gap-2">
+          <Select value={siteFilter} onValueChange={setSiteFilter}>
+            <SelectTrigger className="w-48 h-8 text-xs" data-testid="select-site-filter">
+              <SelectValue placeholder="Filter by site" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="all">All Sites</SelectItem>
+              {sites.map((s) => (
+                <SelectItem key={s} value={s}>{s}</SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+          <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
+            <DialogTrigger asChild>
+              <Button size="sm" className="h-8 text-xs gap-1.5" data-testid="button-add-keyword">
+                <Plus className="size-3.5" />
+                Add Keyword
+              </Button>
+            </DialogTrigger>
+            <DialogContent className="sm:max-w-md">
+              <DialogHeader>
+                <DialogTitle>Add Keyword</DialogTitle>
+              </DialogHeader>
+              <div className="space-y-4 pt-2">
+                <div className="space-y-2">
+                  <label className="text-xs font-medium text-muted-foreground">Keyword</label>
+                  <Input
+                    placeholder="e.g. content clipping agency"
+                    value={newKeyword}
+                    onChange={(e) => setNewKeyword(e.target.value)}
+                    data-testid="input-new-keyword"
+                  />
+                </div>
+                <div className="space-y-2">
+                  <label className="text-xs font-medium text-muted-foreground">Site</label>
+                  <Select value={newKeywordSite} onValueChange={setNewKeywordSite}>
+                    <SelectTrigger className="text-xs" data-testid="select-new-keyword-site">
+                      <SelectValue placeholder="Select site" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {sites.map((s) => (
+                        <SelectItem key={s} value={s}>{s}</SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </div>
+                <Button
+                  className="w-full"
+                  onClick={handleAddKeyword}
+                  disabled={addLoading || !newKeyword.trim() || !newKeywordSite}
+                  data-testid="button-confirm-add-keyword"
+                >
+                  {addLoading ? <Loader2 className="size-4 mr-2 animate-spin" /> : null}
+                  Add Keyword
+                </Button>
+              </div>
+            </DialogContent>
+          </Dialog>
+        </div>
       </div>
 
       <Card className="bg-card border-card-border overflow-hidden">
@@ -161,6 +265,8 @@ export default function KeywordsPage() {
                   </th>
                   <th className="text-center px-4 py-2.5 font-medium text-muted-foreground uppercase tracking-wider text-[10px]">
                     Trend
+                  </th>
+                  <th className="text-center px-4 py-2.5 font-medium text-muted-foreground uppercase tracking-wider text-[10px] w-12">
                   </th>
                 </tr>
               </thead>
@@ -213,6 +319,20 @@ export default function KeywordsPage() {
                       </td>
                       <td className="px-4 py-3 flex justify-center">
                         <PositionMiniChart history={kw.position_history} />
+                      </td>
+                      <td className="px-2 py-3 text-center">
+                        <button
+                          onClick={() => handleDeleteKeyword(kw.keyword, kw.site)}
+                          disabled={deleteLoading === `${kw.site}-${kw.keyword}`}
+                          className="p-1 rounded hover:bg-red-500/10 text-muted-foreground hover:text-red-400 transition-colors"
+                          title="Remove keyword"
+                        >
+                          {deleteLoading === `${kw.site}-${kw.keyword}` ? (
+                            <Loader2 className="size-3 animate-spin" />
+                          ) : (
+                            <Trash2 className="size-3" />
+                          )}
+                        </button>
                       </td>
                     </tr>
                   );

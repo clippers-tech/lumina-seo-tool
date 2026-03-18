@@ -41,6 +41,7 @@ class OrchestratorConfig:
     output_dir: str = "./outputs"
     log_retention_days: int = 90
     sites: list[SiteConfig] = field(default_factory=list)
+    notifications: dict = field(default_factory=dict)
 
     # API credentials from environment
     searchatlas_api_key: str = ""
@@ -83,6 +84,8 @@ def load_config(config_path: Optional[str] = None) -> OrchestratorConfig:
     # Sort by priority (lower number = higher priority)
     sites.sort(key=lambda x: x.priority)
 
+    notifications = raw.get("notifications", {})
+
     config = OrchestratorConfig(
         max_actions_per_run=orch.get("max_actions_per_run", 10),
         risk_level=orch.get("risk_level", "conservative"),
@@ -90,6 +93,7 @@ def load_config(config_path: Optional[str] = None) -> OrchestratorConfig:
         output_dir=orch.get("output_dir", "./outputs"),
         log_retention_days=orch.get("log_retention_days", 90),
         sites=sites,
+        notifications=notifications,
         searchatlas_api_key=os.environ.get("SEARCHATLAS_API_KEY", ""),
     )
 

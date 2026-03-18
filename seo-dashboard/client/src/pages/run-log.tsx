@@ -1,7 +1,10 @@
+import { useState } from "react";
+import { useQuery } from "@tanstack/react-query";
 import { useDashboardData } from "@/hooks/use-dashboard-data";
 import type { ExecutionResult } from "@/hooks/use-dashboard-data";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import {
   Clock,
@@ -17,6 +20,8 @@ import {
   AlertTriangle,
   FileEdit,
   FilePlus,
+  History,
+  ChevronRight,
 } from "lucide-react";
 import { format } from "date-fns";
 
@@ -99,6 +104,81 @@ function ExecutionResultRow({ result }: { result: ExecutionResult }) {
   );
 }
 
+interface RunListItem {
+  run_id: string;
+  timestamp: string;
+  sites_processed?: string[];
+  total_actions?: number;
+  summary?: string;
+  status?: string;
+  source: string;
+}
+
+function RunHistoryList() {
+  const { data: runsData } = useQuery<{ runs: RunListItem[] }>({
+    queryKey: ["/api/runs"],
+    queryFn: async () => {
+      const res = await fetch("/api/runs");
+      return res.json();
+    },
+  });
+
+  const runs = runsData?.runs || [];
+  if (runs.length === 0) return null;
+
+  return (
+    <Card className="bg-card border-card-border">
+      <CardHeader className="px-5 pt-5 pb-3">
+        <CardTitle className="text-sm font-semibold flex items-center gap-2">
+          <History className="size-4 text-primary" />
+          Run History
+        </CardTitle>
+      </CardHeader>
+      <CardContent className="px-5 pb-5">
+        <div className="space-y-1">
+          {runs.map((run) => (
+            <div
+              key={run.run_id}
+              className="flex items-center justify-between py-2 px-3 rounded-md hover:bg-muted/30 transition-colors"
+            >
+              <div className="flex items-center gap-3">
+                <div className={`w-2 h-2 rounded-full ${
+                  run.status === "failed" ? "bg-red-400" :
+                  run.status === "running" ? "bg-amber-400 animate-pulse" :
+                  "bg-emerald-400"
+                }`} />
+                <div>
+                  <span className="text-xs font-medium tabular-nums">{run.run_id}</span>
+                  <span className="text-[10px] text-muted-foreground ml-2">
+                    {run.timestamp ? format(new Date(run.timestamp), "PP p") : ""}
+                  </span>
+                </div>
+              </div>
+              <div className="flex items-center gap-3">
+                {run.total_actions != null && (
+                  <span className="text-[10px] text-muted-foreground tabular-nums">
+                    {run.total_actions} actions
+                  </span>
+                )}
+                {run.sites_processed && (
+                  <div className="flex gap-1">
+                    {run.sites_processed.map((s) => (
+                      <Badge key={s} variant="outline" className="text-[9px] px-1.5 py-0 h-4">
+                        {s}
+                      </Badge>
+                    ))}
+                  </div>
+                )}
+                <ChevronRight className="size-3 text-muted-foreground/50" />
+              </div>
+            </div>
+          ))}
+        </div>
+      </CardContent>
+    </Card>
+  );
+}
+
 export default function RunLogPage() {
   const { data, isLoading } = useDashboardData();
 
@@ -129,9 +209,12 @@ export default function RunLogPage() {
       <div>
         <h1 className="text-lg font-semibold">Run Log</h1>
         <p className="text-xs text-muted-foreground mt-0.5">
-          Latest orchestrator run metadata and execution results
+          Orchestrator run history and execution results
         </p>
       </div>
+
+      {/* Historical Runs */}
+      <RunHistoryList />
 
       {/* Execution Summary */}
       {execSummary && (

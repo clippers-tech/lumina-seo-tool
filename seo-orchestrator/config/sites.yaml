@@ -78,6 +78,14 @@ sites:
       # For blog: Next.js app on Vercel, revalidation via API
 
 # ============================================================
+# Notifications — Webhook integration for run alerts
+# ============================================================
+notifications:
+  enabled: false
+  webhook_url: ""                    # Slack/Discord/generic webhook URL
+  notification_type: "slack"         # slack | discord | generic
+
+# ============================================================
 # Environment Variables Required (set before running):
 # ============================================================
 # SEARCHATLAS_API_KEY         — SearchAtlas API key

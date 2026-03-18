@@ -1,8 +1,12 @@
+import { useState, useCallback } from "react";
 import { useDashboardData } from "@/hooks/use-dashboard-data";
 import type { SiteData, OttoDeployStatus } from "@/hooks/use-dashboard-data";
+import { queryClient } from "@/lib/queryClient";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { useToast } from "@/hooks/use-toast";
 import { Progress } from "@/components/ui/progress";
 import {
   ArrowUp,
@@ -17,6 +21,8 @@ import {
   CheckCircle2,
   Clock,
   Rocket,
+  Play,
+  Loader2,
 } from "lucide-react";
 import {
   BarChart,
@@ -386,6 +392,29 @@ function SearchVisibilityTrend({ site, hostname }: { site: SiteData; hostname: s
 
 export default function OverviewPage() {
   const { data, isLoading } = useDashboardData();
+  const { toast } = useToast();
+  const [runLoading, setRunLoading] = useState(false);
+
+  const triggerRun = useCallback(async () => {
+    setRunLoading(true);
+    try {
+      const res = await fetch("/api/runs/trigger", { method: "POST" });
+      const body = await res.json();
+      if (!res.ok) {
+        toast({ title: "Error", description: body.error, variant: "destructive" });
+        return;
+      }
+      toast({ title: "Run triggered", description: `Run ID: ${body.run_id}` });
+      // Poll for completion, then refresh
+      setTimeout(() => {
+        queryClient.invalidateQueries({ queryKey: ["/api/dashboard-data"] });
+        setRunLoading(false);
+      }, 5000);
+    } catch (e: any) {
+      toast({ title: "Error", description: e.message, variant: "destructive" });
+      setRunLoading(false);
+    }
+  }, [toast]);
 
   if (isLoading || !data) {
     return (
@@ -412,16 +441,37 @@ export default function OverviewPage() {
 
   return (
     <div className="p-6 space-y-8" data-testid="page-overview">
-      <div>
-        <h1 className="text-lg font-semibold">Overview</h1>
-        <p className="text-xs text-muted-foreground mt-0.5">
-          SEO performance across all tracked sites
-          {executionTime && (
-            <span className="ml-2 text-muted-foreground/70">
-              · Last execution: {executionTime}
-            </span>
+      <div className="flex items-start justify-between">
+        <div>
+          <h1 className="text-lg font-semibold">Overview</h1>
+          <p className="text-xs text-muted-foreground mt-0.5">
+            SEO performance across all tracked sites
+            {executionTime && (
+              <span className="ml-2 text-muted-foreground/70">
+                · Last execution: {executionTime}
+              </span>
+            )}
+          </p>
+        </div>
+        <Button
+          size="sm"
+          className="h-8 text-xs gap-1.5"
+          onClick={triggerRun}
+          disabled={runLoading}
+          data-testid="button-run-now"
+        >
+          {runLoading ? (
+            <>
+              <Loader2 className="size-3.5 animate-spin" />
+              Running...
+            </>
+          ) : (
+            <>
+              <Play className="size-3.5" />
+              Run Now
+            </>
           )}
-        </p>
+        </Button>
       </div>
 
       {/* OTTO Deploy Status */}
