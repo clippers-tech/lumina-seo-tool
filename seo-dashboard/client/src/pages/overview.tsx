@@ -421,7 +421,7 @@ export default function OverviewPage() {
 
       pollRef.current = setInterval(async () => {
         try {
-          const statusRes = await fetch("/api/runs/status");
+          const statusRes = await fetch(`/api/runs/status?jobId=${encodeURIComponent(body.jobId)}`, { cache: "no-store" });
           const statusBody = await statusRes.json();
 
           if (statusBody.status === "succeeded" || statusBody.status === "completed") {

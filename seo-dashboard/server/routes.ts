@@ -140,17 +140,20 @@ export async function registerRoutes(
     }
   });
 
-  app.get("/api/runs/status", async (_req: Request, res: Response) => {
+  app.get("/api/runs/status", async (req: Request, res: Response) => {
+    res.set("Cache-Control", "no-store");
     try {
       const renderApiKey = process.env.RENDER_API_KEY;
       const cronServiceId = process.env.RENDER_CRON_SERVICE_ID || "crn-d6t8bhvkijhs73euvke0";
+      const targetJobId = req.query.jobId as string | undefined;
 
       if (!renderApiKey) {
         return res.status(500).json({ error: "RENDER_API_KEY not configured" });
       }
 
-      // Get latest job status
-      const response = await fetch(`https://api.render.com/v1/services/${cronServiceId}/jobs?limit=1`, {
+      // Fetch more jobs if we need to find a specific one
+      const limit = targetJobId ? 10 : 1;
+      const response = await fetch(`https://api.render.com/v1/services/${cronServiceId}/jobs?limit=${limit}`, {
         headers: { "Authorization": `Bearer ${renderApiKey}` }
       });
 
@@ -159,17 +162,26 @@ export async function registerRoutes(
       }
 
       const jobs = await response.json();
-      if (jobs.length > 0) {
-        const latest = jobs[0].job;
-        res.json({
-          status: latest.status,
-          startedAt: latest.startedAt,
-          finishedAt: latest.finishedAt,
-          id: latest.id
-        });
-      } else {
-        res.json({ status: "no_runs" });
+
+      if (jobs.length === 0) {
+        return res.json({ status: "no_runs" });
       }
+
+      // Find the specific job or use the latest
+      let latest;
+      if (targetJobId) {
+        const found = jobs.find((j: any) => j.job.id === targetJobId);
+        latest = found ? found.job : jobs[0].job;
+      } else {
+        latest = jobs[0].job;
+      }
+
+      res.json({
+        status: latest.status,
+        startedAt: latest.startedAt,
+        finishedAt: latest.finishedAt,
+        id: latest.id
+      });
     } catch (error: any) {
       res.status(500).json({ error: error.message });
     }
