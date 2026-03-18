@@ -22,7 +22,7 @@ orchestrator:
 
 sites:
   - hostname: luminaclippers.com
-    type: framer
+    type: nextjs
     priority: 1                  # Lower = higher priority
     description: "Lumina Clipping Agency — short-form content distribution"
     searchatlas:
@@ -57,7 +57,9 @@ sites:
       - "/services"
       - "/pricing"
     cms:
-      type: framer
+      type: nextjs
+      content_dir: "./content"   # JSON/YAML content folder
+      # Next.js site on Vercel, deployed from GitHub repo
       # Blog content managed via Ghost CMS
       # GitHub repo: https://github.com/RhysMckay7777/luminaclippers-site
 
@@ -107,6 +109,6 @@ sites:
 # OPENAI_API_KEY                — OpenAI API key (if provider = openai)
 # ANTHROPIC_API_KEY             — Anthropic API key (if provider = anthropic)
 # GHOST_ADMIN_API_KEY           — Ghost Admin API key (format: id:secret)
-# WP_CLIPPERS_USER              — WordPress username for luminaclippers.com
-# WP_CLIPPERS_APP_PASSWORD      — WordPress application password
+# VERCEL_TOKEN                  — Vercel API token for deployments
 # LUMINAWEB3_REVALIDATION_SECRET — Next.js ISR revalidation secret
+# LUMINACLIPPERS_REVALIDATION_SECRET — Next.js ISR revalidation secret

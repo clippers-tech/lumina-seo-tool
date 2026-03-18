@@ -22,8 +22,8 @@ lumina-seo-tool/
 │   │   └── content_generator.py # Content generation helpers
 │   ├── integrations/
 │   │   ├── searchatlas.py     # SearchAtlas API client (Rank Tracker, Site Audit, OTTO, Content API)
-│   │   ├── wordpress.py       # WordPress CMS integration (legacy, site now on Framer)
-│   │   └── nextjs_stub.py     # Next.js CMS integration stub
+│   │   ├── wordpress.py       # WordPress CMS integration (preserved for future use)
+│   │   └── vercel_publisher.py # Vercel/Next.js publishing integration
 │   ├── outputs/               # Generated reports, actions, execution logs per run
 │   ├── strategy/              # Strategy documents
 │   └── requirements.txt       # Python dependencies
@@ -39,7 +39,7 @@ lumina-seo-tool/
 │   │   └── data/              # dashboard_data.json (updated by orchestrator)
 │   └── package.json
 │
-├── articles/                  # SEO articles ready for Framer CMS (21,000+ words)
+├── articles/                  # SEO articles for Next.js blog (21,000+ words)
 │   ├── 01-what-is-a-clipping-agency.md    # Pillar page (4,482 words)
 │   ├── 02-how-to-start-clipping.md        # How-to guide (3,402 words)
 │   ├── 03-clipping-campaign-at-scale.md   # Campaign guide (3,637 words)
@@ -48,17 +48,14 @@ lumina-seo-tool/
 │   ├── 06-clipping-disrupting-marketing.md  # Forbes feature (3,583 words)
 │   └── ALL-ARTICLES-FOR-FRAMER.md         # All articles in one file
 │
-├── content-briefs/            # Brand context and article specifications
-│   ├── brand-context.md
-│   └── article-specs.md
-│
-└── strategy/                  # Ranking strategy documents
-    └── ranking_strategy_clipping_agency.md
+└── content-briefs/            # Brand context and article specifications
+    ├── brand-context.md
+    └── article-specs.md
 ```
 
 ## Website GitHub Repos
 
-- **luminaclippers.com**: https://github.com/RhysMckay7777/luminaclippers-site (Framer)
+- **luminaclippers.com**: https://github.com/RhysMckay7777/luminaclippers-site (Next.js / Vercel)
 - **luminaweb3.io**: https://github.com/RhysMckay7777/luminaweb3-site (Next.js / Vercel)
 
 ## SearchAtlas API
@@ -124,7 +121,7 @@ NODE_ENV=production node dist/index.cjs
 - **OTTO fixes deployed:** 224/285 (score: 78%)
 - **Press releases:** 4 created (1 published, 3 generated/processing)
 - **Cloud stacks:** 8 created (2 published/indexed, 2 generated, 4 pending credit limit)
-- **Content:** 6 new SEO articles written (21,000+ words) — ready for Framer CMS
+- **Content:** 6 new SEO articles written (21,000+ words) — ready for Next.js blog
 
 ### luminaweb3.io
 - **"web3 marketing agency" ranking:** Position 8 (up from 18)
@@ -135,10 +132,10 @@ NODE_ENV=production node dist/index.cjs
 
 - SearchAtlas OTTO Hyperdrive credits maxed at 65 — some cloud stacks can't build until plan upgraded
 - Rank Tracker API intermittently returns 404/403 — orchestrator falls back to cached data
-- luminaclippers.com is on Framer — blog content must be pasted manually into CMS (no API push)
+- luminaclippers.com blog content publishing via Vercel integration is in progress
 
 ## Environment Variables
 
 ```
-SEARCHATLAS_API_KEY=6d64cc823eccbb9865cfa2d0b45aa3e5
+SEARCHATLAS_API_KEY=<your-api-key-here>
 ```

@@ -2,7 +2,7 @@ import json, os, sys, time
 from datetime import datetime, timezone
 import urllib.request
 
-API_KEY = "6d64cc823eccbb9865cfa2d0b45aa3e5"
+API_KEY = os.environ.get("SEARCHATLAS_API_KEY", "")
 
 URLS = {
   "rank_tracker_luminaclippers": "https://keyword.searchatlas.com/api/v1/projects/70664/keywords/?searchatlas_api_key="+API_KEY,
