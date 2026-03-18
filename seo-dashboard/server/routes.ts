@@ -75,6 +75,34 @@ export async function registerRoutes(
     }
   });
 
+  // ── Dashboard data update (push from orchestrator) ─────
+  app.post("/api/dashboard-data/update", (req: Request, res: Response) => {
+    try {
+      const secret = process.env.DASHBOARD_API_SECRET;
+      if (secret) {
+        const authHeader = req.headers.authorization;
+        if (!authHeader || authHeader !== `Bearer ${secret}`) {
+          return res.status(401).json({ error: "Unauthorized" });
+        }
+      }
+
+      const data = req.body;
+      if (!data || typeof data !== "object" || !data.sites) {
+        return res.status(400).json({ error: "Invalid dashboard data payload — must include 'sites'" });
+      }
+
+      const written = writeDashboardData(data);
+      if (!written) {
+        return res.status(500).json({ error: "Failed to write dashboard data file" });
+      }
+
+      res.json({ success: true, message: "Dashboard data updated", timestamp: new Date().toISOString() });
+    } catch (err) {
+      console.error("Error updating dashboard data:", err);
+      res.status(500).json({ error: "Failed to update dashboard data" });
+    }
+  });
+
   // ── Run management ───────────────────────────────────────
 
   app.post("/api/runs/trigger", async (_req: Request, res: Response) => {
