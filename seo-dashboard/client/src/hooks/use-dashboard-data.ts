@@ -173,6 +173,14 @@ export interface OttoDeployStatus {
 
 export interface DashboardData {
   sites: Record<string, SiteData>;
+  competitors: Record<string, Array<{
+    url: string;
+    keywords_in_top_10: number;
+    avg_position: number | null;
+    previous_search_visibility: number | null;
+    current_search_visibility: number | null;
+    search_visibility_delta: number;
+  }>>;
   actions: Action[];
   run_log: {
     run_id: string;
