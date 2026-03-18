@@ -32,6 +32,7 @@ from config.models import RunLog, Action, ActionType, ActionStatus
 from integrations.searchatlas import SearchAtlasClient
 from integrations.notifier import SEONotifier
 from integrations.github_publisher import GitHubPublisher
+from integrations.ghost_publisher import GhostPublisher
 from integrations.llm_writer import LLMContentWriter
 from core.analyzer import SEOAnalyzer
 from core.content_generator import ContentGenerator
@@ -68,7 +69,7 @@ class SEOOrchestrator:
         # LLM writer (for content generation)
         self.llm_writer = self._init_llm_writer()
 
-        # GitHub publishers (one per site)
+        # GitHub publishers (one per site — only if GITHUB_TOKEN is set)
         self.github_publishers: dict[str, GitHubPublisher] = {}
         if config.github_token:
             for site in config.sites:
@@ -79,19 +80,41 @@ class SEOOrchestrator:
                         repo_name=site.github.repo,
                     )
 
-        # SEO publisher (per site, initialized on demand)
+        # Ghost publishers (one per site that has ghost config + API key)
+        self.ghost_publishers: dict[str, GhostPublisher] = {}
+        if config.ghost_admin_api_key:
+            for site in config.sites:
+                if site.ghost.api_url:
+                    try:
+                        self.ghost_publishers[site.hostname] = GhostPublisher(
+                            ghost_api_url=site.ghost.api_url,
+                            ghost_admin_api_key=config.ghost_admin_api_key,
+                        )
+                        logger.info(f"Ghost publisher created for {site.hostname}")
+                    except ValueError as e:
+                        logger.warning(f"Could not create Ghost publisher for {site.hostname}: {e}")
+
+        # SEO publisher (per site — works with ghost alone, github alone, or both)
         self.seo_publishers: dict[str, SEOPublisher] = {}
-        for site in config.sites:
-            gh_pub = self.github_publishers.get(site.hostname)
-            if gh_pub and self.llm_writer:
-                self.seo_publishers[site.hostname] = SEOPublisher(
-                    github_publisher=gh_pub,
-                    llm_writer=self.llm_writer,
-                    config={
-                        "auto_publish": config.content_generation.auto_publish,
-                        "vercel_deploy_hook": site.vercel.deploy_hook,
-                    },
-                )
+        if self.llm_writer:
+            for site in config.sites:
+                gh_pub = self.github_publishers.get(site.hostname)
+                ghost_pub = self.ghost_publishers.get(site.hostname)
+
+                if gh_pub or ghost_pub:
+                    self.seo_publishers[site.hostname] = SEOPublisher(
+                        llm_writer=self.llm_writer,
+                        config={
+                            "auto_publish": config.content_generation.auto_publish,
+                            "vercel_deploy_hook": site.vercel.deploy_hook,
+                        },
+                        github_publisher=gh_pub,
+                        ghost_publisher=ghost_pub,
+                    )
+                    logger.info(
+                        f"SEO publisher created for {site.hostname} "
+                        f"(github={'yes' if gh_pub else 'no'}, ghost={'yes' if ghost_pub else 'no'})"
+                    )
 
     def _init_llm_writer(self) -> LLMContentWriter | None:
         """Initialize LLM writer based on config."""
@@ -276,7 +299,8 @@ class SEOOrchestrator:
         logger.info("\n── Building dashboard data ──")
         try:
             dashboard_payload = self._build_dashboard_payload(
-                run_log, site_data_map, execution_log, competitor_results
+                run_log, site_data_map, execution_log, competitor_results,
+                publish_results=publish_results,
             )
             save_dashboard_data_locally(dashboard_payload)
 
@@ -361,6 +385,7 @@ class SEOOrchestrator:
         site_data_map: dict[str, dict],
         execution_log: ExecutionLog | None,
         competitor_results: dict[str, dict],
+        publish_results: list[dict] | None = None,
     ) -> dict:
         """Build the complete dashboard_data.json payload from run results."""
         sites = {}
@@ -486,11 +511,32 @@ class SEOOrchestrator:
             st = a.status if isinstance(a.status, str) else (a.status.value if hasattr(a.status, "value") else str(a.status))
             by_status[st] = by_status.get(st, 0) + 1
 
+        # Content generation results
+        content_generation = {}
+        if publish_results:
+            articles = []
+            for pr in publish_results:
+                articles.append({
+                    "hostname": pr.get("hostname", ""),
+                    "title": pr.get("article_title", ""),
+                    "word_count": pr.get("word_count", 0),
+                    "publish_method": pr.get("publish_method", ""),
+                    "ghost_post_id": pr.get("ghost_post_id", ""),
+                    "ghost_slug": pr.get("ghost_slug", ""),
+                    "ghost_status": pr.get("ghost_status", ""),
+                    "error": pr.get("error", ""),
+                })
+            content_generation = {
+                "articles_generated": len(articles),
+                "articles": articles,
+            }
+
         return {
             "sites": sites,
             "actions": actions,
             "execution": execution,
             "competitors": competitors,
+            "content_generation": content_generation,
             "generated_at": run_log.timestamp,
             "run_log": {
                 "run_id": run_log.run_id,
