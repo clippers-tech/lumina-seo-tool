@@ -2,7 +2,7 @@
   "sites": {
     "luminaclippers.com": {
       "hostname": "luminaclippers.com",
-      "type": "wordpress",
+      "type": "nextjs",
       "priority": 1,
       "description": "Lumina Clipping Agency \u2014 short-form content distribution",
       "priority_keywords": [

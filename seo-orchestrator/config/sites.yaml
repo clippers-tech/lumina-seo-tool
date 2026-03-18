@@ -8,13 +8,23 @@ orchestrator:
   human_review_threshold: high   # low = review everything, high = only money pages
   output_dir: ./outputs
   log_retention_days: 90
+  content_generation:
+    enabled: true
+    provider: openai             # openai | anthropic
+    max_articles_per_run: 1
+    auto_publish: false          # if true, publishes immediately; if false, creates PR for review
+  competitor_tracking:
+    enabled: true
+    alert_on_outrank: true
+  notifications:
+    enabled: false               # placeholder for notification system
+    webhook_url: ""
 
 sites:
   - hostname: luminaclippers.com
-    type: framer
+    type: nextjs
     priority: 1                  # Lower = higher priority
     description: "Lumina Clipping Agency — short-form content distribution"
-    github: "https://github.com/RhysMckay7777/luminaclippers-site"
     searchatlas:
       rank_tracker_project_id: 70664
       site_audit_id: 116665
@@ -23,6 +33,14 @@ sites:
       knowledge_graph_id: 608151
       gsc_connected: true
       ga_connected: false
+    github:
+      owner: RhysMckay7777
+      repo: luminaclippers-site
+    ghost:
+      api_url: https://ghost-production-8c5d.up.railway.app
+      # admin_api_key should be in env var GHOST_ADMIN_API_KEY
+    vercel:
+      deploy_hook: ""            # To be configured
     target_regions:
       - country: us
         language: english
@@ -39,15 +57,16 @@ sites:
       - "/services"
       - "/pricing"
     cms:
-      type: framer
-      # Blog content managed in Framer CMS — articles provided as markdown for manual paste
+      type: nextjs
+      content_dir: "./content"   # JSON/YAML content folder
+      # Next.js site on Vercel, deployed from GitHub repo
+      # Blog content managed via Ghost CMS
       # GitHub repo: https://github.com/RhysMckay7777/luminaclippers-site
 
   - hostname: luminaweb3.io
     type: nextjs
     priority: 2
     description: "Lumina Web3 — crypto/Web3 marketing agency"
-    github: "https://github.com/RhysMckay7777/luminaweb3-site"
     searchatlas:
       rank_tracker_project_id: 69275
       site_audit_id: 114531
@@ -56,6 +75,11 @@ sites:
       knowledge_graph_id: 611385
       gsc_connected: true
       ga_connected: false
+    github:
+      owner: RhysMckay7777
+      repo: luminaweb3-site
+    vercel:
+      deploy_hook: ""            # To be configured
     target_regions:
       - country: us
         language: english
@@ -88,7 +112,11 @@ notifications:
 # ============================================================
 # Environment Variables Required (set before running):
 # ============================================================
-# SEARCHATLAS_API_KEY         — SearchAtlas API key
-# WP_CLIPPERS_USER            — WordPress username for luminaclippers.com
-# WP_CLIPPERS_APP_PASSWORD    — WordPress application password
+# SEARCHATLAS_API_KEY           — SearchAtlas API key
+# GITHUB_TOKEN                  — GitHub personal access token (repo scope)
+# OPENAI_API_KEY                — OpenAI API key (if provider = openai)
+# ANTHROPIC_API_KEY             — Anthropic API key (if provider = anthropic)
+# GHOST_ADMIN_API_KEY           — Ghost Admin API key (format: id:secret)
+# VERCEL_TOKEN                  — Vercel API token for deployments
 # LUMINAWEB3_REVALIDATION_SECRET — Next.js ISR revalidation secret
+# LUMINACLIPPERS_REVALIDATION_SECRET — Next.js ISR revalidation secret

@@ -1,7 +1,9 @@
 """
 WordPress REST API Integration Layer
 ─────────────────────────────────────
-For luminaclippers.com (WordPress).
+Preserved for potential future WordPress integration.
+luminaclippers.com has migrated from Framer to Next.js/Vercel — this module
+is not currently active but kept for reference if a WordPress site is added.
 Uses WP Application Passwords for authentication.
 """
 
@@ -49,7 +51,7 @@ class WordPressClient:
 
     async def _patch(self, endpoint: str, json_data: dict) -> dict:
         async with httpx.AsyncClient(timeout=self.timeout) as client:
-            resp = await client.post(  # WP uses POST with _method override, or direct POST to update
+            resp = await client.patch(
                 f"{self.base_url}{endpoint}",
                 json=json_data,
                 headers=self.auth_header,

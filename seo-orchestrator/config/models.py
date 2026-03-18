@@ -43,8 +43,9 @@ class ActionStatus(str, Enum):
 
 
 class SiteType(str, Enum):
-    WORDPRESS = "wordpress"
     NEXTJS = "nextjs"
+    VERCEL = "vercel"
+    FRAMER = "framer"  # Legacy: luminaclippers.com migrated from Framer to Next.js/Vercel
 
 
 # ── Page Record ────────────────────────────────────────────────
