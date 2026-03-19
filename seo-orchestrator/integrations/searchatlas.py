@@ -273,11 +273,42 @@ class SearchAtlasClient:
         )
         return data if isinstance(data, list) else data.get("results", [])
 
+    async def list_cloud_stacks(self, page_size: int = 100) -> list[dict]:
+        """GET /api/cg/v1/cloud-stack-contents/"""
+        data = await self._get(
+            f"{CONTENT_BASE}/cloud-stack-contents/",
+            params={"page_size": page_size},
+            headers=self._bearer_headers()
+        )
+        return data.get("results", [])
+
+    async def get_cloud_stack(self, cs_id: int) -> dict:
+        """GET /api/cg/v1/cloud-stack-contents/{id}/"""
+        return await self._get(
+            f"{CONTENT_BASE}/cloud-stack-contents/{cs_id}/",
+            headers=self._bearer_headers()
+        )
+
     async def create_cloud_stack(self, payload: dict) -> dict:
         """POST /api/cg/v1/cloud-stack-contents/"""
         return await self._post(
             f"{CONTENT_BASE}/cloud-stack-contents/",
             json_data=payload,
+            headers=self._bearer_headers()
+        )
+
+    async def build_cloud_stack(self, cs_id: int) -> dict:
+        """POST /api/cg/v1/cloud-stack-contents/{id}/build/"""
+        return await self._post(
+            f"{CONTENT_BASE}/cloud-stack-contents/{cs_id}/build/",
+            headers=self._bearer_headers()
+        )
+
+    async def deploy_cloud_stack(self, cs_id: int, provider_ids: list[int]) -> dict:
+        """POST /api/cg/v1/cloud-stack-contents/{id}/deploy/"""
+        return await self._post(
+            f"{CONTENT_BASE}/cloud-stack-contents/{cs_id}/deploy/",
+            json_data={"cloud_stack_providers": provider_ids},
             headers=self._bearer_headers()
         )
 

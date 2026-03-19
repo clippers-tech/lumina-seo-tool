@@ -15,6 +15,7 @@ import SiteAuditPage from "@/pages/site-audit";
 import CompetitorsPage from "@/pages/competitors";
 import RunLogPage from "@/pages/run-log";
 import ExecutionPage from "@/pages/execution";
+import CloudStacksPage from "@/pages/cloud-stacks";
 import SettingsPage from "@/pages/settings";
 import NotFound from "@/pages/not-found";
 
@@ -26,6 +27,7 @@ function AppRouter() {
       <Route path="/actions" component={ActionsPage} />
       <Route path="/site-audit" component={SiteAuditPage} />
       <Route path="/competitors" component={CompetitorsPage} />
+      <Route path="/cloud-stacks" component={CloudStacksPage} />
       <Route path="/run-log" component={RunLogPage} />
       <Route path="/execution" component={ExecutionPage} />
       <Route path="/settings" component={SettingsPage} />
