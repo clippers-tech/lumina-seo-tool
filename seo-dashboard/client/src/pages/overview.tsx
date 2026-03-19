@@ -215,16 +215,22 @@ function SiteKPIs({ site, hostname }: { site: SiteData; hostname: string }) {
 }
 
 function SerpDistribution({ site, hostname }: { site: SiteData; hostname: string }) {
-  const latest = site.rank_overview.serps_overview[0];
-  if (!latest) return null;
+  const serps = site.rank_overview.serps_overview || [];
+  // Find the most recent entry with actual data, falling back to the latest
+  const bestEntry = serps.find(
+    (s) =>
+      (s.serp_1 || 0) + (s.serp_2_3 || 0) + (s.serp_4_10 || 0) +
+      (s.serp_11_20 || 0) + (s.serp_21_50 || 0) + (s.serp_51_100 || 0) > 0
+  ) || serps[0];
+  if (!bestEntry) return null;
 
   const data = [
-    { range: "#1", count: latest.serp_1, fill: "hsl(var(--chart-1))" },
-    { range: "#2-3", count: latest.serp_2_3, fill: "hsl(var(--chart-2))" },
-    { range: "#4-10", count: latest.serp_4_10, fill: "hsl(var(--chart-3))" },
-    { range: "#11-20", count: latest.serp_11_20, fill: "hsl(var(--chart-4))" },
-    { range: "#21-50", count: latest.serp_21_50, fill: "hsl(var(--chart-5))" },
-    { range: "#51-100", count: latest.serp_51_100, fill: "hsl(185 40% 35%)" },
+    { range: "#1", count: bestEntry.serp_1, fill: "hsl(var(--chart-1))" },
+    { range: "#2-3", count: bestEntry.serp_2_3, fill: "hsl(var(--chart-2))" },
+    { range: "#4-10", count: bestEntry.serp_4_10, fill: "hsl(var(--chart-3))" },
+    { range: "#11-20", count: bestEntry.serp_11_20, fill: "hsl(var(--chart-4))" },
+    { range: "#21-50", count: bestEntry.serp_21_50, fill: "hsl(var(--chart-5))" },
+    { range: "#51-100", count: bestEntry.serp_51_100, fill: "hsl(185 40% 35%)" },
   ];
 
   const total = data.reduce((sum, d) => sum + d.count, 0);
@@ -239,7 +245,7 @@ function SerpDistribution({ site, hostname }: { site: SiteData; hostname: string
       <CardContent className="px-4 pb-4">
         {total === 0 ? (
           <div className="h-[140px] flex items-center justify-center text-xs text-muted-foreground">
-            No ranking data yet
+            No keywords ranking in the top 100 yet
           </div>
         ) : (
           <ResponsiveContainer width="100%" height={140}>
@@ -284,7 +290,7 @@ function TrafficTrend({ site, hostname }: { site: SiteData; hostname: string }) 
         </CardTitle>
       </CardHeader>
       <CardContent className="px-4 pb-4">
-        {history.length === 0 || history.every((h) => h.traffic === 0) ? (
+        {history.length === 0 ? (
           <div className="h-[140px] flex items-center justify-center text-xs text-muted-foreground">
             No traffic data yet
           </div>
