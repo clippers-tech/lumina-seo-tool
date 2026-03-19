@@ -26,8 +26,13 @@ import { useToast } from "@/hooks/use-toast";
 import {
   LineChart,
   Line,
+  Area,
+  AreaChart,
   ResponsiveContainer,
   YAxis,
+  XAxis,
+  Tooltip,
+  CartesianGrid,
 } from "recharts";
 
 interface KeywordRow extends KeywordData {
@@ -97,6 +102,11 @@ export default function KeywordsPage() {
   const [newKeywordSite, setNewKeywordSite] = useState("");
   const [addLoading, setAddLoading] = useState(false);
   const [deleteLoading, setDeleteLoading] = useState<string | null>(null);
+  const [expandedKeyword, setExpandedKeyword] = useState<string | null>(null);
+
+  const toggleExpanded = useCallback((key: string) => {
+    setExpandedKeyword((prev) => (prev === key ? null : key));
+  }, []);
 
   const handleAddKeyword = useCallback(async () => {
     if (!newKeyword.trim() || !newKeywordSite) return;
@@ -172,7 +182,8 @@ export default function KeywordsPage() {
         <div>
           <h1 className="text-lg font-semibold">Keywords</h1>
           <p className="text-xs text-muted-foreground mt-0.5">
-            {allKeywords.length} tracked keywords across {sites.length} sites
+            {filteredKeywords.length} tracked keywords
+            {siteFilter === "all" ? ` across ${sites.length} sites` : ` on ${siteFilter}`}
           </p>
         </div>
         <div className="flex items-center gap-2">
@@ -272,69 +283,211 @@ export default function KeywordsPage() {
               </thead>
               <tbody>
                 {filteredKeywords.map((kw, i) => {
+                  const rowKey = `${kw.site}-${kw.keyword}`;
+                  const isExpanded = expandedKeyword === rowKey;
                   const rowColor =
                     kw.delta !== null && kw.delta > 0
                       ? "border-l-2 border-l-emerald-500/40"
                       : kw.delta !== null && kw.delta < 0
                         ? "border-l-2 border-l-red-500/40"
                         : "border-l-2 border-l-transparent";
+
+                  // Prepare chart data for expanded panel
+                  const chartData = [...kw.position_history]
+                    .reverse()
+                    .map((h) => ({
+                      date: h.date,
+                      pos: h.position ?? undefined,
+                    }))
+                    .filter((d) => d.pos !== undefined);
+
                   return (
-                    <tr
-                      key={`${kw.site}-${kw.keyword}`}
-                      className={`border-b border-border/30 hover:bg-muted/20 transition-colors ${rowColor}`}
-                      data-testid={`keyword-row-${i}`}
-                    >
-                      <td className="px-4 py-3 font-medium">{kw.keyword}</td>
-                      <td className="px-4 py-3">
-                        <span className="text-muted-foreground">{kw.site}</span>
-                      </td>
-                      <td className="text-center px-4 py-3 tabular-nums font-semibold">
-                        {kw.position ?? "–"}
-                      </td>
-                      <td className="text-center px-4 py-3">
-                        <DeltaBadge delta={kw.delta} />
-                      </td>
-                      <td className="text-center px-4 py-3 tabular-nums text-muted-foreground">
-                        {kw.search_volume > 0
-                          ? kw.search_volume.toLocaleString()
-                          : "–"}
-                      </td>
-                      <td className="px-4 py-3 max-w-[180px] truncate text-muted-foreground">
-                        {kw.url || "–"}
-                      </td>
-                      <td className="px-4 py-3">
-                        <div className="flex flex-wrap gap-1">
-                          {kw.serp_features.length > 0
-                            ? kw.serp_features.map((f) => (
-                                <Badge
-                                  key={f}
-                                  variant="outline"
-                                  className="text-[9px] px-1.5 py-0 h-4"
-                                >
-                                  {f}
-                                </Badge>
-                              ))
-                            : <span className="text-muted-foreground">–</span>}
-                        </div>
-                      </td>
-                      <td className="px-4 py-3 flex justify-center">
-                        <PositionMiniChart history={kw.position_history} />
-                      </td>
-                      <td className="px-2 py-3 text-center">
-                        <button
-                          onClick={() => handleDeleteKeyword(kw.keyword, kw.site)}
-                          disabled={deleteLoading === `${kw.site}-${kw.keyword}`}
-                          className="p-1 rounded hover:bg-red-500/10 text-muted-foreground hover:text-red-400 transition-colors"
-                          title="Remove keyword"
-                        >
-                          {deleteLoading === `${kw.site}-${kw.keyword}` ? (
-                            <Loader2 className="size-3 animate-spin" />
-                          ) : (
-                            <Trash2 className="size-3" />
-                          )}
-                        </button>
-                      </td>
-                    </tr>
+                    <>
+                      <tr
+                        key={rowKey}
+                        className={`border-b border-border/30 hover:bg-muted/20 transition-colors cursor-pointer ${rowColor} ${isExpanded ? "bg-muted/10" : ""}`}
+                        data-testid={`keyword-row-${i}`}
+                        onClick={() => toggleExpanded(rowKey)}
+                      >
+                        <td className="px-4 py-3 font-medium">{kw.keyword}</td>
+                        <td className="px-4 py-3">
+                          <span className="text-muted-foreground">{kw.site}</span>
+                        </td>
+                        <td className="text-center px-4 py-3 tabular-nums font-semibold">
+                          {kw.position ?? "–"}
+                        </td>
+                        <td className="text-center px-4 py-3">
+                          <DeltaBadge delta={kw.delta} />
+                        </td>
+                        <td className="text-center px-4 py-3 tabular-nums text-muted-foreground">
+                          {kw.search_volume > 0
+                            ? kw.search_volume.toLocaleString()
+                            : "–"}
+                        </td>
+                        <td className="px-4 py-3 max-w-[180px] truncate text-muted-foreground">
+                          {kw.url || "–"}
+                        </td>
+                        <td className="px-4 py-3">
+                          <div className="flex flex-wrap gap-1">
+                            {kw.serp_features.length > 0
+                              ? kw.serp_features.map((f) => (
+                                  <Badge
+                                    key={f}
+                                    variant="outline"
+                                    className="text-[9px] px-1.5 py-0 h-4"
+                                  >
+                                    {f}
+                                  </Badge>
+                                ))
+                              : <span className="text-muted-foreground">–</span>}
+                          </div>
+                        </td>
+                        <td className="px-4 py-3 flex justify-center">
+                          <PositionMiniChart history={kw.position_history} />
+                        </td>
+                        <td className="px-2 py-3 text-center">
+                          <button
+                            onClick={(e) => { e.stopPropagation(); handleDeleteKeyword(kw.keyword, kw.site); }}
+                            disabled={deleteLoading === rowKey}
+                            className="p-1 rounded hover:bg-red-500/10 text-muted-foreground hover:text-red-400 transition-colors"
+                            title="Remove keyword"
+                          >
+                            {deleteLoading === rowKey ? (
+                              <Loader2 className="size-3 animate-spin" />
+                            ) : (
+                              <Trash2 className="size-3" />
+                            )}
+                          </button>
+                        </td>
+                      </tr>
+                      {isExpanded && (
+                        <tr key={`${rowKey}-expanded`} className="border-b border-border/30 bg-muted/5">
+                          <td colSpan={9} className="px-6 py-5">
+                            <div className="grid grid-cols-[1fr_auto] gap-6 items-start">
+                              {/* Position History Chart */}
+                              <div>
+                                <p className="text-[10px] font-medium uppercase tracking-wider text-muted-foreground mb-3">
+                                  Position History
+                                </p>
+                                {chartData.length >= 2 ? (
+                                  <div className="h-36">
+                                    <ResponsiveContainer width="100%" height="100%">
+                                      <AreaChart data={chartData} margin={{ top: 4, right: 8, bottom: 0, left: 0 }}>
+                                        <defs>
+                                          <linearGradient id={`grad-${i}`} x1="0" y1="0" x2="0" y2="1">
+                                            <stop offset="5%" stopColor="hsl(var(--chart-1))" stopOpacity={0.3} />
+                                            <stop offset="95%" stopColor="hsl(var(--chart-1))" stopOpacity={0} />
+                                          </linearGradient>
+                                        </defs>
+                                        <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" opacity={0.4} />
+                                        <XAxis
+                                          dataKey="date"
+                                          tick={{ fontSize: 10, fill: "hsl(var(--muted-foreground))" }}
+                                          tickLine={false}
+                                          axisLine={false}
+                                          interval="preserveStartEnd"
+                                        />
+                                        <YAxis
+                                          reversed
+                                          domain={["dataMin - 2", "dataMax + 2"]}
+                                          tick={{ fontSize: 10, fill: "hsl(var(--muted-foreground))" }}
+                                          tickLine={false}
+                                          axisLine={false}
+                                          width={28}
+                                        />
+                                        <Tooltip
+                                          contentStyle={{
+                                            background: "hsl(var(--popover))",
+                                            border: "1px solid hsl(var(--border))",
+                                            borderRadius: "6px",
+                                            fontSize: "11px",
+                                            color: "hsl(var(--popover-foreground))",
+                                          }}
+                                          formatter={(value: any) => [value, "Position"]}
+                                          labelFormatter={(label) => `Date: ${label}`}
+                                        />
+                                        <Area
+                                          type="monotone"
+                                          dataKey="pos"
+                                          stroke="hsl(var(--chart-1))"
+                                          strokeWidth={2}
+                                          fill={`url(#grad-${i})`}
+                                          dot={{ r: 3, fill: "hsl(var(--chart-1))", strokeWidth: 0 }}
+                                          activeDot={{ r: 4 }}
+                                          connectNulls
+                                        />
+                                      </AreaChart>
+                                    </ResponsiveContainer>
+                                  </div>
+                                ) : (
+                                  <p className="text-xs text-muted-foreground">Not enough history to display chart.</p>
+                                )}
+                              </div>
+
+                              {/* Keyword Details */}
+                              <div className="min-w-[200px] space-y-3">
+                                <p className="text-[10px] font-medium uppercase tracking-wider text-muted-foreground">
+                                  Details
+                                </p>
+                                <div className="space-y-2 text-xs">
+                                  <div className="flex items-center justify-between gap-4">
+                                    <span className="text-muted-foreground">Current Position</span>
+                                    <span className="font-semibold tabular-nums">
+                                      {kw.position ?? "–"}
+                                      {kw.delta !== null && kw.delta !== undefined && (
+                                        <span className="ml-1.5">
+                                          <DeltaBadge delta={kw.delta} />
+                                        </span>
+                                      )}
+                                    </span>
+                                  </div>
+                                  <div className="flex items-center justify-between gap-4">
+                                    <span className="text-muted-foreground">Search Volume</span>
+                                    <span className="tabular-nums">
+                                      {kw.search_volume > 0 ? kw.search_volume.toLocaleString() : "–"}
+                                    </span>
+                                  </div>
+                                  <div className="flex items-center justify-between gap-4">
+                                    <span className="text-muted-foreground">Site</span>
+                                    <span>{kw.site}</span>
+                                  </div>
+                                  {kw.url && (
+                                    <div className="flex flex-col gap-1">
+                                      <span className="text-muted-foreground">Ranking URL</span>
+                                      <a
+                                        href={kw.url}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="text-blue-400 hover:underline truncate max-w-[200px] block"
+                                        onClick={(e) => e.stopPropagation()}
+                                      >
+                                        {kw.url}
+                                      </a>
+                                    </div>
+                                  )}
+                                  {kw.serp_features.length > 0 && (
+                                    <div className="flex flex-col gap-1">
+                                      <span className="text-muted-foreground">SERP Features</span>
+                                      <div className="flex flex-wrap gap-1">
+                                        {kw.serp_features.map((f) => (
+                                          <Badge
+                                            key={f}
+                                            variant="outline"
+                                            className="text-[9px] px-1.5 py-0 h-4"
+                                          >
+                                            {f}
+                                          </Badge>
+                                        ))}
+                                      </div>
+                                    </div>
+                                  )}
+                                </div>
+                              </div>
+                            </div>
+                          </td>
+                        </tr>
+                      )}
+                    </>
                   );
                 })}
               </tbody>

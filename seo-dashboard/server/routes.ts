@@ -311,6 +311,12 @@ export async function registerRoutes(
     }
   });
 
+  // ── SearchAtlas Rank Tracker project IDs ─────────────────
+  const SITE_RT_PROJECTS: Record<string, number> = {
+    "luminaclippers.com": 70664,
+    "luminaweb3.io": 69275,
+  };
+
   // ── Keyword management ───────────────────────────────────
 
   app.get("/api/keywords", (_req: Request, res: Response) => {
@@ -331,7 +337,7 @@ export async function registerRoutes(
     }
   });
 
-  app.post("/api/keywords", (req: Request, res: Response) => {
+  app.post("/api/keywords", async (req: Request, res: Response) => {
     try {
       const data = readDashboardData();
       if (!data) return res.status(500).json({ error: "Data not found" });
@@ -377,7 +383,49 @@ export async function registerRoutes(
       }
 
       writeDashboardData(data);
-      res.json({ success: true, keyword: newKeyword, site });
+
+      // Sync to SearchAtlas Rank Tracker
+      let rankTrackerSynced = false;
+      let rankTrackerError: string | null = null;
+      const searchatlasKey = process.env.SEARCHATLAS_API_KEY;
+      const rtProjectId = SITE_RT_PROJECTS[site];
+
+      if (searchatlasKey && rtProjectId) {
+        try {
+          const rtResponse = await fetch(
+            `https://keyword.searchatlas.com/api/v1/rank-tracker/${rtProjectId}/tracked-keywords/?searchatlas_api_key=${searchatlasKey}`,
+            {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ keywords: [keyword] }),
+            }
+          );
+          if (rtResponse.ok) {
+            rankTrackerSynced = true;
+          } else {
+            const errText = await rtResponse.text();
+            rankTrackerError = `SearchAtlas API error (${rtResponse.status}): ${errText}`;
+            console.error("SearchAtlas rank tracker sync failed:", rankTrackerError);
+          }
+        } catch (rtErr: any) {
+          rankTrackerError = rtErr.message;
+          console.error("SearchAtlas rank tracker sync error:", rtErr);
+        }
+      } else if (!searchatlasKey) {
+        rankTrackerError = "SEARCHATLAS_API_KEY not configured";
+        console.warn("Skipping SearchAtlas sync:", rankTrackerError);
+      } else {
+        rankTrackerError = `No rank tracker project ID for site: ${site}`;
+        console.warn("Skipping SearchAtlas sync:", rankTrackerError);
+      }
+
+      res.json({
+        success: true,
+        keyword: newKeyword,
+        site,
+        rank_tracker_synced: rankTrackerSynced,
+        ...(rankTrackerError ? { rank_tracker_note: rankTrackerError } : {}),
+      });
     } catch (err) {
       res.status(500).json({ error: "Failed to add keyword" });
     }
