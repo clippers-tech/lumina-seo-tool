@@ -48,7 +48,7 @@ function OurMetricsCard({ site, hostname }: { site: SiteData; hostname: string }
 
   const chartData = [
     { name: "DR", value: otto.domain_rating ?? 0 },
-    { name: "Backlinks", value: Math.min(otto.backlinks, 500) },
+    { name: "Backlinks", value: Math.min(otto.backlinks ?? 0, 500) },
     { name: "Ref Domains", value: otto.refdomains },
   ];
 
@@ -77,7 +77,7 @@ function OurMetricsCard({ site, hostname }: { site: SiteData; hostname: string }
                 Backlinks
               </span>
             </div>
-            <p className="text-xl font-semibold tabular-nums">{otto.backlinks.toLocaleString()}</p>
+            <p className="text-xl font-semibold tabular-nums">{(otto.backlinks ?? 0).toLocaleString()}</p>
           </div>
           <div className="text-center">
             <div className="flex items-center justify-center gap-1.5 mb-1">
@@ -86,7 +86,7 @@ function OurMetricsCard({ site, hostname }: { site: SiteData; hostname: string }
                 Ref Domains
               </span>
             </div>
-            <p className="text-xl font-semibold tabular-nums">{otto.refdomains.toLocaleString()}</p>
+            <p className="text-xl font-semibold tabular-nums">{(otto.refdomains ?? 0).toLocaleString()}</p>
           </div>
         </div>
         <ResponsiveContainer width="100%" height={120}>
