@@ -11,10 +11,14 @@ import logging
 import re
 from typing import Any
 
+import httpx
+
 from config import SiteConfig
 from integrations.searchatlas import SearchAtlasClient
 
 logger = logging.getLogger("seo_orchestrator.searchatlas_content")
+
+CONTENT_BASE = "https://ca.searchatlas.com/api/cg/v1"
 
 
 class SearchAtlasContentPublisher:
@@ -64,30 +68,50 @@ class SearchAtlasContentPublisher:
 
         logger.info(f"[{hostname}] Creating press release for '{title}'")
 
-        # Step 1: Create press release
-        pr = await self.sa.create_press_release(
-            target_url=f"https://{hostname}/",
-            target_keywords=keywords,
-            input_prompt=input_prompt,
-            otto_project=sa.otto_project_id,
-            knowledge_graph=sa.knowledge_graph_id,
-            content_type=self.default_content_type,
-            main_topic_subject=title,
-            anchor_text=target_keyword,
-        )
-        pr_id = pr.get("id")
-        logger.info(f"[{hostname}] Press release created: {pr_id}")
+        try:
+            # Step 1: Create press release
+            pr = await self.sa.create_press_release(
+                target_url=f"https://{hostname}/",
+                target_keywords=keywords,
+                input_prompt=input_prompt,
+                otto_project=sa.otto_project_id,
+                knowledge_graph=sa.knowledge_graph_id,
+                content_type=self.default_content_type,
+                main_topic_subject=title,
+                anchor_text=target_keyword,
+            )
+            pr_id = pr.get("id")
+            logger.info(f"[{hostname}] Press release created: {pr_id}")
 
-        # Step 2: Trigger AI generation
-        await self.sa.build_press_release(pr_id)
-        logger.info(f"[{hostname}] Build triggered, polling for completion...")
+            # Step 2: Trigger AI generation
+            await self.sa.build_press_release(pr_id)
+            logger.info(f"[{hostname}] Build triggered, polling for completion...")
 
-        # Step 3: Poll until generated (5s intervals, max 180s)
-        result = await self.sa.poll_press_release(pr_id, max_attempts=36, interval=5.0)
+            # Step 3: Poll until generated (5s intervals, max 180s)
+            result = await self.sa.poll_press_release(pr_id, max_attempts=36, interval=5.0)
+
+        except httpx.HTTPStatusError as e:
+            if e.response.status_code == 400:
+                error_text = e.response.text
+                # Handle duplicate press release error
+                existing_id_match = re.search(
+                    r"already exists \(ID: ([a-f0-9-]+)\)", error_text
+                )
+                if existing_id_match:
+                    pr_id = existing_id_match.group(1)
+                    logger.info(
+                        f"[{hostname}] Press release already exists: {pr_id}, reusing"
+                    )
+                    result = await self._reuse_existing(pr_id, hostname)
+                else:
+                    raise
+            else:
+                raise
+
         logger.info(f"[{hostname}] Press release generated: {result.get('blog_title', 'N/A')}")
 
         # Calculate approximate word count
-        main_content = result.get("main_content", "")
+        main_content = result.get("main_content", "") or ""
         word_count = len(re.sub(r"<[^>]+>", "", main_content).split())
 
         return {
@@ -100,3 +124,26 @@ class SearchAtlasContentPublisher:
             "word_count": word_count,
             "status": result.get("status", "Generated"),
         }
+
+    async def _reuse_existing(self, pr_id: str, hostname: str) -> dict:
+        """Fetch an existing press release and ensure it's generated."""
+        result = await self.sa._get(
+            f"{CONTENT_BASE}/press-release/{pr_id}/",
+            headers=self.sa._bearer_headers(),
+        )
+        status = result.get("status")
+
+        if status == "Generated":
+            logger.info(f"[{hostname}] Existing press release is already generated")
+            return result
+        elif status == "Pending":
+            logger.info(f"[{hostname}] Existing press release is pending, triggering build")
+            await self.sa.build_press_release(pr_id)
+            return await self.sa.poll_press_release(pr_id, max_attempts=36, interval=5.0)
+        elif status == "Generating":
+            logger.info(f"[{hostname}] Existing press release is generating, polling")
+            return await self.sa.poll_press_release(pr_id, max_attempts=36, interval=5.0)
+        else:
+            raise RuntimeError(
+                f"Existing press release {pr_id} has unexpected status: {status}"
+            )
