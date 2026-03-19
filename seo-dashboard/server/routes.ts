@@ -551,6 +551,131 @@ export async function registerRoutes(
     }
   });
 
+  // ── Cloud Stacks (live proxy to SearchAtlas API) ────────
+
+  const SEARCHATLAS_BASE = "https://ca.searchatlas.com/api/cg/v1";
+  const OTTO_IDS = [
+    { id: 78296, hostname: "luminaclippers.com" },
+    { id: 76313, hostname: "luminaweb3.io" },
+  ];
+
+  app.get("/api/cloud-stacks", async (_req: Request, res: Response) => {
+    try {
+      const apiKey = process.env.SEARCHATLAS_API_KEY;
+      if (!apiKey) {
+        return res.status(500).json({ error: "SEARCHATLAS_API_KEY not configured" });
+      }
+
+      const headers = { "x-api-key": apiKey };
+
+      // Fetch cloud stacks and press releases in parallel
+      const [csResponse, ...prResponses] = await Promise.all([
+        fetch(`${SEARCHATLAS_BASE}/cloud-stack-contents/?page_size=100`, { headers }),
+        ...OTTO_IDS.map((site) =>
+          fetch(`${SEARCHATLAS_BASE}/press-release/?otto_project=${site.id}`, { headers })
+        ),
+      ]);
+
+      if (!csResponse.ok) {
+        return res.status(csResponse.status).json({ error: "Failed to fetch cloud stacks from SearchAtlas" });
+      }
+
+      const csData = await csResponse.json();
+
+      // Build press releases organized by site
+      const pressReleases: Record<string, any[]> = {};
+      for (let i = 0; i < OTTO_IDS.length; i++) {
+        const site = OTTO_IDS[i];
+        if (prResponses[i].ok) {
+          const prData = await prResponses[i].json();
+          pressReleases[site.hostname] = prData.results || [];
+        } else {
+          pressReleases[site.hostname] = [];
+        }
+      }
+
+      // Organize cloud stacks by site using otto_project ID
+      const ottoToHostname: Record<number, string> = {};
+      for (const site of OTTO_IDS) {
+        ottoToHostname[site.id] = site.hostname;
+      }
+
+      const cloudStacks = csData.results || [];
+
+      res.json({
+        cloud_stacks: cloudStacks,
+        press_releases: pressReleases,
+        otto_mapping: ottoToHostname,
+        total: csData.count || cloudStacks.length,
+      });
+    } catch (error: any) {
+      console.error("Error fetching cloud stacks:", error);
+      res.status(500).json({ error: error.message });
+    }
+  });
+
+  app.get("/api/cloud-stacks/:id", async (req: Request, res: Response) => {
+    try {
+      const apiKey = process.env.SEARCHATLAS_API_KEY;
+      if (!apiKey) {
+        return res.status(500).json({ error: "SEARCHATLAS_API_KEY not configured" });
+      }
+
+      const response = await fetch(
+        `${SEARCHATLAS_BASE}/cloud-stack-contents/${req.params.id}/`,
+        { headers: { "x-api-key": apiKey } }
+      );
+
+      if (!response.ok) {
+        return res.status(response.status).json({ error: "Failed to fetch cloud stack detail" });
+      }
+
+      const data = await response.json();
+      res.json(data);
+    } catch (error: any) {
+      res.status(500).json({ error: error.message });
+    }
+  });
+
+  app.post("/api/cloud-stacks/:id/deploy", async (req: Request, res: Response) => {
+    try {
+      const secret = process.env.DASHBOARD_API_SECRET;
+      if (secret) {
+        const authHeader = req.headers.authorization;
+        if (!authHeader || authHeader !== `Bearer ${secret}`) {
+          return res.status(401).json({ error: "Unauthorized" });
+        }
+      }
+
+      const apiKey = process.env.SEARCHATLAS_API_KEY;
+      if (!apiKey) {
+        return res.status(500).json({ error: "SEARCHATLAS_API_KEY not configured" });
+      }
+
+      const response = await fetch(
+        `${SEARCHATLAS_BASE}/cloud-stack-contents/${req.params.id}/deploy/`,
+        {
+          method: "POST",
+          headers: {
+            "x-api-key": apiKey,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(req.body),
+        }
+      );
+
+      if (!response.ok) {
+        const errorText = await response.text();
+        return res.status(response.status).json({ error: errorText });
+      }
+
+      const data = await response.json();
+      res.json(data);
+    } catch (error: any) {
+      res.status(500).json({ error: error.message });
+    }
+  });
+
   // ── Settings ─────────────────────────────────────────────
 
   app.get("/api/settings", (_req: Request, res: Response) => {
