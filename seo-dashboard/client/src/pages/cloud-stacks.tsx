@@ -87,6 +87,8 @@ const csStatusConfig: Record<string, { color: string; icon: typeof CheckCircle }
 const providerStatusColor: Record<string, string> = {
   pending: "bg-zinc-500/15 text-zinc-400 border-zinc-500/20",
   published: "bg-emerald-500/15 text-emerald-400 border-emerald-500/20",
+  INDEXING: "bg-blue-500/15 text-blue-400 border-blue-500/20",
+  indexing: "bg-blue-500/15 text-blue-400 border-blue-500/20",
   failed: "bg-red-500/15 text-red-400 border-red-500/20",
 };
 
@@ -214,7 +216,7 @@ function CloudStackRow({
   const [open, setOpen] = useState(false);
   const statusCfg = csStatusConfig[stack.status] || csStatusConfig.Pending;
   const deployedCount = stack.cloud_stack_providers.filter(
-    (p) => p.status === "published"
+    (p) => p.published_url != null
   ).length;
   const totalProviders = stack.cloud_stack_providers.length;
   const hostname = ottoMapping[stack.otto_project] || `OTTO ${stack.otto_project}`;
